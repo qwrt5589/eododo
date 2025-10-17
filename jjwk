@@ -1,0 +1,778 @@
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+
+local Window = WindUI:CreateWindow({
+        Title = "南娘中心<font color='#FFC0CB'>南娘中心牛逼</font>  ",
+        Icon = "rbxassetid://4483362748",
+        IconTransparency = 0.5,
+        IconThemed = true,
+        Author = "作者:Tuki",
+        Folder = "CloudHub",
+            
+    -- ↓ This all is Optional. You can remove it.
+        
+    -- ↓ Optional. You can remove it.
+    --[[ You can set 'rbxassetid://' or video to Background.
+        'rbxassetid://':
+            Background = "rbxassetid://", -- rbxassetid
+        Video:
+            Background = "video:YOUR-RAW-LINK-TO-VIDEO.webm", -- video 
+    --]]
+    
+    -- ↓ Optional. You can remove it.
+    Size = UDim2.fromOffset(400, 300),
+        Transparent = true,
+        Theme = "Light",
+        User = {
+            Enabled = true,
+            Callback = function() print("clicked") end,
+            Anonymous = false
+        },
+    
+    -- !  ↓  remove this all, 
+    -- !  ↓  if you DON'T need the key system
+    KeySystem = { 
+        -- ↓ Optional. You can remove it.
+        Key = { "Tuki我爸爸" },
+        
+        Note = "请输入卡密.",
+        
+        -- ↓ Optional. You can remove it.
+        Thumbnail = {
+            Image = "rbxassetid://72368339506794",
+            Title = "",
+        },
+        
+        -- ↓ Optional. You can remove it.
+        
+        
+        -- ↓ Optional. You can remove it.
+        SaveKey = false, -- automatically save and load the key.
+        
+        -- ↓ Optional. You can remove it.
+        -- API = {} ← Services. Read about it below ↓
+    },
+})
+            
+Window:Tag({
+    Title = "牛逼",
+    Color = Color3.fromHex("#87CEEB")
+})
+
+Window:Tag({
+        Title = "公益脚本", -- 标签汉化
+        Color = Color3.fromHex("#315dff")
+    })
+    local TimeTag = Window:Tag({
+        Title = "作者Tuki",
+        Color = Color3.fromHex("#87CEEB")
+    })
+
+
+WindUI:Notify({
+    Title = "南娘中心nb",
+    Content = "南娘中心非常的nb",
+    Duration = 10, -- 10 seconds
+    Icon = "bird",
+})
+
+
+local Tab = Window:Tab({
+    Title = "南娘公告",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "欢迎使用 南娘中心",
+    Desc = "QQ 1693323219",
+    Image = "rbxassetid://72368339506794",
+    ImageSize = 42,
+    Thumbnail = "rbxassetid://72368339506794",
+    ThumbnailSize = 120,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "欢迎使用 南娘中心",
+    Desc = "QQ 1693323219",    
+    Thumbnail = "rbxassetid://72368339506794",
+    ThumbnailSize = 0,
+})
+    
+local Tabs = {
+    Main = Window:Section({ Title = "通用", Opened = true }),
+    Settings = Window:Section({ Title = "脚本执行", Opened = true }),
+    Utilities = Window:Section({ Title = "设置", Opened = true })
+}
+
+local Tab = Tabs.Main:Tab({
+    Title = "南娘通用",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Slider = Tab:Slider({
+    Title = "跳跃",
+    Value = {
+        Min = 50,
+        Max = 200,
+        Default = 50,
+    },
+    Increment = 1,
+    Callback = function(value)
+        if game.Players.LocalPlayer.Character then
+            game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").JumpPower = value
+        end
+    end
+})
+
+local Slider = Tab:Slider({
+    Title = "移速",
+    Value = {
+        Min = 16,
+        Max = 400,
+        Default = 16,
+    },
+    Increment = 1,
+    Callback = function(value)
+        if game.Players.LocalPlayer.Character then
+            game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid").WalkSpeed = value
+        end
+    end
+})
+        
+local Slider = Tab:Slider({
+    Title = "重力",
+    Value = {
+        Min = 0.1,
+        Max = 500.0,
+        Default = 196.2,
+    },
+    Step = 0.1,
+    Callback = function(value)
+        game.Workspace.Gravity = value
+    end
+})
+
+local Button = Tab:Button({
+    Title = "无敌少侠飞行",
+    Desc = "飞行",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Invinicible-Flight-R15-45414"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "夜视",
+    Desc = "夜视",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "爬墙",
+    Desc = "爬墙",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/zXk4Rq2r"))()
+    end
+})
+
+
+local Button = Tab:Button({
+    Title = "无头+断腿",
+    Desc = "免费的",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Permanent-Headless-And-korblox-Script-4140"))()                            end
+})
+
+local Button = Tab:Button({
+    Title = "无限连跳",
+    Desc = "连跳",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/V5PQy3y0", true))()     end
+})
+
+local Button = Tab:Button({
+    Title = "踏空行走",
+    Desc = "nb666",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Float'))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "甩飞",
+    Desc = "😏😏",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Auto%20Fling%20Player'))()                 end
+})
+
+local Button = Tab:Button({
+    Title = "透视",
+    Desc = "透视",
+    Locked = false,
+    Callback = function()
+ loadstring(game:GetObjects("rbxassetid://10092697033")[1].Source)()                 end
+})
+
+local Button = Tab:Button({
+    Title = "穿墙",
+    Desc = "😒😒",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/TtmScripter/OtherScript/main/Noclip"))()                end
+})
+
+local Button = Tab:Button({
+    Title = "飞车",
+    Desc = "🔞🔞",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/G3GnBCyC", true))()     end
+})
+
+local Button = Tab:Button({
+    Title = "鲁管R15",
+    Desc = "🔞🔞🔞🔞",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()             end
+})
+
+local Button = Tab:Button({
+    Title = "工具箱",
+    Desc = "😍😍",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/BTools.txt"))()               
+    end
+})
+
+local Button = Tab:Button({
+    Title = "指令",
+    Desc = "指令脚本",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "免费动画包",
+    Desc = "免费",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/Zj4NnKs6"))()           end
+})
+
+local Button = Tab:Button({
+    Title = "正常范围",
+    Desc = "范围",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/jiNwDbCN"))()           end
+})
+
+local Button = Tab:Button({
+    Title = "高级范围",
+    Desc = "范围",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://pastebin.com/raw/x13bwrFb"))()            end
+})
+
+local Button = Tab:Button({
+    Title = "手动范围",
+    Desc = "自己手动弄",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://shz.al/CpRJ"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "隐身",
+    Desc = "别人看不到",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Yungengxin/roblox/main/yinshen"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "旋转",
+    Desc = "我也不知道",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/dingding123hhh/hknvh/main/%E7%94%A9%E9%A3%9E.txt"))()           end
+})
+
+local Button = Tab:Button({
+    Title = "FE假延迟",
+    Desc = "假延迟",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/RENZXW/RENZXW-SCRIPTS/main/fakeLAGRENZXW.txt"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "黑客后门v6",
+    Desc = "后门v6",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/iK4oS/backdoor.exe/v6x/source.lua"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "点击传送",
+    Desc = "传送",
+    Locked = false,
+    Callback = function()
+        mouse = game.Players.LocalPlayer:GetMouse() tool = Instance.new("Tool") tool.RequiresHandle = false tool.Name = "南娘中心传送" tool.Activated:connect(function() local pos = mouse.Hit+Vector3.new(0,2.5,0) pos = CFrame.new(pos.X,pos.Y,pos.Z) game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos end) tool.Parent = game.Players.LocalPlayer.Backpack
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+
+local Tab = Tabs.Settings:Tab({
+    Title = "一路向西",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "一路向西",
+    Desc = "一路向西",
+    Thumbnail = "rbxassetid://113517327126374",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "一路向西",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "一路向西",
+    Desc = "超级枪",
+    Locked = false,
+    Callback = function()
+        loadstring(game:GetObjects("rbxassetid://10040701935")[1].Source)()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Settings:Tab({
+    Title = "自然灾害",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "逆天",
+    Desc = "自然灾害",
+    Thumbnail = "rbxassetid://109823944355188",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "自然灾害",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "自然灾害脚本",
+    Desc = "功能脚本",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/2dgeneralspam1/scripts-and-stuff/master/scripts/LoadstringUjHI6RQpz2o8", true))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Settings:Tab({
+    Title = "最强战场",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "最强战场",
+    Thumbnail = "rbxassetid://112344474851688",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "最坚强战场",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "最强战场无限侧闪",
+    Desc = "无卡密英文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/10tempest01/tempest-hub/refs/heads/main/Launcher.lua"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "最强战场丢垃圾桶",
+    Desc = "无卡密英文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/gycgchgyfytdttr/shenqin/refs/heads/main/V1.0.0.txt"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Settings:Tab({
+    Title = "监狱人生",
+    Icon = "door-open",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "监狱人生",
+    Thumbnail = "rbxassetid://72368339506794",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "监狱人生",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "监狱人生",
+    Desc = "没用过不知道",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/LiverMods/xRawnder/main/HubMoblie'))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "监狱人生2",
+    Desc = "这个我也不知道",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Vynixius/main/Loader.lua"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Settings:Tab({
+    Title = "墨水游戏",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "墨水游戏",
+    Thumbnail = "rbxassetid://135457092955223",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "墨水游戏",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "墨水游戏",
+    Desc = "无卡密英文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/ScripterVaz/InkGameAzure/main/Protected_7974105512464815.lua.txt"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Settings:Tab({
+    Title = "死铁轨",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "死铁轨",
+    Thumbnail = "rbxassetid://113517327126374",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "死铁轨",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "死铁轨",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/iopjklbnmsss/SansHubScript/refs/heads/main/SansHub"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Settings:Tab({
+    Title = "林森99夜",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "森林中的99夜",
+    Thumbnail = "rbxassetid://109823944355188",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "森林中的99夜",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "林森99夜",
+    Desc = "无卡密中文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet(('https://github.com/devslopo/DVES/raw/main/XK%20Hub')))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "林森99夜",
+    Desc = "无卡密中文 推荐",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/NEHUB2/NE/refs/heads/main/855.lua"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Settings:Tab({
+    Title = "刀刃球",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "刀刃球",
+    Thumbnail = "rbxassetid://112344474851688",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "刀刃球",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "刀刃球",
+    Desc = "无卡密英文",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/3345-c-a-t-s-u-s/-beta-/main/AutoParry.lua"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "刀刃球",
+    Desc = "无卡密中文 推荐",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/rbxluau/script-hub/main/loader.lua"))()
+    end
+})
+
+local Button = Tab:Button({
+    Title = "刀刃球红⭕️",
+    Desc = "无卡密中文 推荐",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/1f0yt/community/main/autoparrybest"))()
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Settings:Tab({
+    Title = "偷走脑红",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "偷走脑红",
+    Thumbnail = "rbxassetid://72368339506794",
+    ThumbnailSize = 200,
+})
+
+local Section = Tab:Section({ 
+    Title = "偷走脑红",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+
+local Button = Tab:Button({
+    Title = "偷走脑红",
+    Desc = "无卡密英文 推荐",
+    Locked = false,
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Brinxhub12/brinx-hub-comebac1/refs/heads/main/brinx%20come%20back"))();
+    end
+})
+
+Window:SelectTab(2) -- Number of Tab
+
+local Tab = Tabs.Settings:Tab({
+    Title = "火箭发射模拟器",
+    Icon = "layout-grid",
+    Locked = false,
+})
+
+local Paragraph = Tab:Paragraph({
+    Title = "脚本",
+    Desc = "火箭发射模拟器",
+    Thumbnail = "rbxassetid://90122712710917",
+    ThumbnailSize = 200,
+})
+
+本地节=制表符：节({
+title="火箭发射模拟器"，
+TextXAlignment="左"，
+textSize=17，--默认大小
+})
+
+本地按钮=Tab：按钮({
+title="火箭发射模拟器禁漫"，
+DESC="无卡密中文"，
+锁定=false，
+callback=函数()
+loadstring(游戏：HttpGet("https://raw.githubusercontent.com/dingding123hhh/anlushanjinchangantangwanle/refs/heads/main/jmjmjmjmjmjm114514.txt"))()
+结束
+})
+
+窗口：SelectTab(2)--选项卡编号
+
+本地Tab=Tabs.Settings:Tab({
+title="力量传奇"，
+icon="布局网格"，
+锁定=false，
+})
+
+局部段落=Tab：段落({
+title="脚本"，
+DESC="力量传奇"，
+thumbnail="rbxassetid://135457092955223"，
+ThumbnailSize=200，
+})
+
+本地节=制表符：节({
+title="力量传奇"，
+TextXAlignment="左"，
+textSize=17，--默认大小
+})
+
+本地按钮=Tab：按钮({
+title="力量传奇自动吃蛋"，
+DESC="无卡密中文"，
+锁定=false，
+callback=函数()
+loadstring(游戏：HttpGet("https://raw.github.com/114514541883484/Zephyr-wave/main/agreement.lua"))()
+结束
+})
+
+窗口：SelectTab(2)--选项卡编号
+
+本地Tab=Tabs.Settings:Tab({
+title="其他脚本"，
+icon="布局网格"，
+锁定=false，
+})
+
+局部段落=Tab：段落({
+title="其他作者的脚本"，
+DESC="😡😡"，
+thumbnail="rbxassetid://90122712710917"，
+ThumbnailSize=200，
+})
+
+本地节=制表符：节({
+title="🥺🥺🥺🥺"，
+TextXAlignment="左"，
+textSize=17，--默认大小
+})
+
+本地按钮=Tab：按钮({
+title="皮脚本"，
+DESC="nb脚本"，
+锁定=false，
+callback=函数()
+loadstring(游戏：HttpGet("https://raw.githubusercontent.com/xiaopi77/xiaopi77/main/QQ1002100032-Roblox-Pi-script.lua"))()
+结束
+})
+
+本地按钮=Tab：按钮({
+title="叶脚本"，
+DESC="还行脚本"，
+锁定=false，
+callback=函数()
+loadstring(游戏：HttpGet("https://raw.githubusercontent.com/roblox-ye/QQ515966991/refs/heads/main/ROBLOX-CNVIP-XIAOYE.lua"))()
+结束
+})
+
+本地按钮=Tab：按钮({
+title="苏脚本"，
+DESC="脚本"，
+锁定=false，
+callback=函数()
+loadstring(游戏：HttpGet("https://github.com/kukunb/lol/raw/main/load"))()
+结束
+})
+
+本地按钮=Tab：按钮({
+title="禁漫脚本"，
+DESC="脚本"，
+锁定=false，
+callback=函数()
+loadstring(游戏：HttpGet("https://raw.githubusercontent.com/dingding123hhh/anlushanjinchangantangwanle/main/---------------jmllllIIIl.lua"))()
+结束
+})
+
+窗口：SelectTab(2)--选项卡编号
