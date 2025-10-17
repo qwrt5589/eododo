@@ -1,0 +1,782 @@
+repeat task.wait() until game:IsLoaded()
+local library = {}
+local ToggleUI = false
+library.currentTab = nil
+library.flags = {}
+
+local services = setmetatable({}, {
+  __index = function(t, k)
+    return game.GetService(game, k)
+  end
+})
+
+local mouse = services.Players.LocalPlayer:GetMouse()
+
+函数Tween(obj，t，data)
+services.TweenService:Create(obj，TweenInfo.new(t[1]，Enum.EasingStyle[t[2]]，Enum.EasingDirection[t[3]])，data)：Play()
+返回true
+结束
+
+函数涟漪(obj)
+派生(函数()
+如果obj.ClipsDescendants~=true，则
+obj.ClipsDescendants=true
+结束
+本地波纹=Instance.new("ImageLabel")
+Ripple.Name="Ripple"
+Ripple.Parent=obj
+Ripple.BackgroundColor3=Color3.fromRGB(255，255，255)
+Ripple.BackgroundTransparency=1.000
+Ripple.ZIndex=8
+Ripple.Image="rbxassetid://2708891598"
+Ripple.ImageTransparency=0.800
+Ripple.ScaleType=枚举.ScaleType.Fit
+Ripple.ImageColor3=Color3.fromRGB(255，255，255)
+Ripple.Position=UDim2.new((鼠标.X-Ripple.AbsolutePosition.X)/obj.AbsoluteSize.X，0，(鼠标.Y-Ripple.AbsolutePosition.Y)/obj.AbsoluteSize.Y，0)
+补间(波纹，{.3，'线性'，'输入输出'}，{位置=UDim2.new(-5.5，0，-5.5，0)，大小=UDim2.new(12，0，12，0)})
+等待(0.15)
+补间(波纹，{.3，'线性'，'输入输出'}，{ImageTransparency=1})
+等待(.3)
+波纹：销毁()
+结束)
+结束
+
+本地切换=false
+
+--#切换标签#--
+本地switchingTabs=false
+功能开关标签(新)
+如果switchingTabs，则返回结束
+本地旧=library.currentTab
+如果旧==无则
+新建[2].visible=true
+library.currentTab=新建
+services.TweenService：创建(新建[1]，TweenInfo.new(0.1)，{ImageTransparency=0})：播放()
+services.TweenService：创建(新建[1].TabText，TweenInfo.new(0.1)，{TextTransparency=0})：播放()
+返回
+结束
+  
+如果旧[1]==新[1]，则返回结束
+switchingTabs=true
+library.currentTab=新建
+
+services.TweenService：创建(旧[1]，TweenInfo.new(0.1)，{ImageTransparency=0.2})：播放()
+services.TweenService：创建(新建[1]，TweenInfo.new(0.1)，{ImageTransparency=0})：播放()
+services.TweenService：创建(旧[1].标签文本，TweenInfo.new(0.1)，{TextTransparency=0.2})：播放()
+services.TweenService：创建(新建[1].TabText，TweenInfo.new(0.1)，{TextTransparency=0})：播放()
+
+旧[2].可见=false
+新建[2].visible=true
+  
+task.wait(0.1)
+
+switchingTabs=false
+结束
+
+-----------------------------------------------------------------------------------------------------
+功能拖动(框架，按住)
+如果未保持，则
+持有=框架
+结束
+局部拖动
+本地dragInput
+本地拖动启动
+本地startpos
+
+本地功能更新(输入)
+本地增量=输入。 位置-拖动开始
+frame.Position=UDim2.new(起始位置X.刻度，起始位置X.偏移+δX，起始位置y.刻度，起始位置y.偏移+δY)
+结束
+
+hold.InputBegin：连接(函数(输入)
+如果input.UserInputType==枚举。UserInputType.MouseButton1，则
+拖动=真
+dragstart=输入.位置
+startpos=frame.Position
+
+input.Changed:Connect(函数()
+如果input.UserInputState==枚举。UserInputState。结束，则
+拖动=假的
+结束
+结束)
+结束
+结束)
+
+frame.InputChanged：连接(函数(输入)
+如果input.UserInputType==枚举。UserInputType。鼠标移动，则
+dragInput=输入
+结束
+结束)
+
+服务。UserInputService.InputChanged：连接(函数(输入)
+如果输入==拖动输入并拖动，则
+更新(输入)
+结束
+结束)
+结束
+
+函数库.new(库、名称、主题)
+for_，venext，services.CoreGui:GetChildren()do
+如果v.Name=="frosty"，则
+v：销毁()
+结束
+结束
+如果主题=='深色'则
+MainColor=Color3.fromRGB(25，25，25)
+背景=颜色3.来自RGB(25，25，25)
+zyColor=Color3.fromRGB(25，25，25)
+beijingColor=Color3.fromRGB(25，25，25)
+其他
+MainColor=Color3.fromRGB(25，25，25)
+背景=颜色3.来自RGB(25，25，25)
+zyColor=Color3.fromRGB(30，30，30)
+bijingColor=Color3.fromRGB(255，255，255)
+结束
+本地dogent=Instance.new("ScreenGui")
+本地主=Instance.new("Frame")
+本地TabMain=Instance.new("Frame")
+本地MainC=Instance.new("UICorner")
+本地SB=Instance.new("Frame")
+本地SBC=Instance.new("UICorner")
+本地端=Instance.new("Frame")
+本地SideG=Instance.new("UIGradient")
+本地TabBtns=Instance.new("ScrollingFrame")
+本地TabBtnsL=Instance.new("UIListLayout")
+本地ScriptTitle=Instance.new("TextLabel")
+本地SBG=Instance.new("UIGradient")
+本地打开=Instance.new("TextButton")
+本地UIG=Instance.new("UIGradient")
+本地DropShadowHolder=Instance.new("Frame")
+本地Dropshadow=Instance.new("ImageLabel")
+本地UICornerMain=Instance.new("UICorner")
+本地UIGradient=Instance.new("UIGradient")
+本地UIGradientTitle=Instance.new("UIGradient")
+      
+如果syn和syn.protect_gui，则syn.protect_gui(dogent)结束
+    
+      dogent.Name = "frosty"
+      dogent.Parent = services.CoreGui
+      
+      function UiDestroy()
+          dogent:Destroy()
+      end
+      
+          function ToggleUILib()
+            if not ToggleUI then
+                dogent.Enabled = false
+                ToggleUI = true
+                else
+                ToggleUI = false
+                dogent.Enabled = true
+            end
+        end
+      
+      Main.Name = "Main"
+      Main.Parent = dogent
+      Main.AnchorPoint = Vector2.new(0.5, 0.5)
+      Main.BackgroundColor3 = Background
+      Main.BorderColor3 = MainColor
+      Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+      Main.Size = UDim2.new(0, 572, 0, 353)
+      Main.ZIndex = 1
+      Main.Active = true
+      Main.Draggable = true
+      services.UserInputService.InputEnded:Connect(function(input)
+      if input.KeyCode == Enum.KeyCode.LeftControl then
+      if Main.Visible == true then
+      Main.Visible = false else
+      Main.Visible = true
+      end
+      end
+      end)
+      drag(Main)
+      
+      UICornerMain.Parent = Main
+      UICornerMain.CornerRadius = UDim.new(0,3)
+      
+      DropShadowHolder.Name = "DropShadowHolder"
+      DropShadowHolder.Parent = Main
+      DropShadowHolder.BackgroundTransparency = 1.000
+      DropShadowHolder.BorderSizePixel = 0
+      DropShadowHolder.Size = UDim2.new(1, 0, 1, 0)
+      DropShadowHolder.BorderColor3 = Color3.fromRGB(255,255,255)
+      DropShadowHolder.ZIndex = 0
+
+      DropShadow.Name = "DropShadow"
+      DropShadow.Parent = DropShadowHolder
+      DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+      DropShadow.BackgroundTransparency = 1.000
+      DropShadow.BorderSizePixel = 0
+      DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
+      DropShadow.Size = UDim2.new(1, 43, 1, 43)
+      DropShadow.ZIndex = 0
+      DropShadow.Image = "rbxassetid://6015897843"
+      DropShadow.ImageColor3 = Color3.fromRGB(255,255,255)
+      DropShadow.ImageTransparency = 0.500
+      DropShadow.ScaleType = Enum.ScaleType.Slice
+      DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
+
+
+      UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.20, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(0.30, Color3.fromRGB(0, 255, 0)), ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 255)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(0.60, Color3.fromRGB(139, 0, 255)), ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.80, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 0))}
+      UIGradient.Parent = DropShadow
+
+      local TweenService = game:GetService("TweenService")
+      local tweeninfo = TweenInfo.new(7, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
+      local tween = TweenService:Create(UIGradient, tweeninfo, {Rotation = 360})
+      tween:Play()
+
+          function toggleui()
+            toggled = not toggled
+            spawn(function()
+                if toggled then wait(0.3) end
+            end)
+            Tween(Main, {0.3, 'Sine', 'InOut'}, {
+                Size = UDim2.new(0, 609, 0, (toggled and 505 or 0))
+            })
+        end
+      
+      TabMain.Name = "TabMain"
+      TabMain.Parent = Main
+      TabMain.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+      TabMain.BackgroundTransparency = 1.000
+      TabMain.Position = UDim2.new(0.217000037, 0, 0, 3)
+      TabMain.Size = UDim2.new(0, 448, 0, 353)
+      
+      MainC.CornerRadius = UDim.new(0, 5.5)
+      MainC.Name = "MainC"
+      MainC.Parent = Frame
+      
+      SB.Name = "SB"
+      SB.Parent = Main
+      SB.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+      SB.BorderColor3 = MainColor
+      SB.Size = UDim2.new(0, 8, 0, 353)
+      
+      SBC.CornerRadius = UDim.new(0, 6)
+      SBC.Name = "SBC"
+      SBC.Parent = SB
+      
+      Side.Name = "Side"
+      Side.Parent = SB
+      Side.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+      Side.BorderColor3 = Color3.fromRGB(255, 255, 255)
+      Side.BorderSizePixel = 0
+      Side.ClipsDescendants = true
+      Side.Position = UDim2.new(1, 0, 0, 0)
+      Side.Size = UDim2.new(0, 110, 0, 353)
+      
+      SideG.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, zyColor), ColorSequenceKeypoint.new(1.00, zyColor)}
+      SideG.Rotation = 90
+      SideG.Name = "SideG"
+      SideG.Parent = Side
+      
+      TabBtns.Name = "TabBtns"
+      TabBtns.Parent = Side
+      TabBtns.Active = true
+      TabBtns.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+      TabBtns.BackgroundTransparency = 1.000
+      TabBtns.BorderSizePixel = 0
+      TabBtns.Position = UDim2.new(0, 0, 0.0973535776, 0)
+      TabBtns.Size = UDim2.new(0, 110, 0, 318)
+      TabBtns.CanvasSize = UDim2.new(0, 0, 1, 0)
+      TabBtns.ScrollBarThickness = 0
+      
+      TabBtnsL.Name = "TabBtnsL"
+      TabBtnsL.Parent = TabBtns
+      TabBtnsL.SortOrder = Enum.SortOrder.LayoutOrder
+      TabBtnsL.Padding = UDim.new(0, 12)
+      
+      ScriptTitle.Name = "ScriptTitle"
+      ScriptTitle.Parent = Side
+      ScriptTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+      ScriptTitle.BackgroundTransparency = 1.000
+      ScriptTitle.Position = UDim2.new(0, 0, 0.00953488424, 0)
+      ScriptTitle.Size = UDim2.new(0, 102, 0, 20)
+      ScriptTitle.Font = Enum.Font.GothamSemibold
+      ScriptTitle.Text = name
+      ScriptTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+      ScriptTitle.TextSize = 14.000
+      ScriptTitle.TextScaled = true
+      ScriptTitle.TextXAlignment = Enum.TextXAlignment.Left
+      
+      UIGradientTitle.Parent = ScriptTitle
+     
+      local function NPLHKB_fake_script() 
+        local script = Instance.new('LocalScript', ScriptTitle)
+     
+        local button = script.Parent
+        local gradient = button.UIGradient
+        local ts = game:GetService("TweenService")
+        local ti = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+        local offset = {Offset = Vector2.new(1, 0)}
+        local create = ts:Create(gradient, ti, offset)
+        local startingPos = Vector2.new(-1, 0)
+        local list = {} 
+        local s, kpt = ColorSequence.new, ColorSequenceKeypoint.new
+        local counter = 0
+        local status = "down" 
+        gradient.Offset = startingPos
+        local function rainbowColors()
+            local sat, val = 255, 255 
+            for i = 1, 10 do 
+                local hue = i * 17 
+                table.insert(list, Color3.fromHSV(hue / 255, sat / 255, val / 255))
+            end
+        end
+        rainbowColors()
+        gradient.Color = s({
+            kpt(0, list[#list]),
+            kpt(0.5, list[#list - 1]),
+            kpt(1, list[#list - 2])
+        })
+        counter = #list
+        local function animate()
+            create:Play()
+            create.Completed:Wait() 
+            gradient.Offset = startingPos 
+            gradient.Rotation = 180
+            if counter == #list - 1 and status == "down" then
+                gradient.Color = s({
+                    kpt(0, gradient.Color.Keypoints[1].Value),
+                    kpt(0.5, list[#list]), 
+                    kpt(1, list[1]) 
+                })
+                counter = 1
+                status = "up" 
+            elseif counter == #list and status == "down" then 
+                gradient.Color = s({
+                    kpt(0, gradient.Color.Keypoints[1].Value),
+                    kpt(0.5, list[1]),
+                    kpt(1, list[2])
+                })
+                counter = 2
+                status = "up"
+            elseif counter <= #list - 2 and status == "down" then 
+                gradient.Color = s({
+                    kpt(0, gradient.Color.Keypoints[1].Value),
+                    kpt(0.5, list[counter + 1]), 
+                    kpt(1, list[counter + 2])
+                })
+                counter = counter + 2
+                status = "up"
+            end
+            create:Play()
+            create.Completed:Wait()
+            gradient.Offset = startingPos
+            gradient.Rotation = 0 
+            if counter == #list - 1 and status == "up" then
+                gradient.Color = s({ 
+     
+                    kpt(0, list[1]), 
+                    kpt(0.5, list[#list]), 
+                    kpt(1, gradient.Color.Keypoints[3].Value)
+                })
+                counter = 1
+                status = "down"
+            elseif counter == #list and status == "up" then
+                gradient.Color = s({
+                    kpt(0, list[2]),
+                    kpt(0.5, list[1]), 
+                    kpt(1, gradient.Color.Keypoints[3].Value)
+                })
+                counter = 2
+                status = "down"
+            elseif counter <= #list - 2 and status == "up" then
+                gradient.Color = s({
+                    kpt(0, list[counter + 2]), 
+                    kpt(0.5, list[counter + 1]), 
+                    kpt(1, gradient.Color.Keypoints[3].Value) 	
+                })
+                counter = counter + 2
+                status = "down"
+            end
+            animate()
+        end
+        animate()
+     
+    end
+    coroutine.wrap(NPLHKB_fake_script)()
+      
+      SBG.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, zyColor), ColorSequenceKeypoint.new(1.00, zyColor)}
+      SBG.Rotation = 90
+      SBG.Name = "SBG"
+      SBG.Parent = SB
+    
+      TabBtnsL:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        TabBtns.CanvasSize = UDim2.new(0, 0, 0, TabBtnsL.AbsoluteContentSize.Y + 18)
+      end)
+      Open.Name = "Open"
+      Open.Parent = dogent
+      Open.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+      Open.Position = UDim2.new(0.00829315186, 0, 0.31107837, 0)
+      Open.Size = UDim2.new(0, 61, 0, 32)
+      Open.Font = Enum.Font.SourceSans
+      Open.Text = "隐藏/打开"
+      Open.TextColor3 = Color3.fromRGB(255, 255, 255)
+      Open.TextSize = 14.000
+      Open.Active = true
+      Open.Draggable = true
+      Open.MouseButton1Click:Connect(function()
+      Main.Visible = not Main.Visible
+      end)
+      UIG.Parent = Open
+      local window = {}
+      function window.Tab(window, name, icon)
+        local Tab = Instance.new("ScrollingFrame")
+        local TabIco = Instance.new("ImageLabel")
+        local TabText = Instance.new("TextLabel")
+        local TabBtn = Instance.new("TextButton")
+        local TabL = Instance.new("UIListLayout")
+    
+        Tab.Name = "Tab"
+        Tab.Parent = TabMain
+        Tab.Active = true
+        Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Tab.BackgroundTransparency = 1.000
+        Tab.Size = UDim2.new(1, 0, 1, 0)
+        Tab.ScrollBarThickness = 2
+        Tab.Visible = false
+        
+        TabIco.Name = "TabIco"
+        TabIco.Parent = TabBtns
+        TabIco.BackgroundTransparency = 1.000
+        TabIco.BorderSizePixel = 0
+        TabIco.Size = UDim2.new(0, 24, 0, 24)
+        TabIco.Image = ("rbxassetid://%s"):format((icon or 4370341699))
+        TabIco.ImageTransparency = 0.2
+        
+        TabText.Name = "TabText"
+        TabText.Parent = TabIco
+        TabText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TabText.BackgroundTransparency = 1.000
+        TabText.Position = UDim2.new(1.41666663, 0, 0, 0)
+        TabText.Size = UDim2.new(0, 76, 0, 24)
+        TabText.Font = Enum.Font.GothamSemibold
+        TabText.Text = name
+        TabText.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TabText.TextSize = 14.000
+        TabText.TextXAlignment = Enum.TextXAlignment.Left
+        TabText.TextTransparency = 0.2
+        
+        TabBtn.Name = "TabBtn"
+        TabBtn.Parent = TabIco
+        TabBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TabBtn.BackgroundTransparency = 1.000
+        TabBtn.BorderSizePixel = 0
+        TabBtn.Size = UDim2.new(0, 110, 0, 24)
+        TabBtn.AutoButtonColor = false
+        TabBtn.Font = Enum.Font.SourceSans
+        TabBtn.Text = ""
+        TabBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+        TabBtn.TextSize = 14.000
+        
+        TabL.Name = "TabL"
+        TabL.Parent = Tab
+        TabL.SortOrder = Enum.SortOrder.LayoutOrder
+        TabL.Padding = UDim.new(0, 4)  
+    
+        TabBtn.MouseButton1Click:Connect(function()
+            spawn(function()
+                Ripple(TabBtn)
+            end)
+          switchTab({TabIco, Tab})
+        end)
+    
+        if library.currentTab == nil then switchTab({TabIco, Tab}) end
+    
+        TabL:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+          Tab.CanvasSize = UDim2.new(0, 0, 0, TabL.AbsoluteContentSize.Y + 8)
+        end)
+    
+        local tab = {}
+        function tab.section(tab, name, TabVal)
+          local Section = Instance.new("Frame")
+          local SectionC = Instance.new("UICorner")
+          local SectionText = Instance.new("TextLabel")
+          local SectionOpen = Instance.new("ImageLabel")
+          local SectionOpened = Instance.new("ImageLabel")
+          local SectionToggle = Instance.new("ImageButton")
+          local Objs = Instance.new("Frame")
+          local ObjsL = Instance.new("UIListLayout")
+    
+          Section.Name = "Section"
+          Section.Parent = Tab
+          Section.BackgroundColor3 = zyColor
+          Section.BackgroundTransparency = 1.000
+          Section.BorderSizePixel = 0
+          Section.ClipsDescendants = true
+          Section.Size = UDim2.new(0.981000006, 0, 0, 36)
+          
+          SectionC.CornerRadius = UDim.new(0, 6)
+          SectionC.Name = "SectionC"
+          SectionC.Parent = Section
+          
+          SectionText.Name = "SectionText"
+          SectionText.Parent = Section
+          SectionText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+          SectionText.BackgroundTransparency = 1.000
+          SectionText.Position = UDim2.new(0.0887396261, 0, 0, 0)
+          SectionText.Size = UDim2.new(0, 401, 0, 36)
+          SectionText.Font = Enum.Font.GothamSemibold
+          SectionText.Text = name
+          SectionText.TextColor3 = Color3.fromRGB(255, 255, 255)
+          SectionText.TextSize = 16.000
+          SectionText.TextXAlignment = Enum.TextXAlignment.Left
+          
+          SectionOpen.Name = "SectionOpen"
+          SectionOpen.Parent = SectionText
+          SectionOpen.BackgroundTransparency = 1
+          SectionOpen.BorderSizePixel = 0
+          SectionOpen.Position = UDim2.new(0, -33, 0, 5)
+          SectionOpen.Size = UDim2.new(0, 26, 0, 26)
+          SectionOpen.Image = "http://www.roblox.com/asset/?id=6031302934"
+          
+          SectionOpened.Name = "SectionOpened"
+          SectionOpened.Parent = SectionOpen
+          SectionOpened.BackgroundTransparency = 1.000
+          SectionOpened.BorderSizePixel = 0
+          SectionOpened.Size = UDim2.new(0, 26, 0, 26)
+          SectionOpened.Image = "http://www.roblox.com/asset/?id=6031302932"
+          SectionOpened.ImageTransparency = 1.000
+    
+          SectionToggle.Name = "SectionToggle"
+          SectionToggle.Parent = SectionOpen
+          SectionToggle.BackgroundTransparency = 1
+          SectionToggle.BorderSizePixel = 0
+          SectionToggle.Size = UDim2.new(0, 26, 0, 26)
+          
+          Objs.Name = "Objs"
+          Objs.Parent = Section
+          Objs.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+          Objs.BackgroundTransparency = 1
+Objs.BorderSizePixel=0
+Objs.Position=UDim2.new(0，6，0，36)
+Objs.Size=UDim2.new(0.986347735，0，0，0)
+    
+ObjsL.Name="ObjsL"
+ObjsL.Parent=objs
+ObjectsL.SortOrder=枚举.SortOrder.LayoutOrder
+ObjsL.Padding=UDim.new(0，8)
+          
+本地打开=TabVal
+如果TabVal~=false，则
+Section.Size=UDim2.new(0.981000006，0，0，open and36+ObjsL.AbsoluteContentSize.Y+8或36)
+SectionOpened.ImageTransparency=(打开且0或1)
+SectionOpen.ImageTransparency=(打开且为1或0)
+结束
+          
+SectionToggle。鼠标按钮1单击：连接(函数()
+打开=未打开
+Section.Size=UDim2.new(0.981000006，0，0，open and36+ObjsL.AbsoluteContentSize.Y+8或36)
+SectionOpened.ImageTransparency=(打开且0或1)
+SectionOpen.ImageTransparency=(打开且为1或0)
+结束)
+    
+ObjsL:GetPropertyChangedSignal("AbsoluteContentSize")：Connect(函数()
+如果未打开，则返回端
+Section.Size=UDim2.new(0.981000006，0，0，36+ObjsL.AbsoluteContentSize.Y+8)
+结束)
+    
+局部段={}
+函数节.按钮(节，文本，回调)
+本地回调=callback或函数()结束
+    
+本地BtnModule=Instance.new("Frame")
+本地Btn=Instance.new("TextButton")
+本地BTNC=Instance.new("UICorner")
+            
+BtnModule.Name="BtnModule"
+BtnModule.Parent=objs
+BtnModule.BackgroundColor3=Color3.fromRGB(255，255，255)
+BtnModule.BackgroundTransparency=1.000
+BtnModule.BorderSizePixel=0
+BtnModule.Position=UDim2.new(0，0，0)
+BtnModule.Size=UDim2.new(0，428，0，38)
+            
+Btn.Name="Btn"
+Btn.Parent=BtnModule
+Btn.BackgroundColor3=zyColor
+Btn.BorderSizePixel=0
+Btn.Size=UDim2.new(0，428，0，38)
+Btn.AutoButtonColor=false
+Btn.Font=枚举.Font.Gotham Semibold
+Btn.Text=""..text
+Btn.TextColor3=Color3.fromRGB(255，255，255)
+Btn.TextSize=16.000
+Btn.TextXAlignment=枚举.TextXAlignment.Left
+            
+BtnC.CornerRadius=UDim.new(0，6)
+BtnC.Name="BTNC"
+BtnC.Parent=Btn
+    
+Btn.MouseButton1Click:Connect(函数()
+派生(函数()
+波纹(Btn)
+结束)
+繁殖(回拨)
+结束)
+结束
+    
+功能部分：标签(文本)
+本地LabelModule=Instance.new("Frame")
+本地TextLabel=Instance.new("TextLabel")
+本地标签C=Instance.new("UICorner")
+          
+LabelModule.Name="LabelModule"
+LabelModule.Parent=objs
+LabelModule.BackgroundColor3=Color3.fromRGB(255，255，255)
+LabelModule.BackgroundTransparency=1.000
+LabelModule.BorderSizePixel=0
+LabelModule.Position=UDim2.new(0，0，NAN，0)
+LabelModule.Size=UDim2.new(0，428，0，19)
+    
+TextLabel.Parent=LabelModule
+TextLabel.BackgroundColor3=zyColor
+TextLabel.Size=UDim2.new(0，428，0，22)
+TextLabel.Font=枚举.Font.GothamSemibold
+TextLabel.Text=text
+TextLabel.TextColor3=Color3.fromRGB(255，255，255)
+TextLabel.TextSize=14.000
+    
+LabelC.CornerRadius=UDim.new(0，6)
+LabelC.Name="LabelC"
+LabelC.Parent=TextLabel
+返回TextLabel
+结束
+    
+功能区段.切换(区段、文字、旗标、启用、回呼)
+本地回调=callback或函数()结束
+重复任务。等待()直到游戏：IsLoaded()
+本地库={}
+本地ToggleUI=false
+library.currentTab=nil
+library.flags={}
+TabText.BackgroundTransparency=1.000
+本地服务=setmetable({}，{
+__index=函数(t，k)
+TabText.Font=枚举。字体.Gotham Semibold
+TabText.Text=名称
+TabText。TextColor3=Color3。fromRGB(255，255，255)
+TabText.TextSize=14.000
+TabText.TextXAlignment=枚举。TextXAlignment.Left
+TabText.TextTransparency=0.2
+本地鼠标=services.players.LocalPlayer:GetMouse()
+TabBtn.Name="TabBtn"
+TabBtn.Parent=TabIco
+TabBtn.BackgroundColor3=Color3。fromRGB(255，255，255)
+TabBtn.BackgroundTransparency=1.000
+TabBtn.BorderSizePixel=0
+TabBtn.Size=UDim2.new(0，110，0，24)
+TabBtn.AutoButtonColor=false
+TabBtn.Font=枚举。字体.SourceSans
+TabBtn.Text=""
+TabBtn.TextColor3=Color3.fromRGB(0，0，0)
+TabBtn.TextSize=14.000
+本地波纹=Instance.new("ImageLabel")
+TabL.Name="表"
+TabL.Parent=Tab
+TabL.SortOrder=枚举。排序顺序.布局顺序
+TabL.Padding=UDim.new(0，4)
+Ripple.ZIndex=8
+TabBtn.MouseButton1单击：连接(函数()
+派生(函数()
+波纹(TabBtn)
+结束)
+switchTab({TabIco，Tab})
+结束)
+等待(0.15)
+如果library.currentTab==nil，则switchTab({TabIco，Tab})结束
+等待(.3)
+选项卡：GetPropertyChangedSignal("AbsoluteContentSize")：连接(函数()
+标签。CanvasSize=UDim2。new(0，0，0，table.AbsoluteContentSize.y+8)
+结束)
+            
+本地选项卡={}
+“函数”选项卡.节(选项卡、名称、TabVal)
+本地节=Instance.new("Frame")
+本地区段C=Instance.new("UICorner")
+本地SectionText=Instance.new("TextLabel")
+本地SectionOpen=Instance.new("ImageLabel")
+本地SectionOpened=Instance.new("ImageLabel")
+本地SectionToggle=Instance.new("ImageButton")
+本地objs=Instance.new("Frame")
+本地ObjsL=Instance.new("UIListLayout")
+services.TweenService：创建(新建[1]，TweenInfo.new(0.1)，{ImageTransparency=0})：播放()
+Section.Name="Section"
+Section.Parent=Tab
+Section.BackgroundColor3=zyColor
+Section.BackgroundTransparency=1.000
+Section.BorderSizePixel=0
+Section.ClipsDescendants=true
+截面尺寸=UDim2.new(0.981000006，0，0，36)
+新建[2].visible=true
+SectionC.CornerRadius=UDim.new(0，6)
+SectionC.Name="SectionC"
+SectionC.Parent=Section
+switchingTabs=false
+SectionText.Name="SectionText"
+SectionText.Parent=Section
+SectionText.BroundColor3=Color3。fromRGB(255，255，255)
+SectionText.BackgroundTransparency=1.000
+SectionText.位置=UDim2。新建(0.0887396261，0，0，0)
+SectionText.Size=UDim2.new(0，401，0，36)
+SectionText.Font=枚举。字体.Gotham Semibold
+SectionText.Text=名称
+SectionText.TextColor3=Color3。fromRGB(255，255，255)
+SectionText.TextSize=16.000
+SectionText.TextXAlignment=枚举。TextXAlignment.Left
+如果未保持，则
+SectionOpen.Name="SectionOpen"
+SectionOpen.Parent=SectionText
+SectionOpen.BackgroundTransparency=1
+SectionOpen.BorderSizePixel=0
+SectionOpen.Position=UDim2.new(0，-33，0，5)
+SectionOpen.Size=UDim2.new(0，26，0，26)
+SectionOpen.Image="http://www.roblox.com/asset/?id=6031302934"
+本地功能更新(输入)
+SectionOpened.Name="SectionOpened"
+SectionOpened.Parent=SectionOpen
+SectionOpened.BackgroundTransparency=1.000
+SectionOpened.BorderSizePixel=0
+SectionOpened.Size=UDim2.new(0，26，0，26)
+SectionOpened.Image="http://www.roblox.com/asset/?id=6031302932"
+SectionOpened.ImageTransparency=1.000
+dragstart=输入.位置
+SectionToggle.Name="SectionToggle"
+SectionToggle.Parent=SectionOpen
+SectionToggle.BackgroundTransparency=1
+SectionToggle.BorderSizePixel=0
+SectionToggle.Size=UDim2.new(0，26，0，26)
+结束
+Objs.Name="objs"
+Objs.Parent=节
+objects.BroundColor3=Color3。fromRGB(255，255，255)
+Objs.BackgroundTransparency=1
+frame.InputChanged：连接(函数(输入)
+如果input.UserInputType==枚举。UserInputType。鼠标移动，则
+dragInput=输入
+结束
+结束)
+    
+函数库.new(库、名称、主题)
+for_，venext，services.CoreGui:GetChildren()do
+如果v.Name=="frosty"，则
+v：销毁()
+结束
+结束
+如果主题=='深色'则
+MainColor=Color3.fromRGB(25，25，25)
+背景=颜色3.来自RGB(25，25，25)
+zyColor=Color3.fromRGB(25，25，25)
+beijingColor=Color3.fromRGB(25，25，25)
+其他
+MainColor=Color3.fromRGB(25，25，25)
+背景=颜色3.来自RGB(25，25，25)
+zyColor=Color3.fromRGB(30，30，30)
+bijingColor=Color3.fromRGB(255，255，255)
+结束
+本地dogent=Instance.new("ScreenGui")
+本地主=Instance.new("Frame")
+本地TabMain=Instance.new("Frame")
+本地MainC=Instance.new("UICorner")
+      
