@@ -1,0 +1,309 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local functionBar = Instance.new("Frame") 
+local btnGeneral = Instance.new("TextButton") 
+local btnDisaster = Instance.new("TextButton") 
+local btnWest = Instance.new("TextButton") 
+local circleSwitch = Instance.new("ImageButton") 
+local authorText = Instance.new("TextLabel")
+local timeText = Instance.new("TextLabel")
+
+ScreenGui.Parent = game.CoreGui
+
+-- 圆形开关配置
+circleSwitch.Name = "CircleSwitch"
+circleSwitch.Parent = ScreenGui
+circleSwitch.Image = "rbxassetid://79399049294493"
+circleSwitch.Size = UDim2.new(0, 50, 0, 50)
+circleSwitch.Position = UDim2.new(0.1, 0, 0.5, 0)
+circleSwitch.BackgroundTransparency = 1
+circleSwitch.Draggable = true
+circleSwitch.Active = true
+circleSwitch.ZIndex = 10
+
+-- 面板配置
+local originalFrameState = {
+    Position = UDim2.new(0.326148063, 0, 0.29880476, 0),
+    Size = UDim2.new(0, 450, 0, 350),
+    Draggable = true,
+    Visible = false
+}
+
+-- 面板背景
+Frame.Name = "frame"
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(248, 248, 248)
+Frame.Position = originalFrameState.Position
+Frame.Size = originalFrameState.Size
+Frame.Active = true
+Frame.Draggable = originalFrameState.Draggable
+Frame.BorderSizePixel = 0
+Frame.Visible = originalFrameState.Visible
+
+local bgImage = Instance.new("ImageLabel")
+bgImage.Parent = Frame
+bgImage.Size = UDim2.new(1, 0, 1, 0)
+bgImage.Position = UDim2.new(0, 0, 0, 0)
+bgImage.Image = "rbxassetid://72368339506794"
+bgImage.BackgroundTransparency = 1
+bgImage.ZIndex = 1
+
+-- 左侧功能栏（透明）
+functionBar.Name = "functionBar"
+functionBar.Parent = Frame
+functionBar.Size = UDim2.new(0, 80, 1, 0)
+functionBar.Position = UDim2.new(0, 0, 0, 0)
+functionBar.BackgroundTransparency = 1
+functionBar.BorderSizePixel = 0
+functionBar.ZIndex = 2
+
+-- 作者信息（Tuki）
+authorText.Name = "AuthorText"
+authorText.Parent = functionBar
+authorText.Text = "作者：Tuki"
+authorText.Size = UDim2.new(1, 0, 0, 20)
+authorText.Position = UDim2.new(0, 0, 0, 5)
+authorText.BackgroundTransparency = 1
+authorText.TextColor3 = Color3.fromRGB(255, 255, 255)
+authorText.TextSize = 11
+authorText.BorderSizePixel = 0
+authorText.ZIndex = 3
+
+-- 当前时间文本
+timeText.Name = "TimeText"
+timeText.Parent = functionBar
+timeText.Text = os.date("%Y-%m-%d %H:%M:%S")
+timeText.Size = UDim2.new(1, 0, 0, 20)
+timeText.Position = UDim2.new(0, 0, 0, 25)
+timeText.BackgroundTransparency = 1
+timeText.TextColor3 = Color3.fromRGB(255, 255, 255)
+timeText.TextSize = 11
+timeText.BorderSizePixel = 0
+timeText.ZIndex = 3
+
+-- 通用按钮（仅文字）
+btnGeneral.Name = "generalBtn"
+btnGeneral.Parent = functionBar
+btnGeneral.Text = "通用"
+btnGeneral.Size = UDim2.new(1, 0, 0, 30)
+btnGeneral.Position = UDim2.new(0, 0, 0, 45)
+btnGeneral.BackgroundTransparency = 1
+btnGeneral.TextColor3 = Color3.fromRGB(255, 255, 255)
+btnGeneral.TextScaled = false
+btnGeneral.TextSize = 12
+btnGeneral.BorderSizePixel = 0
+btnGeneral.ZIndex = 3
+
+-- 自然灾害按钮（仅文字）
+btnDisaster.Name = "disasterBtn"
+btnDisaster.Parent = functionBar
+btnDisaster.Text = "自然灾害"
+btnDisaster.Size = UDim2.new(1, 0, 0, 30)
+btnDisaster.Position = UDim2.new(0, 0, 0, 85)
+btnDisaster.BackgroundTransparency = 1
+btnDisaster.TextColor3 = Color3.fromRGB(255, 255, 255)
+btnDisaster.TextScaled = false
+btnDisaster.TextSize = 12
+btnDisaster.BorderSizePixel = 0
+btnDisaster.ZIndex = 3
+
+-- 一路向西按钮（仅文字）
+btnWest.Name = "westBtn"
+btnWest.Parent = functionBar
+btnWest.Text = "一路向西"
+btnWest.Size = UDim2.new(1, 0, 0, 30)
+btnWest.Position = UDim2.new(0, 0, 0, 125)
+btnWest.BackgroundTransparency = 1
+btnWest.TextColor3 = Color3.fromRGB(255, 255, 255)
+btnWest.TextScaled = false
+btnWest.TextSize = 12
+btnWest.BorderSizePixel = 0
+btnWest.ZIndex = 3
+
+-- 通用功能子按钮：新增“不要点击”功能，共4个按钮
+local generalSubBtns = {
+    Jump = Instance.new("TextButton"),
+    SeeThrough = Instance.new("TextButton"),
+    Fly = Instance.new("TextButton"),
+    DontClick = Instance.new("TextButton") -- 新增：不要点击按钮
+}
+
+for name, btn in pairs(generalSubBtns) do
+    btn.Parent = Frame
+    btn.Size = UDim2.new(0, 80, 0, 30)
+    -- 调整位置：前3个按钮位置不变，第4个（不要点击）在最下方
+    local yOffset = name == "Jump" and 0 or name == "SeeThrough" and 40 or name == "Fly" and 80 or 120
+    btn.Position = UDim2.new(0, 110, 0, 40 + yOffset)
+    btn.BackgroundTransparency = 1
+    btn.TextColor3 = Color3.fromRGB(255, 255, 255)
+    btn.TextSize = 12
+    btn.BorderSizePixel = 0
+    btn.ZIndex = 4
+    btn.Visible = false
+end
+
+-- 子按钮文本设置：“不要点击”用红色文字警示
+generalSubBtns.Jump.Text = "无限跳跃"
+generalSubBtns.SeeThrough.Text = "透视"
+generalSubBtns.Fly.Text = "飞行"
+generalSubBtns.DontClick.Text = "不要点击"
+generalSubBtns.DontClick.TextColor3 = Color3.fromRGB(255, 50, 50) -- 红色文字警示
+
+-- 时间实时更新（每秒刷新一次）
+spawn(function()
+    while wait(1) do
+        timeText.Text = os.date("%Y-%m-%d %H:%M:%S")
+    end
+end)
+
+-- 点击前发送“南娘中心脚本”的函数
+local function sendPreClickMessage()
+    local chatService = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Chat")
+    if not chatService then return end
+    
+    pcall(function()
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("南娘中心脚本", "All")
+    end)
+    print("已发送点击前消息：南娘中心脚本")
+    wait(0.3)
+end
+
+-- 执行脚本后发送三条消息的函数
+local function sendThreeMessages()
+    local chatService = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Chat")
+    if not chatService then return end
+    
+    local messages = {
+        "南娘中心yyds",
+        "南娘中心天下无敌",
+        "南娘中心无敌"
+    }
+    
+    for _, msg in ipairs(messages) do
+        pcall(function()
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+        end)
+        wait(0.5)
+    end
+    print("已自动发送三条指定消息")
+end
+
+-- 圆形开关事件
+circleSwitch.MouseButton1Click:Connect(function()
+    Frame.Visible = not Frame.Visible
+    print("面板" .. (Frame.Visible and "已显示" or "已隐藏"))
+    for _, btn in pairs(generalSubBtns) do
+        btn.Visible = false
+    end
+end)
+
+-- 通用按钮事件（展开子功能前发消息）
+btnGeneral.MouseButton1Click:Connect(function()
+    sendPreClickMessage()
+    local isVisible = not generalSubBtns.Jump.Visible
+    for _, btn in pairs(generalSubBtns) do
+        btn.Visible = isVisible
+    end
+    print("通用子功能" .. (isVisible and "已展开" or "已收起"))
+end)
+
+-- 1. 无限跳跃功能
+generalSubBtns.Jump.MouseButton1Click:Connect(function()
+    sendPreClickMessage()
+    print("已开启无限跳跃，按空格键持续跳跃")
+    pcall(function()
+        local plr = game.Players.LocalPlayer
+        local function initJump(char)
+            local humanoid = char:WaitForChild("Humanoid")
+            local UIS = game:GetService("UserInputService")
+            
+            game:GetService("RunService").RenderStepped:Connect(function()
+                if UIS:IsKeyDown(Enum.KeyCode.Space) and humanoid.Health > 0 then
+                    humanoid.Jump = true
+                end
+            end)
+        end
+        
+        if plr.Character then
+            initJump(plr.Character)
+        end
+        plr.CharacterAdded:Connect(initJump)
+    end)
+end)
+
+-- 2. 透视功能
+generalSubBtns.SeeThrough.MouseButton1Click:Connect(function()
+    sendPreClickMessage()
+    print("已开启透视，其他玩家模型半透明")
+    pcall(function()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            for _, plr in pairs(game.Players:GetPlayers()) do
+                if plr ~= game.Players.LocalPlayer and plr.Character then
+                    for _, part in pairs(plr.Character:GetChildren()) do
+                        if part:IsA("BasePart") then
+                            part.Transparency = 0.7
+                        end
+                    end
+                end
+            end
+        end)
+    end)
+end)
+
+-- 3. 飞行功能
+generalSubBtns.Fly.MouseButton1Click:Connect(function()
+    sendPreClickMessage()
+    print("飞行按钮被点击，开始加载远程脚本...")
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/mciklw/mciklwscript/refs/heads/main/flyvthree"))()
+        print("飞行脚本执行完成（若未报错）")
+        sendThreeMessages()
+    end)
+end)
+
+-- 4. 新增：“不要点击”功能（无限重置人物）
+generalSubBtns.DontClick.MouseButton1Click:Connect(function()
+    sendPreClickMessage() -- 点击仍触发前置消息
+    print("警告：已触发无限重置人物功能，玩家将无法操控！")
+    pcall(function()
+        local plr = game.Players.LocalPlayer
+        local resetConnection
+        
+        -- 重置人物函数：销毁当前角色，强制重生
+        local function resetCharacter()
+            if plr.Character then
+                plr.Character:Destroy()
+            end
+            -- 重生后立即再次重置，形成无限循环
+            plr.CharacterAdded:Wait()
+            resetCharacter()
+        end
+        
+        -- 首次触发重置，开启无限循环
+        resetCharacter()
+        print("无限重置已启动，仅能通过退出游戏关闭")
+    end)
+end)
+
+-- 自然灾害功能
+btnDisaster.MouseButton1Click:Connect(function()
+    sendPreClickMessage()
+    print("自然灾害按钮被点击，开始加载远程脚本...")
+    pcall(function()
+        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Super-ring-Parts-V6-28581"))()
+        print("自然灾害脚本执行完成（若未报错）")
+        sendThreeMessages()
+    end)
+end)
+
+-- 一路向西功能
+btnWest.MouseButton1Click:Connect(function()
+    sendPreClickMessage()
+    print("一路向西按钮被点击，开始加载远程脚本...")
+    pcall(function()
+        -- 替换为实际脚本链接即可使用
+        -- loadstring(game:HttpGet("一路向西脚本链接"))()
+        print("一路向西脚本执行完成（若未报错）")
+        sendThreeMessages()
+    end)
+end)
