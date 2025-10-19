@@ -1,0 +1,530 @@
+-- ======================================
+-- 1. 卡密验证系统（优先加载，未验证屏蔽主功能）
+-- ======================================
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local LocalPlayer = Players.LocalPlayer
+local isVerified = false -- 验证状态：false=未验证，true=已验证
+local CORRECT_KEY = "WNZX666" -- 正确卡密
+
+-- 创建卡密验证UI（背景图片ID：76358535387943）
+local KeyGui = Instance.new("ScreenGui")
+KeyGui.Name = "KeyVerificationGui"
+KeyGui.Parent = CoreGui
+KeyGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+KeyGui.DisplayOrder = 999 -- 确保卡密UI在最上层
+
+-- 卡密面板背景（使用目标图片）
+local KeyPanel = Instance.new("ImageLabel")
+KeyPanel.Name = "KeyPanel"
+KeyPanel.Parent = KeyGui
+KeyPanel.Size = UDim2.new(0, 400, 0, 250)
+KeyPanel.Position = UDim2.new(0.5, -200, 0.5, -125) -- 居中显示
+KeyPanel.Image = "rbxassetid://76358535387943" -- 卡密UI背景图片
+KeyPanel.ScaleType = Enum.ScaleType.Stretch -- 图片铺满面板
+KeyPanel.BackgroundTransparency = 1
+
+-- 卡密标题
+local KeyTitle = Instance.new("TextLabel")
+KeyTitle.Name = "KeyTitle"
+KeyTitle.Parent = KeyPanel
+KeyTitle.Size = UDim2.new(1, 0, 0, 40)
+KeyTitle.Position = UDim2.new(0, 0, 0, 20)
+KeyTitle.BackgroundTransparency = 1
+KeyTitle.Text = "卡密验证"
+KeyTitle.TextColor3 = Color3.fromRGB(0, 0, 0)
+KeyTitle.TextSize = 24
+KeyTitle.Font = Enum.Font.SourceSansBold
+KeyTitle.TextXAlignment = Enum.TextXAlignment.Center
+
+-- 卡密输入框
+local KeyInput = Instance.new("TextBox")
+KeyInput.Name = "KeyInput"
+KeyInput.Parent = KeyPanel
+KeyInput.Size = UDim2.new(0.8, 0, 0, 35)
+KeyInput.Position = UDim2.new(0.1, 0, 0, 80)
+KeyInput.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+KeyInput.BackgroundTransparency = 0.3
+KeyInput.PlaceholderText = "请输入卡密"
+KeyInput.PlaceholderColor3 = Color3.fromRGB(100, 100, 100)
+KeyInput.TextColor3 = Color3.fromRGB(0, 0, 0)
+KeyInput.TextSize = 18
+KeyInput.Font = Enum.Font.SourceSans
+KeyInput.ClearTextOnFocus = false
+KeyInput.BorderSizePixel = 2
+KeyInput.BorderColor3 = Color3.fromRGB(44, 120, 224)
+
+-- 验证按钮
+local VerifyBtn = Instance.new("TextButton")
+VerifyBtn.Name = "VerifyBtn"
+VerifyBtn.Parent = KeyPanel
+VerifyBtn.Size = UDim2.new(0.4, 0, 0, 40)
+VerifyBtn.Position = UDim2.new(0.3, 0, 0, 140)
+VerifyBtn.BackgroundColor3 = Color3.fromRGB(44, 120, 224)
+VerifyBtn.Text = "验证"
+VerifyBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+VerifyBtn.TextSize = 20
+VerifyBtn.Font = Enum.Font.SourceSansBold
+VerifyBtn.MouseButton1Click:Connect(function()
+    local inputKey = KeyInput.Text
+    if inputKey == CORRECT_KEY then
+        -- 验证通过：隐藏卡密UI，标记验证状态
+        isVerified = true
+        KeyGui:Destroy()
+        -- 显示验证成功通知
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "验证成功",
+            Text = "欢迎使用脚本，功能已解锁",
+            Duration = 3
+        })
+    else
+        -- 验证失败：显示错误通知
+        game:GetService("StarterGui"):SetCore("SendNotification", {
+            Title = "验证失败",
+            Text = "去找作者买卡密",
+            Duration = 3
+        })
+        KeyInput.Text = "" -- 清空输入框
+    end
+end)
+
+-- 等待验证通过（未通过则一直阻塞）
+repeat task.wait(0.5) until isVerified
+
+-- ======================================
+-- 2. 验证通过后，加载主脚本功能
+-- ======================================
+-- 启动通知
+local StarterGui = game:GetService("StarterGui")
+StarterGui:SetCore("SendNotification", {
+    Title = "正在启动",
+    Text = "开始倒计时",
+    Duration = 5,
+})
+wait(2)
+StarterGui:SetCore("SendNotification", {
+    Title = "倒计时",
+    Text = "3",
+    Duration = 5,
+})
+wait(2)
+StarterGui:SetCore("SendNotification", {
+    Title = "倒计时",
+    Text = "2",
+    Duration = 5,
+})
+wait(2)
+StarterGui:SetCore("SendNotification", {
+    Title = "倒计时",
+    Text = "1",
+    Duration = 5,
+})
+wait(2)
+print("Anti Afk On")
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    vu:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+    wait(1)
+    vu:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+end)
+StarterGui:SetCore("SendNotification", {
+    Title = "反挂机已自动开启",
+    Text = "被踢出服务器的概率已降低",
+    Duration = 5,
+})
+wait(2)
+StarterGui:SetCore("SendNotification", {
+    Title = "启动成功",
+    Text = "您好"..game.Players.LocalPlayer.Name.."，欢迎使用伪娘中心",
+    Duration = 5,
+})
+
+-- 加载UI库并初始化
+local lib = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt"))() 
+
+-- 创建「打开UI的圆形按钮」
+local OpenUI = Instance.new("ScreenGui")
+local ImageButton = Instance.new("ImageButton")
+local UICorner = Instance.new("UICorner")
+
+OpenUI.Name = "OpenUI"
+OpenUI.Parent = game.CoreGui
+OpenUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+ImageButton.Parent = OpenUI
+ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255) 
+ImageButton.BackgroundTransparency = 0 
+ImageButton.Position = UDim2.new(0.0235790554, 0, 0.466334164, 0)
+ImageButton.Size = UDim2.new(0, 50, 0, 50) 
+ImageButton.Image = "rbxassetid://79399049294493" 
+ImageButton.ScaleType = Enum.ScaleType.Fit 
+ImageButton.Draggable = true 
+
+UICorner.CornerRadius = UDim.new(0, 25) 
+UICorner.Parent = ImageButton
+
+-- 按钮点击逻辑（控制主UI显示/隐藏）
+local uihide = false
+ImageButton.MouseButton1Click:Connect(function() 
+    if uihide == false then
+        uihide = true
+        if game.CoreGui:FindFirstChild("ui") and game.CoreGui.ui:FindFirstChild("Main") then
+            game.CoreGui.ui.Main:TweenSize(UDim2.new(0, 0, 0, 0),"In","Quad",0.4,true)
+        end
+    else
+        uihide = false
+        if game.CoreGui:FindFirstChild("ui") and game.CoreGui.ui:FindFirstChild("Main") then
+            game.CoreGui.ui.Main:TweenSize(UDim2.new(0, 560, 0, 319),"Out","Quad",0.4,true)
+        end
+    end
+end)
+
+-- 创建主UI并设置样式
+local win = lib:Window("通用脚本", Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)
+
+-- 等待UI加载后，批量修改：背景白色 + 所有文字黑色
+task.wait(0.1)
+if game.CoreGui:FindFirstChild("ui") then
+    local mainUI = game.CoreGui.ui
+    for _, v in pairs(mainUI:GetDescendants()) do
+        -- 面板背景设为白色
+        if v:IsA("Frame") or v:IsA("ScrollingFrame") then
+            v.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            v.BackgroundTransparency = 0
+        end
+        -- 所有文字设为黑色
+        if v:IsA("TextLabel") or v:IsA("TextButton") or v:IsA("TextBox") then
+            v.TextColor3 = Color3.fromRGB(0, 0, 0)
+            v.Font = Enum.Font.SourceSansBold
+        end
+    end
+end
+
+-- 「设置」标签页
+local setup = win:Tab("设置")
+setup:Label("作者Tuki使用QQ1693323219")
+setup:Label("感谢使用伪娘脚本")
+
+setup:Button("移除声音", function()
+    for i, v in pairs(game.Workspace:FindFirstChild("_WorldOrigin") and game.Workspace["_WorldOrigin"]:GetChildren() or {}) do
+        if v.Name == "CurvedRing" or v.Name == "SlashHit" or v.Name == "SwordSlash" or v.Name == "Sounds" then
+            v:Destroy()
+        end
+    end
+end)
+
+setup:Colorpicker("更改用户界面颜色", Color3.fromRGB(44, 120, 224), function(t) 
+    lib:ChangePresetColor(Color3.fromRGB(t.R * 255, t.G * 255, t.B * 255)) 
+end)
+
+-- 「通用」标签页
+local tab = win:Tab("通用") 
+
+tab:Button("隐形", function() 
+    loadstring(game:HttpGet("https://gist.githubusercontent.com/skid123skidlol/cd0d2dce51b3f20ad1aac941da06a1a1/raw/f58b98cce7d51e53ade94e7bb460e4f24fb7e0ff/%257BFE%257D%2520Invisible%2520Tool%2520(can%2520hold%2520tools)", true))()
+end)
+
+tab:Button("键盘脚本  /console", function() 
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+end)
+
+tab:Button("无敌少侠飞行", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Invinicible-Flight-R15-45414"))()
+end)
+
+tab:Button("屋头夹断腿", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Permanent-Headless-And-korblox-Script-4140"))()
+end)
+
+tab:Button("修改范围", function()
+    loadstring(game:HttpGet("https://shz.al/CpRJ"))()
+end)
+
+tab:Button("甩飞", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Auto%20Fling%20Player'))()
+end)
+
+tab:Button("撸鸡巴", function()
+    loadstring(game:HttpGet("https://pastefy.app/YZoglOyJ/raw"))()
+end)
+
+tab:Button("踏空行走", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Float'))()
+end)
+
+tab:Button("无限跳跃", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/V5PQy3y0", true))()
+end)
+
+tab:Button("动作", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/Zj4NnKs6"))()
+end)
+
+tab:Toggle("去除雾气", false, function(state)
+    if state then
+        game.Lighting.FogStart = 3276634343
+        game.Lighting.FogEnd = 3276734343
+    else
+        game.Lighting.FogStart = 0
+        game.Lighting.FogEnd = 1000
+    end
+end)
+
+tab:Button("工具点击传送", function()
+    local mouse = game.Players.LocalPlayer:GetMouse()
+    local tool = Instance.new("Tool")
+    tool.RequiresHandle = false
+    tool.Name = "点击传送"
+    tool.Activated:Connect(function()
+        if mouse.Hit and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local pos = mouse.Hit + Vector3.new(0, 2.5, 0)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos)
+        end
+    end)
+    tool.Parent = game.Players.LocalPlayer.Backpack
+end)
+
+tab:Toggle("夜视", false, function(Value) 
+    if Value then
+        game.Lighting.Ambient = Color3.new(0.8, 0.8, 0.8)
+        game.Lighting.FogColor = Color3.new(0.5, 0.5, 0.5)
+    else
+        game.Lighting.Ambient = Color3.new(0.1, 0.1, 0.1)
+        game.Lighting.FogColor = Color3.new(0, 0, 0)
+    end
+end)
+
+tab:Toggle("穿墙", false, function(Value) 
+    if Value then
+        getgenv().Noclip = true
+        getgenv().Stepped = game.RunService.Stepped:Connect(function()
+            if getgenv().Noclip and game.Players.LocalPlayer.Character then
+                for _, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end
+            end
+        end)
+    else
+        getgenv().Noclip = false
+        if getgenv().Stepped then
+            getgenv().Stepped:Disconnect()
+        end
+    end
+end)
+
+tab:Button("工具", function()
+    loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/BTools.txt"))()
+end)
+
+tab:Button("反AFK", function()
+    wait(0.5)
+    local VirtualUser = game:GetService("VirtualUser")
+    game.Players.LocalPlayer.Idled:Connect(function()
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end)
+    print("Antiafk enabled")
+end)
+
+-- 「玩家」标签页
+local tab2 = win:Tab("玩家")
+
+tab2:Textbox("跳跃", true, function(value) 
+    local char = game.Players.LocalPlayer.Character
+    if char and char:FindFirstChild("Humanoid") then
+        char.Humanoid.JumpPower = tonumber(value) or 50
+    end
+end)
+
+tab2:Textbox("速度", true, function(value) 
+    local char = game.Players.LocalPlayer.Character
+    if char and char:FindFirstChild("Humanoid") then
+        char.Humanoid.WalkSpeed = tonumber(value) or 16
+    end
+end)
+
+tab2:Textbox("重力", true, function(value) 
+    game.Workspace.Gravity = tonumber(value) or 196.2
+end)
+
+tab2:Textbox("设置血量", true, function(value) 
+    local char = game.Players.LocalPlayer.Character
+    if char and char:FindFirstChild("Humanoid") then
+        char.Humanoid.Health = tonumber(value) or 100
+    end
+end)
+
+tab2:Button("死亡", function() 
+    local char = game.Players.LocalPlayer.Character
+    if char and char:FindFirstChild("Humanoid") then
+        char.Humanoid.Health = 0 
+    end
+end)
+
+tab2:Button("ESP gui", function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/zachisfunny/esp-unversal/main/script'), true))()
+end)
+
+tab2:Toggle("玩家ESP", false, function(ESPPLAYER) 
+    getgenv().enabled = ESPPLAYER
+    getgenv().filluseteamcolor = false
+    getgenv().outlineuseteamcolor = false
+    getgenv().fillcolor = Color3.new(0, 0, 0)
+    getgenv().outlinecolor = Color3.new(1, 1, 1)
+    getgenv().filltrans = 0
+    getgenv().outlinetrans = 0
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/zntly/highlight-esp/main/esp.lua"))()
+end)
+
+tab2:Button("透视", function()
+    if _G.Reantheajfdfjdgse then return end
+    _G.Reantheajfdfjdgse = "susan"
+
+    local coregui = game:GetService("CoreGui")
+    local players = game:GetService("Players")
+    local plr = players.LocalPlayer
+    local highlights = {}
+
+    function esp(target, color)
+        pcall(function()
+            if target.Character then
+                if not highlights[target] then
+                    local highlight = Instance.new("Highlight", coregui)
+                    highlight.Name = target.Name
+                    highlight.Adornee = target.Character
+                    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+                    highlight.FillColor = color
+                    highlights[target] = highlight
+                else
+                    highlights[target].FillColor = color
+                end
+            end
+        end)
+    end
+
+    _G.UseTeamColor = true
+    _G.FriendColor = Color3.new(0, 1, 0)
+    _G.EnemyColor = Color3.new(1, 0, 0)
+
+    players.PlayerAdded:Connect(function(v)
+        v.CharacterAdded:Connect(function()
+            local color = _G.UseTeamColor and v.TeamColor.Color or ((plr.TeamColor == v.TeamColor) and _G.FriendColor or _G.EnemyColor)
+            esp(v, color)
+        end)
+    end)
+
+    players.PlayerRemoving:Connect(function(v)
+        if highlights[v] then
+            highlights[v]:Destroy()
+            highlights[v] = nil
+        end
+    end)
+
+    for _, v in pairs(players:GetPlayers()) do
+        if v ~= plr then
+            local color = _G.UseTeamColor and v.TeamColor.Color or ((plr.TeamColor == v.TeamColor) and _G.FriendColor or _G.EnemyColor)
+            v.CharacterAdded:Connect(function() esp(v, color) end)
+            esp(v, color)
+        end
+    end
+
+    while task.wait() do
+        for target, highlight in pairs(highlights) do
+            local color = _G.UseTeamColor and target.TeamColor.Color or ((plr.TeamColor == target.TeamColor) and _G.FriendColor or _G.EnemyColor)
+            highlight.FillColor = color
+        end
+    end
+end)
+
+local tab = win:Tab("服务器脚本")
+
+tab:Button("点击执行99夜脚本", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/atnew2025/Chinese-scripts/refs/heads/main/voidware-cn.txt"))()
+end)
+
+tab:Button("点击执行脑红脚本", function()
+    loadstring(game:HttpGet("https://pastefy.app/HggqZ2TN/raw"))()
+end)
+
+tab:Button("点击执行墨水游戏脚本", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ke9460394-dot/ugik/refs/heads/main/%E6%B1%89%E5%8C%96%E5%A2%A8%E6%B0%B4Ringta.txt"))()
+end)
+
+tab:Button("点击执行一路向西脚本", function()
+    loadstring(game:GetObjects("rbxassetid://10040701935")[1].Source)()
+end)
+
+tab:Button("点击执行监狱人生脚本", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/LiverMods/xRawnder/main/HubMoblie'))()
+end)
+
+tab:Button("点击执行自然灾害脚本", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/2dgeneralspam1/scripts-and-stuff/master/scripts/LoadstringUjHI6RQpz2o8", true))()
+end)
+
+tab:Button("点击执行鲨口求生脚本", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/YYVLbzVg", true))()
+end)
+
+tab:Button("点击执行忍者传奇脚本", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/zerpqe/script/main/NinjaLegends.lua"))()
+end)
+
+tab:Button("点击执行极速传奇脚本", function()
+    loadstring(Game:HttpGet("https://pastebin.com/raw/0A4J7V8M"))()
+end)
+
+tab:Button("点击执行力量传奇脚本", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/Blox-Fruits-Speed-Hub-X-24115"))()
+end)
+
+-- 「加入其他服务器」标签页
+local server = win:Tab("加入其他服务器")
+local TeleportService = game:GetService("TeleportService")
+
+server:Button("加入极速传奇", function() TeleportService:Teleport(3101667897, LocalPlayer) end)
+server:Button("加入鲨口生求2", function() TeleportService:Teleport(8908228901, LocalPlayer) end)
+server:Button("加入监狱人生", function() TeleportService:Teleport(155615604, LocalPlayer) end)
+server:Button("加入忍者传奇", function() TeleportService:Teleport(3956818381, LocalPlayer) end)
+server:Button("加入自然灾害生存游戏", function() TeleportService:Teleport(189707, LocalPlayer) end)
+server:Button("加入力量传奇", function() TeleportService:Teleport(3623096087, LocalPlayer) end)
+
+-- FPS显示面板
+local FPSGui = Instance.new("ScreenGui")
+local FpsLabel = Instance.new("TextLabel")
+
+FPSGui.Name = "FPSGui"
+FPSGui.ResetOnSpawn = false
+FPSGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+FPSGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+FpsLabel.Name = "FPSLabel"
+FpsLabel.Size = UDim2.new(0, 100, 0, 50)
+FpsLabel.Position = UDim2.new(0, 10, 0, 10)
+FpsLabel.BackgroundTransparency = 1
+FpsLabel.Font = Enum.Font.SourceSansBold
+FpsLabel.Text = "帧率: 0"
+FpsLabel.TextSize = 20
+FpsLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+FpsLabel.Parent = FPSGui
+
+-- FPS计算优化
+local RunService = game:GetService("RunService")
+local lastTime = tick()
+local frameCount = 0
+RunService.RenderStepped:Connect(function()
+    frameCount += 1
+    local currentTime = tick()
+    if currentTime - lastTime >= 1 then
+        FpsLabel.Text = "帧率: " .. math.floor(frameCount / (currentTime - lastTime))
+        frameCount = 0
+        lastTime = currentTime
+    end
+end)
+
+-- 修复多余函数调用报错
+if typeof(animateCredits) == "function" then
+    animateCredits()
+end
