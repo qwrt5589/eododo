@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delta卡密获取</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #0a0a2a;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 星空背景效果 */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 30px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #6e00ff, #00a2ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(110, 0, 255, 0.7);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo-text {
+            font-size: 42px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ffffff, #a0d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(110, 0, 255, 0.5);
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff, #a0d2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(0, 162, 255, 0.5);
+        }
+        
+        .description {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: #b0d7ff;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        .form-container {
+            background: rgba(10, 20, 40, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            border: 1px solid rgba(0, 162, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 100, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 2px solid #00a2ff;
+            background: rgba(0, 20, 40, 0.8);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            border-color: #6e00ff;
+            box-shadow: 0 0 15px rgba(110, 0, 255, 0.5);
+        }
+        
+        input::placeholder {
+            color: #7090a5;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #6e00ff, #00a2ff);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 100, 255, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 100, 255, 0.6);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .error-message {
+            color: #ff4d4d;
+            margin-top: 15px;
+            font-size: 16px;
+            display: none;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+        
+        .loading-container {
+            display: none;
+            margin: 30px auto;
+        }
+        
+        .loading {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(0, 162, 255, 0.3);
+            border-radius: 50%;
+            border-top: 8px solid #00a2ff;
+            animation: spin 1.5s linear infinite;
+            box-shadow: 0 0 20px rgba(0, 162, 255, 0.5);
+            margin: 0 auto 20px;
+        }
+        
+        .loading-text {
+            font-size: 18px;
+            color: #b0d7ff;
+            margin-top: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .result {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 22px;
+            color: #ffcc00;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .info {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #7090a5;
+            line-height: 1.5;
+        }
+        
+        .nebula {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .nebula-1 {
+            background: #6e00ff;
+            top: 10%;
+            left: 10%;
+        }
+        
+        .nebula-2 {
+            background: #00a2ff;
+            bottom: 10%;
+            right: 10%;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .logo {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .logo-text {
+                font-size: 32px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .description {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 星空背景 -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- 星云效果 -->
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+    
+    <div class="container">
+        <div class="logo">
+            <div class="logo-text">Δ</div>
+        </div>
+        
+        <h1>一键获取Delta卡密</h1>
+        
+        <p class="description">
+            网站由小冬、星驰制作其实都是一个人
+        </p>
+        
+        <div class="form-container">
+            <div class="input-group">
+                <input type="text" id="linkInput" placeholder="请输入文本">
+            </div>
+            
+            <button class="btn" id="getKeyBtn">获取卡密</button>
+            
+            <div class="error-message" id="errorMessage">请输入有效的链接</div>
+            
+            <div class="loading-container" id="loadingContainer">
+                <div class="loading"></div>
+                <div class="loading-text" id="loadingText">请等待10~15秒，正在获取卡密...</div>
+            </div>
+            
+            <div class="result" id="resultMessage">不是你还真信啊😂😂</div>
+        </div>
+        
+        <div class="info">
+            <p>一键获取Delta卡密不用自己解了</p>
+            <p>一键获取忍者卡密</p>
+        </div>
+    </div>
+
+    <script>
+        // 创建星空背景
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starsCount = 200;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // 随机位置
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                
+                // 随机大小
+                const size = Math.random() * 3;
+                
+                // 随机动画延迟
+                const delay = Math.random() * 5;
+                
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.animationDelay = `${delay}s`;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // 验证链接格式
+        function isValidURL(string) {
+            try {
+                // 尝试创建URL对象
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+        
+        // 获取DOM元素
+        const getKeyBtn = document.getElementById('getKeyBtn');
+        const linkInput = document.getElementById('linkInput');
+        const errorMessage = document.getElementById('errorMessage');
+        const loadingContainer = document.getElementById('loadingContainer');
+        const loadingText = document.getElementById('loadingText');
+        const resultMessage = document.getElementById('resultMessage');
+        
+        // 获取卡密按钮点击事件
+        getKeyBtn.addEventListener('click', function() {
+            const link = linkInput.value.trim();
+            
+            // 验证输入是否为有效链接
+            if (!isValidURL(link)) {
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            // 隐藏错误信息
+            errorMessage.style.display = 'none';
+            
+            // 禁用按钮
+            getKeyBtn.disabled = true;
+            
+            // 显示加载动画
+            loadingContainer.style.display = 'block';
+            
+            // 随机等待时间 10-15秒
+            const waitTime = Math.floor(Math.random() * 6) + 10; // 10-15秒
+            
+            // 更新等待文本
+            loadingText.textContent = `请等待${waitTime}秒，正在获取卡密...`;
+            
+            // 模拟等待过程
+            setTimeout(function() {
+                // 隐藏加载动画
+                loadingContainer.style.display = 'none';
+                
+                // 显示结果
+                resultMessage.style.display = 'block';
+                
+                // 重新启用按钮
+                getKeyBtn.disabled = false;
+            }, waitTime * 1000);
+        });
+        
+        // 页面加载完成后创建星空
+        window.addEventListener('load', createStars);
+    </script>
+</body>
+</html>
