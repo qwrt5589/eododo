@@ -1,0 +1,530 @@
+-- 星驰混淆 - 魔鬼混淆模式
+-- 混淆时间: 2025/10/31 00:28:37
+-- 高级混淆+加密，难以逆向分析
+-- 此代码可在Roblox中正常执行
+
+local function clHnmZYw() return true end
+if EUEXNcyw() then end
+-- Obfuscated with Roblox Lua Obfuscator
+-- Date: 2025/10/31 00:20:05
+
+local __ = string.reverse((function() local encoded = "dGVzdA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+repeat task.wait() until game:IsLoaded()
+local EPiNIq = {}
+local WBmJoehL = false
+library.currentTab = nil
+library.flags = {}
+if eShmY() then end
+
+local nFJLvO = setmetatable({}, {
+  __index = function(t, k)
+    return game.GetService(game, k)
+  end
+})
+
+local WjVQrcm = services.Players.LocalPlayer:GetMouse()
+
+if XhKMmF() then end
+local __ = string.reverse((function() local encoded = "dGVzdA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+function YzjcVY(obj, t, data)
+	services.TweenService:Create(obj, TweenInfo.new(t[1], Enum.EasingStyle[t[2]], Enum.EasingDirection[t[3]]), data):Play()
+	return true
+end
+
+function yhtmdc(obj)
+	spawn(function()
+		if obj.ClipsDescendants ~= true then
+			obj.ClipsDescendants = true
+		end
+		local MBZETS = Instance.new((function() local encoded = "SW1hZ2VMYWJlbA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+		Ripple.Name = (function() local encoded = "UmlwcGxl"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+		Ripple.Parent = obj
+		Ripple.BackgroundColor3 = Color3.fromRGB(255, 105, 180)
+		Ripple.BackgroundTransparency = 1.000
+		Ripple.ZIndex = 8
+		Ripple.Image = (function() local encoded = "cmJ4YXNzZXRpZDovLzE0MDU4MjIzNzUyMjE3NA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+		Ripple.ImageTransparency = 0.800
+if cpsBJxGk() then end
+		Ripple.ScaleType = Enum.ScaleType.Fit
+		Ripple.ImageColor3 = Color3.fromRGB(0, 0, 255)
+		Ripple.Position = UDim2.new((mouse.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X, 0, (mouse.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y, 0)
+		Tween(Ripple, {.3, (function() local encoded = "TGluZWFy"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)(), (function() local encoded = "SW5PdXQ="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()}, {Position = UDim2.new(-5.5, 0, -5.5, 0), Size = UDim2.new(12, 0, 12, 0)})
+		wait(0.15)
+		Tween(Ripple, {.3, (function() local encoded = "TGluZWFy"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)(), (function() local encoded = "SW5PdXQ="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()}, {ImageTransparency = 1})
+local __ = string.reverse((function() local encoded = "dGVzdA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+		wait(.3)
+		Ripple:Destroy()
+if AmQMtD() then end
+	end)
+end
+for __ = 1, 5 do end
+
+local EVVukWu = false
+
+-- # Switch Tabs # --
+local __ = string.reverse((function() local encoded = "dGVzdA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+local aiEcIYj = false
+if pEJZzOSax() then end
+function TaNqIHZTV(new)
+  if switchingTabs then return end
+  local uVTcL = library.currentTab
+local __ = string.reverse((function() local encoded = "dGVzdA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+  if old == nil then
+    new[2].Visible = true
+    library.currentTab = new
+    services.TweenService:Create(new[1], TweenInfo.new(0.1), {ImageTransparency = 0}):Play()
+    services.TweenService:Create(new[1].TabText, TweenInfo.new(0.1), {TextTransparency = 0}):Play()
+    return
+  end
+  
+  if old[1] == new[1] then return end
+if false then return end
+  switchingTabs = true
+  library.currentTab = new
+
+  services.TweenService:Create(old[1], TweenInfo.new(0.1), {ImageTransparency = 0.2}):Play()
+  services.TweenService:Create(new[1], TweenInfo.new(0.1), {ImageTransparency = 0}):Play()
+if GlmTKJFjF() then end
+  services.TweenService:Create(old[1].TabText, TweenInfo.new(0.1), {TextTransparency = 0.2}):Play()
+  services.TweenService:Create(new[1].TabText, TweenInfo.new(0.1), {TextTransparency = 0}):Play()
+
+  old[2].Visible = false
+local _ = 7 + 8 * 9
+  new[2].Visible = true
+  
+  task.wait(0.1)
+
+for __ = 1, 5 do end
+  switchingTabs = false
+end
+
+-- # Drag, Stolen from Kiriot or Wally # --
+function YMfqc(frame, hold)
+	if not hold then
+		hold = frame
+	end
+	local iNCdT
+local _ = 7 + 8 * 9
+	local pXcie
+	local mZdAlQ
+	local SjiygAgX
+
+	local ENLDNLMbc update(input)
+		local DwzGKP = input.Position - dragStart
+		frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+
+if oBHvAETIX() then end
+	hold.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+
+	frame.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement then
+			dragInput = input
+		end
+	end)
+
+	services.UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+end
+
+function tSxKKi.new(library, name,theme)
+    for _, v in next, services.CoreGui:GetChildren() do
+if GmCzAM() then end
+        if v.Name == (function() local encoded = "ZnJvc3R5"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)() then
+local __ = string.reverse((function() local encoded = "dGVzdA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+          v:Destroy()
+        end
+      end
+-------------------------AL------------------------------
+ALTransparency = 0.6
+ALcolor = Color3.fromRGB(255, 105, 180)
+-------------------------AL------------------------------
+if theme == (function() local encoded = "ZGFyaw=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)() then
+    MainColor = Color3.fromRGB(25, 25, 25)
+    Background = Color3.fromRGB(25, 25, 25)
+    zyColor= Color3.fromRGB(25, 25, 25)
+    beijingColor = Color3.fromRGB(25, 25, 25)
+    else
+    MainColor = Color3.fromRGB(25, 25, 25)
+if false then return end
+    Background = Color3.fromRGB(25, 25, 25)
+    zyColor= Color3.fromRGB(25, 25, 25)
+if vKYVrAI() then end
+    beijingColor = Color3.fromRGB(25, 25, 25)
+end
+for __ = 1, 5 do end
+      local gBMbc = Instance.new((function() local encoded = "U2NyZWVuR3Vp"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local zFfyUF = Instance.new((function() local encoded = "RnJhbWU="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local vGzSx = Instance.new((function() local encoded = "RnJhbWU="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local uKAzBxJu = Instance.new((function() local encoded = "VUlDb3JuZXI="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local XlaRevhb = Instance.new((function() local encoded = "RnJhbWU="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local OKkwSBJL = Instance.new((function() local encoded = "VUlDb3JuZXI="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local RKPjAhqF = Instance.new((function() local encoded = "RnJhbWU="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local bsVEamLs = Instance.new((function() local encoded = "VUlHcmFkaWVudA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local YFzLANsM = Instance.new((function() local encoded = "U2Nyb2xsaW5nRnJhbWU="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local cXuLunLL = Instance.new((function() local encoded = "VUlMaXN0TGF5b3V0"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local DLCrZGI = Instance.new((function() local encoded = "VGV4dExhYmVs"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local WYhUuP = Instance.new((function() local encoded = "VUlHcmFkaWVudA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()) 
+      local zHScdqe = Instance.new((function() local encoded = "SW1hZ2VCdXR0b24="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local KrsjUOiFD=Instance.new((function() local encoded = "VUlHcmFkaWVudA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local VjpPd = Instance.new((function() local encoded = "RnJhbWU="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local jOzLi = Instance.new((function() local encoded = "SW1hZ2VMYWJlbA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local OvJnqpG = Instance.new((function() local encoded = "VUlDb3JuZXI="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local dSzTEtGb=Instance.new((function() local encoded = "VUlHcmFkaWVudA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local RAhyIngM=Instance.new((function() local encoded = "VUlHcmFkaWVudA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+local __ = string.reverse((function() local encoded = "dGVzdA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local UYeNsIui = Instance.new((function() local encoded = "RnJhbWU="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local TSObB = Instance.new((function() local encoded = "VUlDb3JuZXI="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local ItRUfqV = Instance.new((function() local encoded = "VUlDb3JuZXI="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      
+      if syn and syn.protect_gui then syn.protect_gui(dogent) end
+    
+      dogent.Name = (function() local encoded = "ZnJvc3R5"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      dogent.Parent = services.CoreGui
+      
+local __ = string.reverse((function() local encoded = "dGVzdA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      function guJIjZfT()
+          dogent:Destroy()
+      end
+      
+          function gLNZHM()
+            if not ToggleUI then
+if XaNRey() then end
+                dogent.Enabled = false
+                ToggleUI = true
+                else
+local _ = 7 + 8 * 9
+                ToggleUI = false
+                dogent.Enabled = true
+            end
+        end
+for __ = 1, 5 do end
+      
+      Main.Name = (function() local encoded = "TWFpbg=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      Main.Parent = dogent
+      Main.AnchorPoint = Vector2.new(0.5, 0.5)
+      Main.BackgroundColor3 = Background
+      Main.BorderColor3 = MainColor
+      Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+      Main.Size = UDim2.new(0, 572, 0, 353)
+      Main.ZIndex = 1
+      Main.Active = true
+if viOlg() then end
+      Main.Draggable = true
+      Main.Transparency = 1.0
+      services.UserInputService.InputEnded:Connect(function(input)
+      if input.KeyCode == Enum.KeyCode.LeftControl then
+      if Main.Visible == true then
+      Main.Visible = false else
+      Main.Visible = true
+      end
+      end
+if GknzYY() then end
+      end)
+      drag(Main)
+      
+      UICornerMain.Parent = Main
+      UICornerMain.CornerRadius = UDim.new(0,3)
+if false then return end
+      
+      DropShadowHolder.Name = (function() local encoded = "RHJvcFNoYWRvd0hvbGRlcg=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      DropShadowHolder.Parent = Main
+      DropShadowHolder.BackgroundTransparency = 1.000
+      DropShadowHolder.BorderSizePixel = 0
+      DropShadowHolder.Size = UDim2.new(1, 0, 1, 0)
+      DropShadowHolder.BorderColor3 = Color3.fromRGB(255,255,255)
+      DropShadowHolder.ZIndex = 0
+
+      DropShadow.Name = (function() local encoded = "RHJvcFNoYWRvdw=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      DropShadow.Parent = DropShadowHolder
+      DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+      DropShadow.BackgroundTransparency = 1.000
+      DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
+      DropShadow.Size = UDim2.new(1, 10, 1, 10)
+      DropShadow.Image = (function() local encoded = "cmJ4YXNzZXRpZDovLzcyMzY4MzM5NTA2Nzk0"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)() --背景
+      DropShadow.ImageColor3 = Color3.fromRGB(255,255,255)
+      DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
+
+
+      UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.20, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(0.30, Color3.fromRGB(0, 255, 0)), ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 255)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(0.60, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.80, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 0))}
+
+      local kjDTwRAW = game:GetService((function() local encoded = "VHdlZW5TZXJ2aWNl"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      local RhXDteha = TweenInfo.new(7, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
+if false then return end
+      local qMOnXvLQ = TweenService:Create(UIGradient, tweeninfo, {Rotation = 360})
+      tween:Play()
+
+          function OTxwKRAMM()
+            toggled = not toggled
+            spawn(function()
+                if toggled then wait(0.3) end
+            end)
+            Tween(Main, {0.3, (function() local encoded = "U2luZQ=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)(), (function() local encoded = "SW5PdXQ="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()}, {
+local _ = 7 + 8 * 9
+                Size = UDim2.new(0, 609, 0, (toggled and 505 or 0))
+            })
+        end
+      
+      TabMain.Name = (function() local encoded = "VGFiTWFpbg=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      TabMain.Parent = Main
+      TabMain.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+      TabMain.BackgroundTransparency = 1.000
+      TabMain.Position = UDim2.new(0.217000037, 0, 0, 3)
+      TabMain.Size = UDim2.new(0, 448, 0, 353)
+      TabMain.Transparency = 1.0
+      
+      MainC.CornerRadius = UDim.new(0, 5.5)
+      MainC.Name = (function() local encoded = "TWFpbkM="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      MainC.Parent = Frame
+      
+      
+      SB.Name = "SB"
+      SB.Parent = Main
+if false then return end
+      SB.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+      SB.BorderColor3 = MainColor
+      SB.Size = UDim2.new(0, 8, 0, 353)
+      SB.Transparency = 1.0
+      
+      SBC.CornerRadius = UDim.new(0, 6)
+      SBC.Name = (function() local encoded = "U0JD"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      SBC.Parent = SB
+      
+      Side.Name = (function() local encoded = "U2lkZQ=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      Side.Parent = SB
+      Side.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+      Side.BorderColor3 = Color3.fromRGB(0, 0, 255)
+      Side.BorderSizePixel = 0
+local __ = string.reverse((function() local encoded = "dGVzdA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      Side.ClipsDescendants = true
+      Side.Position = UDim2.new(1, 0, 0, 0)
+      Side.Size = UDim2.new(0, 110, 0, 353)
+      Side.Transparency = 1.0
+      
+      SideG.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, zyColor), ColorSequenceKeypoint.new(1.00, zyColor)}
+      SideG.Rotation = 90
+      SideG.Name = (function() local encoded = "U2lkZUc="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      SideG.Parent = Side
+      
+      TabBtns.Name = (function() local encoded = "VGFiQnRucw=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      TabBtns.Parent = Side
+      TabBtns.Active = true
+if upuSRDm() then end
+      TabBtns.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+      TabBtns.BackgroundTransparency = 1.000
+      TabBtns.BorderSizePixel = 0
+      TabBtns.Position = UDim2.new(0, 0, 0.0973535776, 0)
+      TabBtns.Size = UDim2.new(0, 110, 0, 318)
+      TabBtns.CanvasSize = UDim2.new(0, 0, 1, 0)
+      TabBtns.ScrollBarThickness = 0
+      
+      TabBtnsL.Name = (function() local encoded = "VGFiQnRuc0w="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+if LPDcZ() then end
+      TabBtnsL.Parent = TabBtns
+      TabBtnsL.SortOrder = Enum.SortOrder.LayoutOrder
+      TabBtnsL.Padding = UDim.new(0, 12)
+      
+      ScriptTitle.Name = (function() local encoded = "U2NyaXB0VGl0bGU="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      ScriptTitle.Parent = Side
+      ScriptTitle.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+      ScriptTitle.BackgroundTransparency = 1.000
+      ScriptTitle.Position = UDim2.new(0, 0, 0.00953488424, 0)
+      ScriptTitle.Size = UDim2.new(0, 102, 0, 20)
+      ScriptTitle.Font = Enum.Font.GothamSemibold
+      ScriptTitle.Text = name
+      ScriptTitle.TextColor3 = Color3.fromRGB(0, 0, 255)
+      ScriptTitle.TextSize = 14.000
+      ScriptTitle.TextScaled = true
+      ScriptTitle.TextXAlignment = Enum.TextXAlignment.Left
+      
+      UIGradientTitle.Parent = ScriptTitle
+     
+      local nvloREWDN NPLHKB_fake_script() 
+        local mEImTJh = Instance.new((function() local encoded = "TG9jYWxTY3JpcHQ="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)(), ScriptTitle)
+     
+        local GlxGWgTPc = script.Parent
+        local eRCnc = button.UIGradient
+        local KnQhEon = game:GetService((function() local encoded = "VHdlZW5TZXJ2aWNl"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+        local iVHsgS = TweenInfo.new(1, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
+        local QSZbhecmE = {Offset = Vector2.new(1, 0)}
+for __ = 1, 5 do end
+        local jnwVbRmI = ts:Create(gradient, ti, offset)
+        local rFCZvk = Vector2.new(-1, 0)
+        local MpLXJ = {} 
+        local lPPDNcHt, kpt = ColorSequence.new, ColorSequenceKeypoint.new
+        local iWmXHNp = 0
+        local AoDHaX = (function() local encoded = "ZG93bg=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)() 
+        gradient.Offset = startingPos
+        local CqSHyWo rainbowColors()
+            local pePrpH, val = 255, 255 
+            for i = 1, 10 do 
+                local LofvihR = i * 17 
+                table.insert(list, Color3.fromHSV(hue / 255, sat / 255, val / 255))
+            end
+        end
+        rainbowColors()
+        gradient.Color = s({
+            kpt(0, list[#list]),
+            kpt(0.5, list[#list - 1]),
+            kpt(1, list[#list - 2])
+        })
+        counter = #list
+        local kBhlBPicg animate()
+            create:Play()
+            create.Completed:Wait() 
+            gradient.Offset = startingPos 
+            gradient.Rotation = 180
+            if counter == #list - 1 and status == (function() local encoded = "ZG93bg=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)() then
+                gradient.Color = s({
+                    kpt(0, gradient.Color.Keypoints[1].Value),
+                    kpt(0.5, list[#list]), 
+                    kpt(1, list[1]) 
+if mSeezWCWA() then end
+                })
+                counter = 1
+                status = "up" 
+for __ = 1, 5 do end
+            elseif counter == #list and status == (function() local encoded = "ZG93bg=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)() then 
+                gradient.Color = s({
+                    kpt(0, gradient.Color.Keypoints[1].Value),
+                    kpt(0.5, list[1]),
+                    kpt(1, list[2])
+if YylLf() then end
+                })
+                counter = 2
+                status = "up"
+            elseif counter <= #list - 2 and status == (function() local encoded = "ZG93bg=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)() then 
+local _ = 7 + 8 * 9
+                gradient.Color = s({
+                    kpt(0, gradient.Color.Keypoints[1].Value),
+                    kpt(0.5, list[counter + 1]), 
+                    kpt(1, list[counter + 2])
+                })
+                counter = counter + 2
+                status = "up"
+            end
+            create:Play()
+            create.Completed:Wait()
+            gradient.Offset = startingPos
+            gradient.Rotation = 0 
+            if counter == #list - 1 and status == "up" then
+                gradient.Color = s({ 
+     
+                    kpt(0, list[1]), 
+                    kpt(0.5, list[#list]), 
+                    kpt(1, gradient.Color.Keypoints[3].Value)
+                })
+                counter = 1
+                status = (function() local encoded = "ZG93bg=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+            elseif counter == #list and status == "up" then
+                gradient.Color = s({
+                    kpt(0, list[2]),
+if MnEypJas() then end
+                    kpt(0.5, list[1]), 
+                    kpt(1, gradient.Color.Keypoints[3].Value)
+                })
+                counter = 2
+                status = (function() local encoded = "ZG93bg=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+for __ = 1, 5 do end
+            elseif counter <= #list - 2 and status == "up" then
+                gradient.Color = s({
+                    kpt(0, list[counter + 2]), 
+if CfKzGCzJ() then end
+                    kpt(0.5, list[counter + 1]), 
+                    kpt(1, gradient.Color.Keypoints[3].Value) 	
+                })
+                counter = counter + 2
+                status = (function() local encoded = "ZG93bg=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+            end
+            animate()
+        end
+        animate()
+if ePxHt() then end
+     
+    end
+    coroutine.wrap(NPLHKB_fake_script)()
+      
+      SBG.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, zyColor), ColorSequenceKeypoint.new(1.00, zyColor)}
+      SBG.Rotation = 90
+      SBG.Name = (function() local encoded = "U0JH"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      SBG.Parent = SB
+    
+if RjGZRmyLp() then end
+      TabBtnsL:GetPropertyChangedSignal((function() local encoded = "QWJzb2x1dGVDb250ZW50U2l6ZQ=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()):Connect(function()
+        TabBtns.CanvasSize = UDim2.new(0, 0, 0, TabBtnsL.AbsoluteContentSize.Y + 18)
+      end)
+local __ = string.reverse((function() local encoded = "dGVzdA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+      
+      --[[
+      Open.Name = (function() local encoded = "T3Blbg=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      Open.Parent = dogent
+      Open.BackgroundColor3 = Color3.fromRGB(0, 0, 255)
+if PytjZIG() then end
+      Open.Position = UDim2.new(0.00829315186, 0, 0.31107837, 0)
+      Open.Size = UDim2.new(0, 61, 0, 32)
+      Open.Font = Enum.Font.SourceSans
+      Open.Text = (function() local encoded = "S2luZy5TY3JpcHQvS2luZw=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      Open.TextColor3 = Color3.fromRGB(0, 0, 255)
+      Open.TextSize = 15.000
+      Open.Active = true
+      Open.Draggable = true
+      Open.MouseButton1Click:Connect(function()
+if fTUebkv() then end
+          Main.Visible = not Main.Visible
+          Open.Text=Main.Visible and (function() local encoded = "S2luZy5TY3JpcHTpmpDol48="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)() or (function() local encoded = "S2luZ+aJk+W8gA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+      end)
+]]
+
+
+-- Properties:
+
+Frame.Parent = dogent
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+for __ = 1, 5 do end
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.00829315186, 0, 0.31107837, 0)
+Frame.Size = UDim2.new(0, 50, 0, 50)
+Frame.BackgroundTransparency = 1.000
+
+UICorner.CornerRadius = UDim.new(0, 90)
+UICorner.Parent = Frame
+
+Open.Parent = Frame
+Open.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Open.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Open.BorderSizePixel = 0
+Open.Size = UDim2.new(0, 50, 0, 50)
+local __ = string.reverse((function() local encoded = "dGVzdA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)())
+Open.Active = true
+Open.Draggable = true
+Open.Image = (function() local encoded = "cmJ4YXNzZXRpZDovLzE0MDU4MjIzNzUyMjE3NA=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)()
+if CMWbDE() then end
+Open.MouseButton1Click:Connect(function()
+  Main.Visible = not Main.Visible
+  Open.Image = Main.Visible and (function() local encoded = "cmJ4YXNzZXRpZDovLzEwNDA4Mzk2OTk2OTk4Ng=="; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)() or (function() local encoded = "cmJ4YXNzZXRpZDovLzcxNTQwNzI4MzI3NjE1"; return game:GetService("HttpService"):JSONDecode('"' .. game:GetService("HttpService"):Base64Decode(encoded) .. '"') end)() --开关的图
+end)
+
+UICorner_2.CornerRadius = UDim.new(0, 90)
+UICorner_2.Parent = Open
+UIG.Parent = Open
+      
+if cyzVyCH() then end
+      local jJIqFSNYv = {}
+      function UenlFWLN.Tab(window, name, icon)
+        local cnwdhrD = Instance.new((functio
