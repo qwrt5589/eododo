@@ -1,0 +1,144 @@
+-- 恶搞脚本：虚假奖励
+local function CreatePrankGUI()
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    
+    -- 创建全屏图片（更大尺寸）
+    local image = Instance.new("ImageLabel")
+    image.Size = UDim2.new(1.2, 0, 1.2, 0) -- 放大图片
+    image.Position = UDim2.new(-0.1, 0, -0.1, 0) -- 调整位置使其居中显示
+    image.Image = "http://www.roblox.com/asset/?id=101930816916083"
+    image.BackgroundColor3 = Color3.new(0, 0, 0)
+    image.Parent = screenGui
+
+    -- 播放两个大声音频
+    local sound1 = Instance.new("Sound")
+    sound1.SoundId = "rbxassetid://313948389"
+    sound1.Volume = 10
+    sound1.Parent = game.Workspace
+    sound1:Play()
+
+    local sound2 = Instance.new("Sound")
+    sound2.SoundId = "rbxassetid://8315677038"
+    sound2.Volume = 10
+    sound2.Parent = game.Workspace
+    sound2:Play()
+
+    -- 创建胶囊型道歉按钮
+    local apologyButton = Instance.new("TextButton")
+    apologyButton.Size = UDim2.new(0, 200, 0, 60)
+    apologyButton.Position = UDim2.new(0.5, -100, 0.8, 0)
+    apologyButton.Text = "爸爸我错了"
+    apologyButton.BackgroundColor3 = Color3.fromRGB(173, 216, 230) -- 淡蓝色
+    apologyButton.TextColor3 = Color3.new(0, 0, 0)
+    apologyButton.Font = Enum.Font.SourceSansBold
+    apologyButton.TextSize = 20
+    
+    -- 设置胶囊形状（圆角）
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(1, 0) -- 设置为胶囊形状
+    corner.Parent = apologyButton
+    
+    apologyButton.Parent = screenGui
+
+    apologyButton.MouseButton1Click:Connect(function()
+        -- 立即消失图片和按钮
+        image:Destroy()
+        apologyButton:Destroy()
+        
+        local message = "爸爸我错了"
+        
+        -- 在聊天框显示消息
+        local Players = game:GetService("Players")
+        local ReplicatedStorage = game:GetService("ReplicatedStorage")
+        
+        -- 尝试通过默认聊天系统发送消息
+        local success, err = pcall(function()
+            Players:Chat(message)
+        end)
+        
+        -- 如果默认方法失败，尝试其他方法
+        if not success then
+            -- 尝试使用SayMessageRequest
+            pcall(function()
+                game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(message)
+            end)
+        end
+
+        -- 修改天空盒
+        local lighting = game:GetService("Lighting")
+        local sky = lighting:FindFirstChildOfClass("Sky")
+        if sky then
+            sky:Destroy()
+        end
+        
+        local newSky = Instance.new("Sky")
+        newSky.Parent = lighting
+        
+        -- 设置天空盒所有面为同一图片
+        local textureId = "http://www.roblox.com/asset/?id=101930816916083"
+        newSky.SkyboxBk = textureId
+        newSky.SkyboxDn = textureId
+        newSky.SkyboxFt = textureId
+        newSky.SkyboxLf = textureId
+        newSky.SkyboxRt = textureId
+        newSky.SkyboxUp = textureId
+
+        -- 修改所有模型的贴图
+        local function changeTextures(obj)
+            if obj:IsA("Part") or obj:IsA("MeshPart") or obj:IsA("UnionOperation") then
+                -- 创建新的贴图
+                local texture = Instance.new("Texture")
+                texture.Texture = textureId
+                texture.Face = "Top"
+                texture.Parent = obj
+                
+                local texture2 = Instance.new("Texture")
+                texture2.Texture = textureId
+                texture2.Face = "Bottom"
+                texture2.Parent = obj
+                
+                local texture3 = Instance.new("Texture")
+                texture3.Texture = textureId
+                texture3.Face = "Left"
+                texture3.Parent = obj
+                
+                local texture4 = Instance.new("Texture")
+                texture4.Texture = textureId
+                texture4.Face = "Right"
+                texture4.Parent = obj
+                
+                local texture5 = Instance.new("Texture")
+                texture5.Texture = textureId
+                texture5.Face = "Front"
+                texture5.Parent = obj
+                
+                local texture6 = Instance.new("Texture")
+                texture6.Texture = textureId
+                texture6.Face = "Back"
+                texture6.Parent = obj
+            end
+            
+            -- 递归处理所有子对象
+            for _, child in ipairs(obj:GetChildren()) do
+                changeTextures(child)
+            end
+        end
+
+        -- 从Workspace开始修改所有模型
+        changeTextures(game.Workspace)
+
+        local apologySound = Instance.new("Sound")
+        apologySound.SoundId = "rbxassetid://128326043560149"
+        apologySound.Volume = 10
+        apologySound.Parent = game.Workspace
+        apologySound:Play()
+
+        apologySound.Ended:Connect(function()
+            screenGui:Destroy()
+        end)
+    end)
+end
+
+-- 执行恶搞脚本
+CreatePrankGUI()
