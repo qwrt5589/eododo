@@ -1,0 +1,35 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/Revenant", true))()
+Library.DefaultColor = Color3.fromRGB(255,0,0)
+
+-- 第一个通知脚本
+Library:Notification({
+    Text = "光脚本作者：小光",
+    Duration = 5, 
+    Image = "rbxassetid://130010938932104"
+})
+
+wait(2)
+
+Library:Notification({
+    Text = "欢迎使用光脚本", 
+    Duration = 3, 
+    Image = "rbxassetid://130010938932104"
+})
+
+wait(4)
+
+Library:Notification({
+    Text = "兄弟：空云脚本作者",
+    Duration = 5, 
+    Image = "rbxassetid://130010938932104"
+})
+
+Library:Notification({
+    Text = "QQ1693323219",
+    Duration = 5, 
+    Image = "rbxassetid://130010938932104"
+})
+
+-- 所有通知结束后执行脚本
+wait(5)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/qwrt5589/eododo/5cc475c38b4c50ca71a9a32c13bb74bf78b70436/时间是个庸医.lua"))()
