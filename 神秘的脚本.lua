@@ -131,13 +131,13 @@ local imageCorner = Instance.new("UICorner")
 imageCorner.CornerRadius = UDim.new(0, 8 * 0.7) -- 图片容器圆角缩放 0.7 倍
 imageCorner.Parent = imageContainer
 
--- 图片
+-- 图片（已替换为你指定的ID：79285958044576）
 local displayImage = Instance.new("ImageLabel")
 displayImage.Size = UDim2.new(1, -20 * 0.7, 1, -20 * 0.7) -- 图片尺寸缩放 0.7 倍
 displayImage.Position = UDim2.new(0, 10 * 0.7, 0, 10 * 0.7) -- 图片位置缩放 0.7 倍
 displayImage.BackgroundTransparency = 1
-displayImage.Image = "rbxassetid://7928595804"
-displayImage.ScaleType = Enum.ScaleType.Crop
+displayImage.Image = "rbxassetid://79285958044576" -- 你提供的猫咪图片ID
+displayImage.ScaleType = Enum.ScaleType.Fit -- 适配显示，避免裁剪异常
 displayImage.Parent = imageContainer
 
 local imageStroke = Instance.new("UIStroke")
@@ -220,7 +220,6 @@ btnText.Parent = confirmBtn
 -- 渐变系统
 local colorOffset = 0
 local activeGradient = true
-
 local function updateGradients()
     while activeGradient do
         colorOffset = (colorOffset + 0.005) % 1
@@ -327,44 +326,15 @@ task.spawn(function()
     updateGradients()
 end)
 
--- 确认功能
+-- 确认功能（点击后立即关闭UI并执行远程脚本）
 confirmBtn.MouseButton1Click:Connect(function()
     activeGradient = false
     
-    btnText.Text = "系统启动中"
-    btnIcon.Image = "rbxassetid://6031091015" -- 加载图标
-    
-    -- 按钮加载动画
-    local loadingAnim = game.TweenService:Create(btnIcon, TweenInfo.new(0.5, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1), {
-        Rotation = 360
-    })
-    loadingAnim:Play()
-    
-    -- 收缩动画
-    local closeAnim = game.TweenService:Create(mainContainer, TweenInfo.new(0.6, Enum.EasingStyle.Cubic, Enum.EasingDirection.In), {
-        Size = UDim2.new(0, 0, 0, 380 * 0.7) -- 收缩后尺寸缩放 0.7 倍
-    })
-    
-    local fadeOut = game.TweenService:Create(background, TweenInfo.new(0.6), {
-        BackgroundTransparency = 1
-    })
-    
-    task.wait(1) -- 展示加载状态
-    
-    closeAnim:Play()
-    fadeOut:Play()
-    closeAnim.Completed:Wait()
-    
+    -- 立即关闭UI（无动画）
     ui:Destroy()
     
-    -- 执行脚本
-    local success, errorMsg = pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/qwrt5589/eododo/main/XG_SYNB.txt"))()
-    end)
-    
-    if not success then
-        warn("脚本执行失败:", errorMsg)
-    end
+    -- 执行远程脚本
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/qwrt5589/eododo/main/XG_SYNB.txt"))()
 end)
 
 -- 关闭功能
