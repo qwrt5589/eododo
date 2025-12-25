@@ -137,7 +137,7 @@ game.HttpGetAsync and game:HttpGetAsync(i) or h:GetAsync(i))()
 			Shapes = {
 				Square = "rbxassetid://82909646051652",
 				["Square-Outline"] = "rbxassetid://72946211851948",
-				Squircle = "rbxassetid://85643448530280",
+				Squircle = "rbxassetid://72545771540973",
 				SquircleOutline = "rbxassetid://117788349049947",
 				["Squircle-Outline"] = "rbxassetid://117817408534198",
 				SquircleOutline2 = "rbxassetid://117817408534198",
@@ -1722,7 +1722,7 @@ game.HttpGetAsync and game:HttpGetAsync(ad) or HttpService:GetAsync(ad))()
 		return {
 			platoboost = {
 				Name = "Platoboost",
-				Icon = "rbxassetid://75920162824531",
+				Icon = "rbxassetid://83943559238385",
 				Args = {
 					"ServiceId",
 					"Secret"
@@ -1739,7 +1739,7 @@ game.HttpGetAsync and game:HttpGetAsync(ad) or HttpService:GetAsync(ad))()
 			},
 			luarmor = {
 				Name = "Luarmor",
-				Icon = "rbxassetid://130918283130165",
+				Icon = "rbxassetid://83943559238385",
 				Args = {
 					"ScriptId",
 					"Discord"
