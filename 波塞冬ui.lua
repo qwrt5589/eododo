@@ -135,17 +135,17 @@ game.HttpGetAsync and game:HttpGetAsync(i) or h:GetAsync(i))()
 			},
 			ThemeFallbacks = a.load'a',
 			Shapes = {
-				Square = "rbxassetid://83943559238385",
-				["Square-Outline"] = "rbxassetid://83943559238385",
-				Squircle = "rbxassetid://83943559238385",
-				SquircleOutline = "rbxassetid://83943559238385",
-				["Squircle-Outline"] = "rbxassetid://83943559238385",
-				SquircleOutline2 = "rbxassetid://83943559238385",
-				["Shadow-sm"] = "rbxassetid://83943559238385",
-				["Squircle-TL-TR"] = "rbxassetid://83943559238385",
-				["Squircle-BL-BR"] = "rbxassetid://83943559238385",
-				["Squircle-TL-TR-Outline"] = "rbxassetid://83943559238385",
-				["Squircle-BL-BR-Outline"] = "rbxassetid://83943559238385",
+				Square = "rbxassetid://82909646051652",
+				["Square-Outline"] = "rbxassetid://72946211851948",
+				Squircle = "rbxassetid://80999662900595",
+				SquircleOutline = "rbxassetid://117788349049947",
+				["Squircle-Outline"] = "rbxassetid://117817408534198",
+				SquircleOutline2 = "rbxassetid://117817408534198",
+				["Shadow-sm"] = "rbxassetid://84825982946844",
+				["Squircle-TL-TR"] = "rbxassetid://73569156276236",
+				["Squircle-BL-BR"] = "rbxassetid://93853842912264",
+				["Squircle-TL-TR-Outline"] = "rbxassetid://136702870075563",
+				["Squircle-BL-BR-Outline"] = "rbxassetid://75035847706564",
 			}
 		}
 		function m.Init(p)
@@ -2744,7 +2744,7 @@ g.Icon or h.Icon or Icons[g.Type] or "user", g.Icon or h.Icon or Icons[g.Type] o
 
 }),
 				ac("ImageLabel", {
-					Image = "rbxassetid://83943559238385",
+					Image = "rbxassetid://9968344105",
 					ImageTransparency = 0.98,
 					ScaleType = Enum.ScaleType.Tile,
 					TileSize = UDim2.new(0, 128, 0, 128),
@@ -2756,7 +2756,7 @@ g.Icon or h.Icon or Icons[g.Type] or "user", g.Icon or h.Icon or Icons[g.Type] o
 					}),
 				}),
 				ac("ImageLabel", {
-					Image = "rbxassetid://83943559238385",
+					Image = "rbxassetid://9968344227",
 					ImageTransparency = 0.9,
 					ScaleType = Enum.ScaleType.Tile,
 					TileSize = UDim2.new(0, 128, 0, 128),
