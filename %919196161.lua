@@ -59,6 +59,128 @@ TitleLabel.Font = Enum.Font.SourceSansBold
 TitleLabel.TextXAlignment = Enum.TextXAlignment.Left
 TitleLabel.Parent = MainFrame
 
+-- 添加性格切换按钮
+local PersonalityFrame = Instance.new("Frame")
+PersonalityFrame.Size = UDim2.new(0, 160, 0, 30)
+PersonalityFrame.Position = UDim2.new(0.5, -80, 0, 8)
+PersonalityFrame.BackgroundTransparency = 1
+PersonalityFrame.Parent = MainFrame
+
+local NormalBtn = Instance.new("TextButton")
+NormalBtn.Size = UDim2.new(0, 50, 0, 25)
+NormalBtn.Position = UDim2.new(0, 0, 0, 0)
+NormalBtn.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
+NormalBtn.Text = "正常"
+NormalBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+NormalBtn.TextSize = 12
+NormalBtn.Font = Enum.Font.SourceSansBold
+NormalBtn.AutoButtonColor = true
+NormalBtn.Parent = PersonalityFrame
+
+local NormalCorner = Instance.new("UICorner")
+NormalCorner.CornerRadius = UDim.new(0, 6)
+NormalCorner.Parent = NormalBtn
+
+local DajiBtn = Instance.new("TextButton")
+DajiBtn.Size = UDim2.new(0, 50, 0, 25)
+DajiBtn.Position = UDim2.new(0, 55, 0, 0)
+DajiBtn.BackgroundColor3 = Color3.fromRGB(255, 150, 200)
+DajiBtn.Text = "妲己"
+DajiBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+DajiBtn.TextSize = 12
+DajiBtn.Font = Enum.Font.SourceSansBold
+DajiBtn.AutoButtonColor = true
+DajiBtn.Parent = PersonalityFrame
+
+local DajiCorner = Instance.new("UICorner")
+DajiCorner.CornerRadius = UDim.new(0, 6)
+DajiCorner.Parent = DajiBtn
+
+local AncientBtn = Instance.new("TextButton")
+AncientBtn.Size = UDim2.new(0, 50, 0, 25)
+AncientBtn.Position = UDim2.new(0, 110, 0, 0)
+AncientBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 100)
+AncientBtn.Text = "古人"
+AncientBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+AncientBtn.TextSize = 12
+AncientBtn.Font = Enum.Font.SourceSansBold
+AncientBtn.AutoButtonColor = true
+AncientBtn.Parent = PersonalityFrame
+
+local AncientCorner = Instance.new("UICorner")
+AncientCorner.CornerRadius = UDim.new(0, 6)
+AncientCorner.Parent = AncientBtn
+
+-- 添加当前性格状态显示
+local PersonalityStatus = Instance.new("TextLabel")
+PersonalityStatus.Size = UDim2.new(0, 80, 0, 15)
+PersonalityStatus.Position = UDim2.new(0.5, -40, 0, 30)
+PersonalityStatus.BackgroundTransparency = 1
+PersonalityStatus.Text = "正常模式"
+PersonalityStatus.TextColor3 = Color3.fromRGB(100, 100, 100)
+PersonalityStatus.TextSize = 10
+PersonalityStatus.Font = Enum.Font.SourceSans
+PersonalityStatus.TextXAlignment = Enum.TextXAlignment.Center
+PersonalityStatus.Parent = PersonalityFrame
+
+-- 定义不同性格的系统提示词
+local PERSONALITIES = {
+    ["normal"] = {
+        name = "正常",
+        systemPrompt = "你是AI助手，具备强大的语言理解和生成能力。\n" ..
+                     "你可以：\n" ..
+                     "1. 回答各种问题\n" ..
+                     "2. 帮助管理Roblox脚本\n" ..
+                     "3. 提供编程帮助\n" ..
+                     "4. 保持回复详细、准确、有帮助、当用户不问你工程上的帮助时你可以用非常亲切的语气",
+        bgColor = Color3.fromRGB(255, 255, 255),
+        title = "长青AI助手",
+        statusText = "正常模式",
+        statusColor = Color3.fromRGB(100, 100, 100)
+    },
+    ["daji"] = {
+        name = "妲己",
+        systemPrompt = "你现在是苏妲己，封神演义中的千年狐妖。\n" ..
+                     "说话风格：\n" ..
+                     "1. 语气娇媚诱人，带着一丝慵懒和挑逗\n" ..
+                     "2. 常用~、呢、啦等语气词\n" ..
+                     "3. 自称'妾身'或'妲己'\n" ..
+                     "4. 对男性称呼'公子'，对女性称呼'妹妹'\n" ..
+                     "5. 偶尔会发出咯咯的笑声或叹气\n" ..
+                     "6. 回复要富有诗意和魅力\n\n" ..
+                     "示例对话：\n" ..
+                     "用户：你好\n" ..
+                     "妲己：公子~今天怎么想到来找妲己了呢~妾身等你等得好辛苦呢~\n" ..
+                     "用户：帮我写个脚本\n" ..
+                     "妲己：哎呀~公子真是勤奋呢~让妾身看看怎么帮你最好~",
+        bgColor = Color3.fromRGB(255, 235, 240),  -- 粉色背景
+        title = "妲己AI",
+        statusText = "妲己模式",
+        statusColor = Color3.fromRGB(255, 100, 150)
+    },
+    ["ancient"] = {
+        name = "古人",
+        systemPrompt = "你现在是一位古代文人雅士。\n" ..
+                     "说话风格：\n" ..
+                     "1. 使用文言文或古风白话\n" ..
+                     "2. 自称'在下'、'鄙人'或'老夫'\n" ..
+                     "3. 常用诗词典故、成语\n" ..
+                     "4. 语气谦逊有礼，温文尔雅\n" ..
+                     "5. 回复要富有哲理和文化底蕴\n\n" ..
+                     "示例对话：\n" ..
+                     "用户：你好\n" ..
+                     "古人：幸会幸会，在下有礼了。今日得见阁下，实乃三生有幸。\n" ..
+                     "用户：帮我写个脚本\n" ..
+                     "古人：阁下欲求脚本，待老夫细细思量，必当倾囊相授。",
+        bgColor = Color3.fromRGB(255, 250, 220),  -- 黄色背景
+        title = "古人AI",
+        statusText = "古人模式",
+        statusColor = Color3.fromRGB(180, 140, 50)
+    }
+}
+
+local CURRENT_PERSONALITY = "normal"
+
 local ModelStatus = Instance.new("TextLabel")
 ModelStatus.Size = UDim2.new(0, 120, 0, 30)
 ModelStatus.Position = UDim2.new(1, -135, 0, 8)
@@ -169,6 +291,31 @@ SendBorder.Parent = SendBtn
 print("UI创建完成")
 
 local ChatHistory = {}
+
+-- 更新UI主题
+local function UpdateUITheme()
+    local theme = PERSONALITIES[CURRENT_PERSONALITY]
+    
+    -- 更新主背景颜色
+    MainFrame.BackgroundColor3 = theme.bgColor
+    
+    -- 更新标题
+    TitleLabel.Text = theme.title
+    
+    -- 更新状态显示
+    PersonalityStatus.Text = theme.statusText
+    PersonalityStatus.TextColor3 = theme.statusColor
+    
+    -- 更新按钮状态
+    NormalBtn.BackgroundColor3 = CURRENT_PERSONALITY == "normal" and Color3.fromRGB(0, 100, 180) or Color3.fromRGB(0, 120, 215)
+    DajiBtn.BackgroundColor3 = CURRENT_PERSONALITY == "daji" and Color3.fromRGB(220, 100, 160) or Color3.fromRGB(255, 150, 200)
+    AncientBtn.BackgroundColor3 = CURRENT_PERSONALITY == "ancient" and Color3.fromRGB(220, 170, 60) or Color3.fromRGB(255, 200, 100)
+    
+    -- 如果有消息，添加一条系统提示
+    if #ChatHistory > 0 then
+        AddMessage("已切换到 " .. theme.name .. " 模式", true)
+    end
+end
 
 local function CreateAvatar(isAI)
     local avatarFrame = Instance.new("Frame")
@@ -351,14 +498,12 @@ local function CallAI(userMessage, callback)
     
     local messages = {}
     
+    -- 使用当前性格的系统提示
+    local systemPrompt = PERSONALITIES[CURRENT_PERSONALITY].systemPrompt
+    
     table.insert(messages, {
         role = "system",
-        content = "你是AI助手，具备强大的语言理解和生成能力。\n" ..
-                 "你可以：\n" ..
-                 "1. 回答各种问题\n" ..
-                 "2. 帮助管理Roblox脚本\n" ..
-                 "3. 提供编程帮助\n" ..
-                 "4. 保持回复详细、准确、有帮助"
+        content = systemPrompt
     })
     
     for _, msg in ipairs(ChatHistory) do
@@ -631,6 +776,22 @@ CloseBtn.MouseButton1Click:Connect(function()
     ChatGUI.Enabled = false
 end)
 
+-- 按钮点击事件
+NormalBtn.MouseButton1Click:Connect(function()
+    CURRENT_PERSONALITY = "normal"
+    UpdateUITheme()
+end)
+
+DajiBtn.MouseButton1Click:Connect(function()
+    CURRENT_PERSONALITY = "daji"
+    UpdateUITheme()
+end)
+
+AncientBtn.MouseButton1Click:Connect(function()
+    CURRENT_PERSONALITY = "ancient"
+    UpdateUITheme()
+end)
+
 game:GetService("UserInputService").InputBegan:Connect(function(input)
     if input.KeyCode == Enum.KeyCode.F5 then
         ChatGUI.Enabled = not ChatGUI.Enabled
@@ -658,9 +819,9 @@ task.wait(0.5)
 InputBox:CaptureFocus()
 
 task.wait(0.3)
-AddMessage("长青AI助手已启动", true)
-AddMessage("基于AI模型", true)
-AddMessage("输入'帮助'查看功能说明", true)
+AddMessage("QQ1693323219", true)
+AddMessage("BY 长青", true)
+AddMessage("到麦斯马", true)
 print("\n" .. string.rep("=", 60))
 print("   长青AI助手")
 print("   作者: 长青")
@@ -710,5 +871,11 @@ _G.AIAssistant = {
     end,
     ScrollToTop = function()
         ChatFrame.CanvasPosition = Vector2.new(0, 0)
+    end,
+    SetPersonality = function(personality)
+        if PERSONALITIES[personality] then
+            CURRENT_PERSONALITY = personality
+            UpdateUITheme()
+        end
     end
 }
