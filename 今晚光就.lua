@@ -37,7 +37,7 @@ NotifText.BackgroundTransparency = 1
 NotifText.Size = UDim2.new(1, -10, 0, 40)
 NotifText.Position = UDim2.new(0, 10, 0, 30)
 NotifText.Font = Enum.Font.Gotham
-NotifText.Text = "by 宇神"
+NotifText.Text = "by 孟浩然"
 NotifText.TextColor3 = Color3.fromRGB(180, 180, 200)
 NotifText.TextSize = 12
 NotifText.TextXAlignment = Enum.TextXAlignment.Left
@@ -152,7 +152,7 @@ local function CreateGUI(title)
     agreeFrame.Size = UDim2.new(0.8, 0, 0.5, 0)
     agreeFrame.Position = UDim2.new(0.1, 0, 0.22, 0)
     agreeFrame.BackgroundColor3 = Color3.fromRGB(240, 240, 240)
-    agreeFrame.Text = "by 宇神\n QQ1693323219.\n 宇神大王nb666.\n 禁止倒卖 倒卖私马"
+    agreeFrame.Text = "by 孟浩然\n QQ1693323219.\n 孟浩然大王nb666.\n 禁止倒卖 倒卖私马"
     agreeFrame.TextWrapped = true
 
     
@@ -225,7 +225,7 @@ local function CreateGUI(title)
     
     disagreeButton.MouseButton1Click:Connect(function()
         AnimateExit()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/useranewrff/roblox/refs/heads/main/%E8%AF%B7%E9%80%89%E6%8B%A9%E4%BD%A0%E4%BD%BF%E7%94%A8%E7%9A%84%E7%89%88%E6%9C%AC.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/qwrt5589/BHJB/34c124e3c477689ae7c67656cb4663577a1cb92e/%E7%99%BD%E7%81%B0%E8%84%9A%E6%9C%AC%E6%97%A7%E7%89%88.lua"))()
     end)
     
     agreeButton.MouseButton1Click:Connect(function()
