@@ -1,0 +1,1440 @@
+ui
+
+repeat
+	task.wait()
+until game:IsLoaded()
+
+local library = {}
+local ToggleUI = false
+library.currentTab = nil
+library.flags = {}
+library.favorites = {}
+library.favoriteCallbacks = {}
+library.favoriteUpdateSignal = Instance.new("BindableEvent")
+
+-- DataStore保存收藏
+local success, dataStore = pcall(function()
+    return game:GetService("DataStoreService"):GetDataStore("UI_Favorites_v4")
+end)
+
+local function LoadFavorites()
+    if success then
+        local playerId = tostring(game.Players.LocalPlayer.UserId)
+        local success2, saved = pcall(function()
+            return dataStore:GetAsync(playerId)
+        end)
+        if success2 and saved then
+            library.favorites = saved
+        end
+    end
+end
+
+local function SaveFavorites()
+    if success then
+        local playerId = tostring(game.Players.LocalPlayer.UserId)
+        pcall(function()
+            dataStore:SetAsync(playerId, library.favorites)
+        end)
+    end
+end
+
+LoadFavorites()
+
+-- 收藏管理函数
+function library:AddFavorite(buttonName, callback, sectionName, tabName)
+    if not library.favorites[buttonName] then
+        library.favorites[buttonName] = {
+            timestamp = os.time(),
+            sectionName = sectionName,
+            tabName = tabName
+        }
+        library.favoriteCallbacks[buttonName] = callback
+        library.favoriteUpdateSignal:Fire()
+        SaveFavorites()
+        return true
+    end
+    return false
+end
+
+function library:RemoveFavorite(buttonName)
+    if library.favorites[buttonName] then
+        library.favorites[buttonName] = nil
+        library.favoriteCallbacks[buttonName] = nil
+        library.favoriteUpdateSignal:Fire()
+        SaveFavorites()
+        return true
+    end
+    return false
+end
+
+function library:ToggleFavorite(buttonName, callback, sectionName, tabName)
+    if library.favorites[buttonName] then
+        return library:RemoveFavorite(buttonName)
+    else
+        return library:AddFavorite(buttonName, callback, sectionName, tabName)
+    end
+end
+
+function library:IsFavorite(buttonName)
+    return library.favorites[buttonName] ~= nil
+end
+
+function library:GetFavoriteCallback(buttonName)
+    return library.favoriteCallbacks[buttonName]
+end
+
+function GetSortedFavorites()
+    local sorted = {}
+    for name, data in pairs(library.favorites) do
+        table.insert(sorted, {
+            name = name,
+            timestamp = data.timestamp,
+            sectionName = data.sectionName,
+            tabName = data.tabName
+        })
+    end
+    table.sort(sorted, function(a, b)
+        return a.timestamp > b.timestamp
+    end)
+    return sorted
+end
+
+local services = setmetatable({}, {
+	__index = function(t, k)
+		return game.GetService(game, k)
+	end,
+})
+local mouse = services.Players.LocalPlayer:GetMouse()
+
+-- 高级颜色系统
+local RainbowColors = {
+    Color3.fromRGB(255, 0, 0), Color3.fromRGB(255, 68, 0),
+    Color3.fromRGB(255, 136, 0), Color3.fromRGB(255, 204, 0),
+    Color3.fromRGB(204, 255, 0), Color3.fromRGB(136, 255, 0),
+    Color3.fromRGB(68, 255, 0), Color3.fromRGB(0, 255, 68),
+    Color3.fromRGB(0, 255, 136), Color3.fromRGB(0, 255, 204),
+    Color3.fromRGB(0, 204, 255), Color3.fromRGB(0, 136, 255),
+    Color3.fromRGB(0, 68, 255), Color3.fromRGB(68, 0, 255),
+    Color3.fromRGB(136, 0, 255), Color3.fromRGB(204, 0, 255),
+    Color3.fromRGB(255, 0, 204), Color3.fromRGB(255, 0, 136)
+}
+local currentColorIndex = 1
+local colorTransitionSpeed = 0.3
+local isAnimating = true
+local PlaceholderColor = Color3.fromRGB(160, 160, 170)
+local DisabledTextColor = Color3.fromRGB(130, 130, 140)
+
+-- 霓虹灯动画
+spawn(function()
+    while isAnimating do
+        currentColorIndex = currentColorIndex % #RainbowColors + 1
+        task.wait(colorTransitionSpeed)
+    end
+end)
+
+function GetRainbowColor()
+    return RainbowColors[currentColorIndex]
+end
+
+function AnimateTextColor(textLabel)
+    spawn(function()
+        while textLabel and textLabel.Parent do
+            local nextIndex = currentColorIndex % #RainbowColors + 1
+            local nextColor = RainbowColors[nextIndex]
+            
+            services.TweenService:Create(textLabel, TweenInfo.new(colorTransitionSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+                TextColor3 = nextColor
+            }):Play()
+            task.wait(colorTransitionSpeed)
+            
+            if not textLabel or not textLabel.Parent then break end
+        end
+    end)
+end
+
+function Tween(obj, t, data)
+	services.TweenService
+		:Create(obj, TweenInfo.new(t[1], Enum.EasingStyle[t[2]], Enum.EasingDirection[t[3]]), data)
+		:Play()
+	return true
+end
+
+-- 高级粒子效果
+function CreateParticles(parent, position, color)
+    for i = 1, 8 do
+        local particle = Instance.new("Frame")
+        particle.Size = UDim2.new(0, math.random(3, 6), 0, math.random(3, 6))
+        particle.BackgroundColor3 = color or GetRainbowColor()
+        particle.BackgroundTransparency = 0.3
+        particle.BorderSizePixel = 0
+        particle.Parent = parent
+        particle.Position = UDim2.new(0, position.X + math.random(-10, 10), 0, position.Y + math.random(-10, 10))
+        
+        local corner = Instance.new("UICorner")
+        corner.CornerRadius = UDim.new(1, 0)
+        corner.Parent = particle
+        
+        services.TweenService:Create(particle, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Position = UDim2.new(0, position.X + math.random(-30, 30), 0, position.Y + math.random(-30, 30)),
+            BackgroundTransparency = 1,
+            Size = UDim2.new(0, 0, 0, 0)
+        }):Play()
+        
+        task.wait(0.03)
+        game:GetService("Debris"):AddItem(particle, 0.5)
+    end
+end
+
+-- 优化的水波纹效果
+function Ripple(obj)
+	spawn(function()
+		if obj.ClipsDescendants ~= true then
+			obj.ClipsDescendants = true
+		end
+		local Ripple = Instance.new("ImageLabel")
+		Ripple.Name = "Ripple"
+		Ripple.Parent = obj
+		Ripple.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Ripple.BackgroundTransparency = 1.000
+		Ripple.ZIndex = 8
+		Ripple.Image = "rbxassetid://2708891598"
+		Ripple.ImageTransparency = 0.6
+		Ripple.ScaleType = Enum.ScaleType.Fit
+		Ripple.ImageColor3 = GetRainbowColor()
+		Ripple.Position = UDim2.new(
+			(mouse.X - Ripple.AbsolutePosition.X) / obj.AbsoluteSize.X,
+			0,
+			(mouse.Y - Ripple.AbsolutePosition.Y) / obj.AbsoluteSize.Y,
+			0
+		)
+		Tween(
+			Ripple,
+			{ 0.4, "Quad", "InOut" },
+			{ Position = UDim2.new(-6, 0, -6, 0), Size = UDim2.new(13, 0, 13, 0), ImageTransparency = 1 }
+		)
+		wait(0.4)
+		Ripple:Destroy()
+	end)
+end
+
+-- 按钮动画控制器
+local ButtonAnimations = {}
+local ANIMATION_DEBOUNCE = 0.25
+
+-- 高级果冻效果
+function SafeJellyEffect(button, buttonName)
+    if not button or not button.Parent then return end
+    
+    if ButtonAnimations[buttonName] and (os.clock() - ButtonAnimations[buttonName]) < ANIMATION_DEBOUNCE then
+        return
+    end
+    
+    ButtonAnimations[buttonName] = os.clock()
+    
+    spawn(function()
+        local originalSize = button.Size
+        
+        local tween1 = services.TweenService:Create(button, TweenInfo.new(0.06, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Size = UDim2.new(originalSize.X.Scale * 0.94, 0, originalSize.Y.Scale * 0.94, 0)
+        })
+        tween1:Play()
+        
+        task.wait(0.06)
+        
+        if not button or not button.Parent then return end
+        
+        local tween2 = services.TweenService:Create(button, TweenInfo.new(0.1, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out, 0, false, 0), {
+            Size = originalSize
+        })
+        tween2:Play()
+    end)
+end
+
+-- 增强果冻效果
+function SafeEnhancedJellyEffect(button, buttonName, isFavButton)
+    if not button or not button.Parent then return end
+    
+    if ButtonAnimations[buttonName] and (os.clock() - ButtonAnimations[buttonName]) < ANIMATION_DEBOUNCE then
+        return
+    end
+    
+    ButtonAnimations[buttonName] = os.clock()
+    
+    spawn(function()
+        local originalSize = button.Size
+        local originalColor = button.BackgroundColor3
+        local originalTransparency = button.BackgroundTransparency
+        
+        local pressColor = isFavButton and Color3.fromRGB(255, 215, 0) or GetRainbowColor()
+        
+        local tween1 = services.TweenService:Create(button, TweenInfo.new(0.07, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Size = UDim2.new(originalSize.X.Scale * 0.9, 0, originalSize.Y.Scale * 0.9, 0),
+            BackgroundColor3 = pressColor,
+            BackgroundTransparency = math.max(0, originalTransparency - 0.15)
+        })
+        tween1:Play()
+        
+        task.wait(0.07)
+        
+        if not button or not button.Parent then return end
+        
+        local tween2 = services.TweenService:Create(button, TweenInfo.new(0.12, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out, 0, false, 0), {
+            Size = UDim2.new(originalSize.X.Scale * 1.05, 0, originalSize.Y.Scale * 1.05, 0)
+        })
+        tween2:Play()
+        
+        task.wait(0.12)
+        
+        if not button or not button.Parent then return end
+        
+        local tween3 = services.TweenService:Create(button, TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Size = originalSize,
+            BackgroundColor3 = originalColor,
+            BackgroundTransparency = originalTransparency
+        })
+        tween3:Play()
+    end)
+end
+
+-- 清除按钮特效
+function SafeClearButtonEffect(button, buttonName)
+    if not button or not button.Parent then return end
+    
+    if ButtonAnimations[buttonName] and (os.clock() - ButtonAnimations[buttonName]) < ANIMATION_DEBOUNCE then
+        return
+    end
+    
+    ButtonAnimations[buttonName] = os.clock()
+    
+    spawn(function()
+        local originalRotation = button.Rotation
+        local originalSize = button.Size
+        
+        local tween1 = services.TweenService:Create(button, TweenInfo.new(0.15, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+            Rotation = originalRotation + 360
+        })
+        tween1:Play()
+        
+        local tween2 = services.TweenService:Create(button, TweenInfo.new(0.15, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out), {
+            Size = UDim2.new(originalSize.X.Scale * 1.2, 0, originalSize.Y.Scale * 1.2, 0)
+        })
+        tween2:Play()
+        
+        task.wait(0.15)
+        
+        if not button or not button.Parent then return end
+        
+        local tween3 = services.TweenService:Create(button, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+            Rotation = originalRotation,
+            Size = originalSize
+        })
+        tween3:Play()
+    end)
+end
+
+-- Tab切换系统
+local toggled = false
+local switchingTabs = false
+
+function switchTab(new)
+	if switchingTabs then
+		return
+	end
+	local old = library.currentTab
+	if old == nil then
+		new[2].Visible = true
+		library.currentTab = new
+		services.TweenService:Create(new[1], TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { ImageTransparency = 0 }):Play()
+		services.TweenService:Create(new[1].TabText, TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), { TextTransparency = 0 }):Play()
+		return
+	end
+	if old[1] == new[1] then
+		return
+	end
+	switchingTabs = true
+	library.currentTab = new
+	services.TweenService:Create(old[1], TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageTransparency = 0.3 }):Play()
+	services.TweenService:Create(new[1], TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { ImageTransparency = 0 }):Play()
+	services.TweenService:Create(old[1].TabText, TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextTransparency = 0.3 }):Play()
+	services.TweenService:Create(new[1].TabText, TweenInfo.new(0.12, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), { TextTransparency = 0 }):Play()
+	old[2].Visible = false
+	new[2].Visible = true
+	task.wait(0.12)
+	switchingTabs = false
+end
+
+-- 窗口拖动系统
+function drag(frame, hold)
+	if not hold then
+		hold = frame
+	end
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	local function update(input)
+		local delta = input.Position - dragStart
+		frame.Position =
+			UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+	hold.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	frame.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement then
+			dragInput = input
+		end
+	end)
+	services.UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+end
+
+-- 主窗口创建
+function library.new(library, name, theme)
+	for _, v in next, services.CoreGui:GetChildren() do
+		if v.Name == "REN_Advanced" then
+			v:Destroy()
+		end
+	end
+	
+	-- 高级颜色定义
+	local MainColor = Color3.fromRGB(0, 0, 0)
+	local Background = Color3.fromRGB(8, 8, 12)
+	local BackgroundTransparency = 0.08
+	local zyColor = Color3.fromRGB(20, 22, 28)
+	local zyColorTransparency = 0.15
+	local glassColor = Color3.fromRGB(30, 35, 45)
+	local glassTransparency = 0.3
+	local beijingColor = Color3.fromRGB(255, 255, 255)
+    local borderColor = Color3.fromRGB(60, 65, 80)
+
+	-- 创建GUI元素
+	local dogent = Instance.new("ScreenGui")
+	local Main = Instance.new("Frame")
+	local TabMain = Instance.new("Frame")
+	local MainC = Instance.new("UICorner")
+	local SB = Instance.new("Frame")
+	local SBC = Instance.new("UICorner")
+	local Side = Instance.new("Frame")
+	local SideG = Instance.new("UIGradient")
+	local TabBtns = Instance.new("ScrollingFrame")
+	local TabBtnsL = Instance.new("UIListLayout")
+	local ScriptTitle = Instance.new("TextLabel")
+	local SBG = Instance.new("UIGradient")
+	local Open = Instance.new("TextButton")
+	local UIG = Instance.new("UIGradient")
+	local DropShadowHolder = Instance.new("Frame")
+	local DropShadow = Instance.new("ImageLabel")
+	local UICornerMain = Instance.new("UICorner")
+	local UIGradient = Instance.new("UIGradient")
+	local UIGradientTitle = Instance.new("UIGradient")
+	local MainGlow = Instance.new("ImageLabel")
+	
+	-- GUI保护
+	if syn and syn.protect_gui then
+		syn.protect_gui(dogent)
+	end
+	
+	dogent.Name = "REN_Advanced"
+	dogent.Parent = services.CoreGui
+	
+	function UiDestroy()
+		dogent:Destroy()
+	end
+
+	function ToggleUILib()
+		Main.Visible = not Main.Visible
+	end
+	
+	-- 主窗口配置 - 更大更现代
+	Main.Name = "Main"
+	Main.Parent = dogent
+	Main.AnchorPoint = Vector2.new(0.5, 0.5)
+	Main.BackgroundColor3 = Background
+	Main.BackgroundTransparency = BackgroundTransparency
+	Main.BorderColor3 = borderColor
+	Main.BorderSizePixel = 1
+	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Main.Size = UDim2.new(0, 620, 0, 420)
+	Main.ZIndex = 1
+	Main.Active = true
+	Main.Draggable = true
+	
+	-- 主窗口发光效果
+	MainGlow.Name = "MainGlow"
+	MainGlow.Parent = Main
+	MainGlow.BackgroundTransparency = 1
+	MainGlow.Size = UDim2.new(1, 20, 1, 20)
+	MainGlow.Position = UDim2.new(0, -10, 0, -10)
+	MainGlow.Image = "rbxassetid://5028857079"
+	MainGlow.ImageColor3 = GetRainbowColor()
+	MainGlow.ImageTransparency = 0.85
+	MainGlow.ScaleType = Enum.ScaleType.Slice
+	MainGlow.SliceCenter = Rect.new(49, 49, 450, 450)
+	MainGlow.ZIndex = 0
+	
+	spawn(function()
+		while MainGlow and MainGlow.Parent do
+			services.TweenService:Create(MainGlow, TweenInfo.new(colorTransitionSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+				ImageColor3 = GetRainbowColor()
+			}):Play()
+			task.wait(colorTransitionSpeed)
+		end
+	end)
+	
+	-- 快捷键控制
+	services.UserInputService.InputEnded:Connect(function(input)
+		if input.KeyCode == Enum.KeyCode.RightControl then
+			Main.Visible = not Main.Visible
+		end
+	end)
+	
+	drag(Main)
+	
+	-- 圆角
+	UICornerMain.Parent = Main
+	UICornerMain.CornerRadius = UDim.new(0, 12)
+	
+	-- 阴影
+	DropShadowHolder.Name = "DropShadowHolder"
+	DropShadowHolder.Parent = Main
+	DropShadowHolder.BackgroundTransparency = 1.000
+	DropShadowHolder.BorderSizePixel = 0
+	DropShadowHolder.Size = UDim2.new(1, 0, 1, 0)
+	DropShadowHolder.BorderColor3 = Color3.fromRGB(255, 255, 255)
+	DropShadowHolder.ZIndex = 0
+	
+	DropShadow.Name = "DropShadow"
+	DropShadow.Parent = DropShadowHolder
+	DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+	DropShadow.BackgroundTransparency = 1.000
+	DropShadow.BorderSizePixel = 0
+	DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
+	DropShadow.Size = UDim2.new(1, 50, 1, 50)
+	DropShadow.ZIndex = 0
+	DropShadow.Image = "rbxassetid://6015897843"
+	DropShadow.ImageColor3 = Color3.fromRGB(255, 255, 255)
+	DropShadow.ImageTransparency = 0.4
+	DropShadow.ScaleType = Enum.ScaleType.Slice
+	DropShadow.SliceCenter = Rect.new(49, 49, 450, 450)
+	
+	-- 渐变
+	UIGradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0.00, Color3.fromRGB(80, 80, 255)),
+		ColorSequenceKeypoint.new(0.25, Color3.fromRGB(100, 50, 200)),
+		ColorSequenceKeypoint.new(0.50, Color3.fromRGB(150, 50, 150)),
+		ColorSequenceKeypoint.new(0.75, Color3.fromRGB(100, 50, 200)),
+		ColorSequenceKeypoint.new(1.00, Color3.fromRGB(80, 80, 255))
+	})
+	UIGradient.Parent = DropShadow
+	
+	local TweenService = game:GetService("TweenService")
+	local tweeninfo = TweenInfo.new(6, Enum.EasingStyle.Linear, Enum.EasingDirection.In, -1)
+	local tween = TweenService:Create(UIGradient, tweeninfo, { Rotation = 360 })
+	tween:Play()
+	
+	-- Tab容器
+	TabMain.Name = "TabMain"
+	TabMain.Parent = Main
+	TabMain.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TabMain.BackgroundTransparency = 1.000
+	TabMain.Position = UDim2.new(0.22, 0, 0, 5)
+	TabMain.Size = UDim2.new(0, 485, 0, 410)
+	
+	MainC.CornerRadius = UDim.new(0, 8)
+	MainC.Name = "MainC"
+	MainC.Parent = Main
+	
+	-- 侧边栏装饰条
+	SB.Name = "SB"
+	SB.Parent = Main
+	SB.BackgroundColor3 = glassColor
+	SB.BackgroundTransparency = glassTransparency
+	SB.BorderColor3 = borderColor
+	SB.BorderSizePixel = 1
+	SB.Size = UDim2.new(0, 6, 0, 410)
+	
+	SBC.CornerRadius = UDim.new(0, 3)
+	SBC.Name = "SBC"
+	SBC.Parent = SB
+	
+	-- 侧边栏主体
+	Side.Name = "Side"
+	Side.Parent = SB
+	Side.BackgroundColor3 = glassColor
+	Side.BackgroundTransparency = glassTransparency
+	Side.BorderColor3 = borderColor
+	Side.BorderSizePixel = 1
+	Side.ClipsDescendants = true
+	Side.Position = UDim2.new(1, 0, 0, 0)
+	Side.Size = UDim2.new(0, 130, 0, 410)
+	
+	SideG.Color = ColorSequence.new({ 
+		ColorSequenceKeypoint.new(0.00, zyColor), 
+		ColorSequenceKeypoint.new(1.00, zyColor) 
+	})
+	SideG.Rotation = 90
+	SideG.Name = "SideG"
+	SideG.Parent = Side
+	
+	-- Tab按钮区域
+	TabBtns.Name = "TabBtns"
+	TabBtns.Parent = Side
+	TabBtns.Active = true
+	TabBtns.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	TabBtns.BackgroundTransparency = 1.000
+	TabBtns.BorderSizePixel = 0
+	TabBtns.Position = UDim2.new(0, 0, 0.08, 0)
+	TabBtns.Size = UDim2.new(0, 130, 0, 375)
+	TabBtns.CanvasSize = UDim2.new(0, 0, 1, 0)
+	TabBtns.ScrollBarThickness = 2
+	TabBtns.ScrollBarImageColor3 = GetRainbowColor()
+	
+	TabBtnsL.Name = "TabBtnsL"
+	TabBtnsL.Parent = TabBtns
+	TabBtnsL.SortOrder = Enum.SortOrder.LayoutOrder
+	TabBtnsL.Padding = UDim.new(0, 15)
+	
+	-- 标题
+	ScriptTitle.Name = "ScriptTitle"
+	ScriptTitle.Parent = Side
+	ScriptTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	ScriptTitle.BackgroundTransparency = 1.000
+	ScriptTitle.Position = UDim2.new(0, 8, 0.015, 0)
+	ScriptTitle.Size = UDim2.new(0, 114, 0, 28)
+	ScriptTitle.Font = Enum.Font.GothamBlack
+	ScriptTitle.Text = "✦ " .. name .. " ✦"
+	ScriptTitle.TextColor3 = GetRainbowColor()
+	ScriptTitle.TextSize = 14.000
+	ScriptTitle.TextTransparency = 0
+	ScriptTitle.TextScaled = false
+	ScriptTitle.TextXAlignment = Enum.TextXAlignment.Left
+	
+	AnimateTextColor(ScriptTitle)
+	
+	-- 打开按钮
+	Open.Name = "Open"
+	Open.Parent = dogent
+	Open.BackgroundColor3 = glassColor
+	Open.BackgroundTransparency = 0.2
+	Open.Position = UDim2.new(0.008, 0, 0.3, 0)
+	Open.Size = UDim2.new(0, 75, 0, 40)
+	Open.Font = Enum.Font.GothamBold
+	Open.Text = "⚡ 辰"
+	Open.TextColor3 = GetRainbowColor()
+	Open.TextTransparency = 0
+	Open.TextSize = 14.000
+	Open.Active = true
+	Open.Draggable = true
+	Open.ZIndex = 100
+	
+	local OpenCorner = Instance.new("UICorner")
+	OpenCorner.CornerRadius = UDim.new(0, 20)
+	OpenCorner.Parent = Open
+	
+	local OpenStroke = Instance.new("UIStroke")
+	OpenStroke.Color = GetRainbowColor()
+	OpenStroke.Thickness = 1
+	OpenStroke.Transparency = 0.5
+	OpenStroke.Parent = Open
+	
+	spawn(function()
+		while OpenStroke and OpenStroke.Parent do
+			services.TweenService:Create(OpenStroke, TweenInfo.new(colorTransitionSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+				Color = GetRainbowColor()
+			}):Play()
+			task.wait(colorTransitionSpeed)
+		end
+	end)
+
+	AnimateTextColor(Open)
+
+	Open.MouseButton1Click:Connect(function()
+		Ripple(Open)
+		SafeJellyEffect(Open, "OpenButton")
+		Main.Visible = not Main.Visible
+	end)
+	
+	-- 窗口对象
+	local window = {}
+	
+	-- Tab创建函数
+	function window.Tab(window, name, icon)
+		local Tab = Instance.new("ScrollingFrame")
+		local TabIco = Instance.new("ImageLabel")
+		local TabText = Instance.new("TextLabel")
+		local TabBtn = Instance.new("TextButton")
+		local TabL = Instance.new("UIListLayout")
+		
+		Tab.Name = name
+		Tab.Parent = TabMain
+		Tab.Active = true
+		Tab.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Tab.BackgroundTransparency = 1.000
+		Tab.Size = UDim2.new(1, 0, 1, 0)
+		Tab.ScrollBarThickness = 4
+		Tab.ScrollBarImageColor3 = GetRainbowColor()
+		Tab.ScrollBarImageTransparency = 0.5
+		Tab.Visible = false
+		
+		TabIco.Name = "TabIco"
+		TabIco.Parent = TabBtns
+		TabIco.BackgroundTransparency = 1.000
+		TabIco.BorderSizePixel = 0
+		TabIco.Size = UDim2.new(0, 110, 0, 32)
+		TabIco.Image = ("rbxassetid://%s"):format((icon or 4370341699))
+		TabIco.ImageTransparency = 0.3
+		TabIco.ScaleType = Enum.ScaleType.Fit
+		
+		local IcoCorner = Instance.new("UICorner")
+		IcoCorner.CornerRadius = UDim.new(0, 8)
+		IcoCorner.Parent = TabIco
+		
+		TabText.Name = "TabText"
+		TabText.Parent = TabIco
+		TabText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TabText.BackgroundTransparency = 1.000
+		TabText.Position = UDim2.new(0, 35, 0, 0)
+		TabText.Size = UDim2.new(0, 70, 0, 32)
+		TabText.Font = Enum.Font.GothamSemibold
+		TabText.Text = " " .. name
+		TabText.TextColor3 = GetRainbowColor()
+		TabText.TextSize = 13.000
+		TabText.TextTransparency = 0.3
+		TabText.TextXAlignment = Enum.TextXAlignment.Left
+		
+		AnimateTextColor(TabText)
+		
+		TabBtn.Name = "TabBtn"
+		TabBtn.Parent = TabIco
+		TabBtn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TabBtn.BackgroundTransparency = 1.000
+		TabBtn.BorderSizePixel = 0
+		TabBtn.Size = UDim2.new(0, 110, 0, 32)
+		TabBtn.AutoButtonColor = false
+		TabBtn.Font = Enum.Font.SourceSans
+		TabBtn.Text = ""
+		TabBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+		TabBtn.TextSize = 14.000
+		
+		TabL.Name = "TabL"
+		TabL.Parent = Tab
+		TabL.SortOrder = Enum.SortOrder.LayoutOrder
+		TabL.Padding = UDim.new(0, 8)
+		
+		TabBtn.MouseButton1Click:Connect(function()
+			Ripple(TabBtn)
+			SafeJellyEffect(TabIco, "TabIco_" .. name)
+			switchTab({ TabIco, Tab })
+		end)
+		
+		if library.currentTab == nil then
+			switchTab({ TabIco, Tab })
+		end
+		
+		TabL:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+			Tab.CanvasSize = UDim2.new(0, 0, 0, TabL.AbsoluteContentSize.Y + 15)
+		end)
+		
+		local tab = {}
+		
+		-- Section创建函数
+		function tab.section(tab, sectionName, TabVal)
+			local Section = Instance.new("Frame")
+			local SectionC = Instance.new("UICorner")
+			local SectionText = Instance.new("TextLabel")
+			local SectionOpen = Instance.new("ImageLabel")
+			local SectionOpened = Instance.new("ImageLabel")
+			local SectionToggle = Instance.new("ImageButton")
+			local Objs = Instance.new("Frame")
+			local ObjsL = Instance.new("UIListLayout")
+			local SectionStroke = Instance.new("UIStroke")
+			
+			Section.Name = "Section_" .. sectionName
+			Section.Parent = Tab
+			Section.BackgroundColor3 = glassColor
+			Section.BackgroundTransparency = glassTransparency
+			Section.BorderSizePixel = 0
+			Section.ClipsDescendants = true
+			Section.Size = UDim2.new(0.98, 0, 0, 42)
+			
+			SectionStroke.Color = borderColor
+			SectionStroke.Thickness = 1
+			SectionStroke.Transparency = 0.5
+			SectionStroke.Parent = Section
+			
+			SectionC.CornerRadius = UDim.new(0, 12)
+			SectionC.Name = "SectionC"
+			SectionC.Parent = Section
+			
+			SectionText.Name = "SectionText"
+			SectionText.Parent = Section
+			SectionText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			SectionText.BackgroundTransparency = 1.000
+			SectionText.Position = UDim2.new(0.08, 0, 0, 0)
+			SectionText.Size = UDim2.new(0, 430, 0, 42)
+			SectionText.Font = Enum.Font.GothamBold
+			SectionText.Text = "📁 " .. sectionName
+			SectionText.TextColor3 = GetRainbowColor()
+			SectionText.TextSize = 15.000
+			SectionText.TextTransparency = 0
+			SectionText.TextXAlignment = Enum.TextXAlignment.Left
+			
+			AnimateTextColor(SectionText)
+			
+			SectionOpen.Name = "SectionOpen"
+			SectionOpen.Parent = SectionText
+			SectionOpen.BackgroundTransparency = 1
+			SectionOpen.BorderSizePixel = 0
+			SectionOpen.Position = UDim2.new(0, -38, 0, 7)
+			SectionOpen.Size = UDim2.new(0, 28, 0, 28)
+			SectionOpen.Image = "http://www.roblox.com/asset/?id=6031302934"
+			SectionOpen.ImageColor3 = Color3.fromRGB(200, 200, 200)
+			
+			SectionOpened.Name = "SectionOpened"
+			SectionOpened.Parent = SectionOpen
+			SectionOpened.BackgroundTransparency = 1.000
+			SectionOpened.BorderSizePixel = 0
+			SectionOpened.Size = UDim2.new(0, 28, 0, 28)
+			SectionOpened.Image = "http://www.roblox.com/asset/?id=6031302932"
+			SectionOpened.ImageTransparency = 1.000
+			SectionOpened.ImageColor3 = Color3.fromRGB(255, 215, 0)
+			
+			SectionToggle.Name = "SectionToggle"
+			SectionToggle.Parent = SectionOpen
+			SectionToggle.BackgroundTransparency = 1
+			SectionToggle.BorderSizePixel = 0
+			SectionToggle.Size = UDim2.new(0, 28, 0, 28)
+			
+			Objs.Name = "Objs"
+			Objs.Parent = Section
+			Objs.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Objs.BackgroundTransparency = 1
+			Objs.BorderSizePixel = 0
+			Objs.Position = UDim2.new(0, 8, 0, 42)
+			Objs.Size = UDim2.new(0.98, 0, 0, 0)
+			
+			ObjsL.Name = "ObjsL"
+			ObjsL.Parent = Objs
+			ObjsL.SortOrder = Enum.SortOrder.LayoutOrder
+			ObjsL.Padding = UDim.new(0, 10)
+			
+			local open = TabVal
+			if TabVal ~= false then
+				Section.Size = UDim2.new(0.98, 0, 0, open and 42 + ObjsL.AbsoluteContentSize.Y + 10 or 42)
+				SectionOpened.ImageTransparency = (open and 0 or 1)
+				SectionOpen.ImageTransparency = (open and 1 or 0)
+			end
+			
+			SectionToggle.MouseButton1Click:Connect(function()
+				SafeJellyEffect(SectionOpen, "SectionOpen_" .. sectionName)
+				open = not open
+				Section.Size = UDim2.new(0.98, 0, 0, open and 42 + ObjsL.AbsoluteContentSize.Y + 10 or 42)
+				SectionOpened.ImageTransparency = (open and 0 or 1)
+				SectionOpen.ImageTransparency = (open and 1 or 0)
+			end)
+			
+			ObjsL:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+				if not open then
+					return
+				end
+				Section.Size = UDim2.new(0.98, 0, 0, 42 + ObjsL.AbsoluteContentSize.Y + 10)
+			end)
+			
+			local section = {}
+			
+			-- 高级按钮创建函数
+			function section.Button(section, text, callback)
+				local callback = callback or function() end
+				local btnText = text:gsub("^%s+", ""):gsub("%s+$", "")
+				local buttonName = "Button_" .. sectionName .. "_" .. btnText
+				
+				local BtnModule = Instance.new("Frame")
+				local Btn = Instance.new("TextButton")
+				local BtnC = Instance.new("UICorner")
+				local FavoriteStar = Instance.new("ImageButton")
+				local BtnGlow = Instance.new("ImageLabel")
+				local BtnStroke = Instance.new("UIStroke")
+				
+				BtnModule.Name = "BtnModule"
+				BtnModule.Parent = Objs
+				BtnModule.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				BtnModule.BackgroundTransparency = 1.000
+				BtnModule.Position = UDim2.new(0, 0, 0, 0)
+				BtnModule.Size = UDim2.new(0, 460, 0, 44)
+				
+				Btn.Name = "Btn"
+				Btn.Parent = BtnModule
+				Btn.BackgroundColor3 = zyColor
+				Btn.BackgroundTransparency = zyColorTransparency
+				Btn.Size = UDim2.new(0, 460, 0, 44)
+				Btn.AutoButtonColor = false
+				Btn.Font = Enum.Font.GothamBold
+				Btn.Text = "  ✦ " .. text
+				Btn.TextColor3 = GetRainbowColor()
+				Btn.TextSize = 15.000
+				Btn.TextTransparency = 0
+				Btn.TextXAlignment = Enum.TextXAlignment.Left
+				
+				BtnC.CornerRadius = UDim.new(0, 22)
+				BtnC.Name = "BtnC"
+				BtnC.Parent = Btn
+				
+				BtnStroke.Color = borderColor
+				BtnStroke.Thickness = 1
+				BtnStroke.Transparency = 0.6
+				BtnStroke.Parent = Btn
+				
+				BtnGlow.Name = "BtnGlow"
+				BtnGlow.Parent = Btn
+				BtnGlow.BackgroundTransparency = 1
+				BtnGlow.Size = UDim2.new(1, 0, 1, 0)
+				BtnGlow.Image = "rbxassetid://5028857079"
+				BtnGlow.ImageColor3 = GetRainbowColor()
+				BtnGlow.ImageTransparency = 0.85
+				BtnGlow.ScaleType = Enum.ScaleType.Slice
+				BtnGlow.SliceCenter = Rect.new(49, 49, 450, 450)
+				BtnGlow.Visible = false
+				
+				AnimateTextColor(Btn)
+				
+				-- 动画效果
+				Btn.MouseEnter:Connect(function()
+					BtnGlow.Visible = true
+					services.TweenService:Create(Btn, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+						BackgroundTransparency = math.max(0, zyColorTransparency - 0.08)
+					}):Play()
+					services.TweenService:Create(BtnGlow, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+						ImageTransparency = 0.7
+					}):Play()
+				end)
+				
+				Btn.MouseLeave:Connect(function()
+					services.TweenService:Create(Btn, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+						BackgroundTransparency = zyColorTransparency
+					}):Play()
+					services.TweenService:Create(BtnGlow, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+						ImageTransparency = 0.85
+					}):Play()
+					task.wait(0.2)
+					if BtnGlow then BtnGlow.Visible = false end
+				end)
+				
+				FavoriteStar.Name = "FavoriteStar"
+				FavoriteStar.Parent = Btn
+				FavoriteStar.BackgroundTransparency = 1
+				FavoriteStar.Position = UDim2.new(0.94, 0, 0.2, 0)
+				FavoriteStar.Size = UDim2.new(0, 26, 0, 26)
+				FavoriteStar.Image = "rbxassetid://6031302932"
+				
+				local function UpdateStar()
+					if library:IsFavorite(btnText) then
+						FavoriteStar.ImageColor3 = GetRainbowColor()
+						FavoriteStar.ImageTransparency = 0
+						spawn(function()
+							while FavoriteStar and FavoriteStar.Parent and library:IsFavorite(btnText) do
+								local nextIndex = currentColorIndex % #RainbowColors + 1
+								local nextColor = RainbowColors[nextIndex]
+								
+								services.TweenService:Create(FavoriteStar, TweenInfo.new(colorTransitionSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+									ImageColor3 = nextColor
+								}):Play()
+								task.wait(colorTransitionSpeed)
+								
+								if not FavoriteStar or not FavoriteStar.Parent then break end
+							end
+						end)
+					else
+						FavoriteStar.ImageColor3 = Color3.fromRGB(180, 180, 200)
+						FavoriteStar.ImageTransparency = 0.5
+					end
+				end
+				
+				FavoriteStar.MouseButton1Click:Connect(function()
+					SafeClearButtonEffect(FavoriteStar, "Star_" .. buttonName)
+					library:ToggleFavorite(btnText, callback, section.Name, name)
+					UpdateStar()
+					
+					if library:IsFavorite(btnText) then
+						CreateParticles(FavoriteStar, Vector2.new(13, 13), Color3.fromRGB(255, 215, 0))
+					end
+				end)
+				
+				UpdateStar()
+				library.favoriteUpdateSignal.Event:Connect(UpdateStar)
+				
+				Btn.MouseButton1Click:Connect(function()
+					Ripple(Btn)
+					SafeEnhancedJellyEffect(Btn, buttonName, false)
+					CreateParticles(Btn, Vector2.new(mouse.X - Btn.AbsolutePosition.X, mouse.Y - Btn.AbsolutePosition.Y), GetRainbowColor())
+					spawn(callback)
+				end)
+				
+				return Btn
+			end
+			
+			-- 高级搜索框
+			function section.SearchBox(section, placeholder)
+				local TextboxModule = Instance.new("Frame")
+				local TextboxBack = Instance.new("TextButton")
+				local TextboxBackC = Instance.new("UICorner")
+				local BoxBG = Instance.new("TextButton")
+				local BoxBGC = Instance.new("UICorner")
+				local TextBox = Instance.new("TextBox")
+				local SearchButton = Instance.new("TextButton")
+				local SearchButtonC = Instance.new("UICorner")
+				local ClearButton = Instance.new("ImageButton")
+				local ClearButtonHover = Instance.new("ImageLabel")
+				local SearchIcon = Instance.new("ImageLabel")
+				
+				TextboxModule.Name = "SearchBoxModule"
+				TextboxModule.Parent = Objs
+				TextboxModule.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				TextboxModule.BackgroundTransparency = 1.000
+				TextboxModule.Size = UDim2.new(0, 460, 0, 50)
+				
+				TextboxBack.Name = "SearchBack"
+				TextboxBack.Parent = TextboxModule
+				TextboxBack.BackgroundColor3 = zyColor
+				TextboxBack.BackgroundTransparency = zyColorTransparency
+				TextboxBack.Size = UDim2.new(0, 460, 0, 50)
+				TextboxBack.AutoButtonColor = false
+				TextboxBack.Font = Enum.Font.GothamBold
+				TextboxBack.Text = "  🔍 搜索功能"
+				TextboxBack.TextColor3 = GetRainbowColor()
+				TextboxBack.TextSize = 15.000
+				TextboxBack.TextXAlignment = Enum.TextXAlignment.Left
+				
+				TextboxBackC.CornerRadius = UDim.new(0, 25)
+				TextboxBackC.Name = "SearchBackC"
+				TextboxBackC.Parent = TextboxBack
+				
+				-- 搜索图标
+				SearchIcon.Name = "SearchIcon"
+				SearchIcon.Parent = TextboxBack
+				SearchIcon.BackgroundTransparency = 1
+				SearchIcon.Position = UDim2.new(0.02, 0, 0.1, 0)
+				SearchIcon.Size = UDim2.new(0, 30, 0, 30)
+				SearchIcon.Image = "rbxassetid://6031090998"
+				SearchIcon.ImageColor3 = GetRainbowColor()
+				SearchIcon.ImageTransparency = 0.3
+				
+				-- 搜索按钮 - 更美观
+				SearchButton.Name = "SearchBtn"
+				SearchButton.Parent = TextboxBack
+				SearchButton.BackgroundColor3 = GetRainbowColor()
+				SearchButton.BackgroundTransparency = 0.2
+				SearchButton.Position = UDim2.new(0.83, 0, 0.28, 0)
+				SearchButton.Size = UDim2.new(0, 65, 0, 28)
+				SearchButton.Font = Enum.Font.GothamBold
+				SearchButton.Text = "搜索"
+				SearchButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+				SearchButton.TextSize = 13
+				
+				SearchButtonC.CornerRadius = UDim.new(0, 14)
+				SearchButtonC.Name = "SearchBtnC"
+				SearchButtonC.Parent = SearchButton
+				
+				-- 清除按钮
+				ClearButton.Name = "ClearBtn"
+				ClearButton.Parent = TextboxBack
+				ClearButton.BackgroundTransparency = 1
+				ClearButton.Position = UDim2.new(0.72, 0, 0.28, 0)
+				ClearButton.Size = UDim2.new(0, 25, 0, 25)
+				ClearButton.Visible = false
+				ClearButton.Image = "rbxassetid://6031302932"
+				ClearButton.ImageColor3 = Color3.fromRGB(200, 200, 220)
+				ClearButton.ImageTransparency = 0.3
+				ClearButton.ScaleType = Enum.ScaleType.Fit
+				
+				ClearButtonHover.Name = "ClearButtonHover"
+				ClearButtonHover.Parent = ClearButton
+				ClearButtonHover.BackgroundTransparency = 1
+				ClearButtonHover.Size = UDim2.new(1, 0, 1, 0)
+				ClearButtonHover.Image = "rbxassetid://6031302932"
+				ClearButtonHover.ImageColor3 = Color3.fromRGB(255, 100, 100)
+				ClearButtonHover.ImageTransparency = 1
+				ClearButtonHover.ScaleType = Enum.ScaleType.Fit
+				
+				BoxBG.Name = "SearchBoxBG"
+				BoxBG.Parent = TextboxBack
+				BoxBG.BackgroundColor3 = Background
+				BoxBG.BackgroundTransparency = BackgroundTransparency
+				BoxBG.Position = UDim2.new(0.25, 0, 0.26, 0)
+				BoxBG.Size = UDim2.new(0, 190, 0, 26)
+				BoxBG.Font = Enum.Font.Gotham
+				BoxBG.Text = ""
+				BoxBG.TextColor3 = Color3.fromRGB(255, 255, 255)
+				BoxBG.TextSize = 14.000
+				
+				BoxBGC.CornerRadius = UDim.new(0, 13)
+				BoxBGC.Name = "SearchBoxBGC"
+				BoxBGC.Parent = BoxBG
+				
+				local BoxStroke = Instance.new("UIStroke")
+				BoxStroke.Color = GetRainbowColor()
+				BoxStroke.Thickness = 1
+				BoxStroke.Transparency = 0.5
+				BoxStroke.Parent = BoxBG
+				
+				spawn(function()
+					while BoxStroke and BoxStroke.Parent do
+						services.TweenService:Create(BoxStroke, TweenInfo.new(colorTransitionSpeed, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+							Color = GetRainbowColor()
+						}):Play()
+						task.wait(colorTransitionSpeed)
+					end
+				end)
+				
+				TextBox.Parent = BoxBG
+				TextBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+				TextBox.BackgroundTransparency = 1.000
+				TextBox.Size = UDim2.new(1, -8, 1, 0)
+				TextBox.Position = UDim2.new(0, 4, 0, 0)
+				TextBox.Font = Enum.Font.Gotham
+				TextBox.PlaceholderText = placeholder or "输入功能名..."
+				TextBox.PlaceholderColor3 = PlaceholderColor
+				TextBox.Text = ""
+				TextBox.TextColor3 = GetRainbowColor()
+				TextBox.TextSize = 13.000
+				
+				AnimateTextColor(TextboxBack)
+				AnimateTextColor(TextBox)
+				
+				-- 搜索历史
+				local searchHistory = {}
+				local originalLayoutOrders = {}
+				
+				for _, module in pairs(Objs:GetChildren()) do
+					if module:IsA("Frame") and module.Name == "BtnModule" then
+						local btn = module:FindFirstChild("Btn")
+						if btn and module ~= TextboxModule then
+							originalLayoutOrders[btn.Text] = module.LayoutOrder
+						end
+					end
+				end
+				
+				-- 搜索功能
+				local function SearchAndPin(searchText)
+					if searchText == "" then 
+						ClearButton.Visible = false
+						for _, module in pairs(Objs:GetChildren()) do
+							if module:IsA("Frame") and module.Name == "BtnModule" then
+								local btn = module:FindFirstChild("Btn")
+								if btn then
+									module.LayoutOrder = originalLayoutOrders[btn.Text] or module.LayoutOrder
+									services.TweenService:Create(btn, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+										BackgroundColor3 = zyColor,
+										BackgroundTransparency = zyColorTransparency,
+										TextColor3 = GetRainbowColor()
+									}):Play()
+								end
+							end
+						end
+						return 
+					end
+					
+					ClearButton.Visible = true
+					local foundCount = 0
+					local searchLower = searchText:lower()
+					
+					for _, module in pairs(Objs:GetChildren()) do
+						if module:IsA("Frame") and module.Name == "BtnModule" then
+							local btn = module:FindFirstChild("Btn")
+							if btn and module ~= TextboxModule then
+								module.LayoutOrder = originalLayoutOrders[btn.Text] or module.LayoutOrder
+								services.TweenService:Create(btn, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+									BackgroundColor3 = zyColor,
+									BackgroundTransparency = zyColorTransparency,
+									TextColor3 = GetRainbowColor()
+								}):Play()
+							end
+						end
+					end
+					
+					for _, module in pairs(Objs:GetChildren()) do
+						if module:IsA("Frame") and module.Name == "BtnModule" then
+							local btn = module:FindFirstChild("Btn")
+							if btn and module ~= TextboxModule then
+								local btnText = btn.Text:gsub("^%s+", ""):gsub("%s+$", "")
+								
+								if btnText:lower():find(searchLower, 1, true) then
+									foundCount = foundCount + 1
+									module.LayoutOrder = -1000 + foundCount
+									
+									local buttonName = "SearchResult_" .. btnText
+									SafeJellyEffect(btn, buttonName)
+									
+									services.TweenService:Create(btn, TweenInfo.new(0.25, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+										BackgroundColor3 = GetRainbowColor(),
+										BackgroundTransparency = 0.15,
+										TextColor3 = Color3.fromRGB(255, 255, 255)
+									}):Play()
+									
+									-- 脉冲效果
+									spawn(function()
+										for i = 1, 2 do
+											services.TweenService:Create(btn, TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+												BackgroundTransparency = 0.25
+											}):Play()
+											task.wait(0.15)
+											services.TweenService:Create(btn, TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+												BackgroundTransparency = 0.15
+											}):Play()
+											task.wait(0.15)
+										end
+									end)
+								end
+							end
+						end
+					end
+					
+					if foundCount > 0 then
+						local originalText = TextBox.Text
+						TextBox.Text = originalText .. " (" .. foundCount .. "项)"
+						TextBox.TextColor3 = GetRainbowColor()
+						
+						if not open then
+							SectionToggle.MouseButton1Click()
+						end
+						
+						table.insert(searchHistory, searchText)
+						
+						-- 搜索结果动画
+						SafeJellyEffect(SearchButton, "SearchAnim")
+						
+						task.wait(1.5)
+						if TextBox.Text == originalText .. " (" .. foundCount .. "项)" then
+							TextBox.Text = originalText
+						end
+					else
+						local originalText = TextBox.Text
+						TextBox.Text = "❌ 未找到 '" .. searchText .. "'"
+						TextBox.TextColor3 = Color3.fromRGB(255, 100, 100)
+						
+						-- 错误动画
+						services.TweenService:Create(BoxBG, TweenInfo.new(0.05, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+							Position = UDim2.new(0.25, 5, 0.26, 0)
+						}):Play()
+						task.wait(0.05)
+						services.TweenService:Create(BoxBG, TweenInfo.new(0.05, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+							Position = UDim2.new(0.25, -5, 0.26, 0)
+						}):Play()
+						task.wait(0.05)
+						services.TweenService:Create(BoxBG, TweenInfo.new(0.05, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut), {
+							Position = UDim2.new(0.25, 0, 0.26, 0)
+						}):Play()
+						
+						task.wait(1.2)
+						
+						if TextBox.Text == "❌ 未找到 '" .. searchText .. "'" then
+							TextBox.Text = ""
+							TextBox.TextColor3 = GetRainbowColor()
+						end
+					end
+				end
+				
+				local function ClearSearch()
+					SafeClearButtonEffect(ClearButton, "ClearButton_" .. sectionName)
+					TextBox.Text = ""
+					SearchAndPin("")
+					TextBox:CaptureFocus()
+				end
+				
+				SearchButton.MouseButton1Click:Connect(function()
+					SafeEnhancedJellyEffect(SearchButton, "SearchButton_" .. sectionName, false)
+					SearchAndPin(TextBox.Text)
+				end)
+				
+				ClearButton.MouseButton1Click:Connect(ClearSearch)
+				
+				TextBox.FocusLost:Connect(function(enterPressed)
+					if enterPressed then
+						SafeEnhancedJellyEffect(SearchButton, "SearchButton_" .. sectionName, false)
+						SearchAndPin(TextBox.Text)
+					end
+				end)
+				
+				ClearButton.MouseEnter:Connect(function()
+					services.TweenService:Create(ClearButtonHover, TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+						ImageTransparency = 0
+					}):Play()
+					services.TweenService:Create(ClearButton, TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+						ImageTransparency = 1
+					}):Play()
+				end)
+				
+				ClearButton.MouseLeave:Connect(function()
+					services.TweenService:Create(ClearButtonHover, TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+						ImageTransparency = 1
+					}):Play()
+					services.TweenService:Create(ClearButton, TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+						ImageTransparency = 0.3
+					}):Play()
+				end)
+				
+				TextBox.Focused:Connect(function()
+					ClearButton.Visible = TextBox.Text ~= ""
+				end)
+				
+				TextBox:GetPropertyChangedSignal("Text"):Connect(function()
+					ClearButton.Visible = TextBox.Text ~= ""
+				end)
+				
+				SearchButton.MouseEnter:Connect(function()
+					services.TweenService:Create(SearchButton, TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+						BackgroundTransparency = 0.05,
+						BackgroundColor3 = GetRainbowColor()
+					}):Play()
+				end)
+				
+				SearchButton.MouseLeave:Connect(function()
+					services.TweenService:Create(SearchButton, TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+						BackgroundTransparency = 0.2
+					}):Play()
+				end)
+				
+				return TextBox
+			end
+			
+			-- 收藏置顶刷新
+			local function RefreshFavorites()
+				for _, child in pairs(Objs:GetChildren()) do
+					if child.Name == "FavoriteButton" then
+						child:Destroy()
+					end
+				end
+				
+				local sortedFavorites = GetSortedFavorites()
+				local favoriteCount = 0
+				
+				for i, fav in ipairs(sortedFavorites) do
+					if fav.tabName == name and fav.sectionName == "Section_" .. sectionName then
+						favoriteCount = favoriteCount + 1
+						local favoriteBtnModule = Instance.new("Frame")
+						local favoriteBtn = Instance.new("TextButton")
+						local favoriteBtnC = Instance.new("UICorner")
+						local favoriteStar = Instance.new("ImageButton")
+						local favoriteGlow = Instance.new("ImageLabel")
+						local favoriteStroke = Instance.new("UIStroke")
+						
+						favoriteBtnModule.Name = "FavoriteButton"
+						favoriteBtnModule.Parent = Objs
+						favoriteBtnModule.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+						favoriteBtnModule.BackgroundTransparency = 1.000
+						favoriteBtnModule.LayoutOrder = -500 + i
+						favoriteBtnModule.Size = UDim2.new(0, 460, 0, 44)
+						
+						favoriteBtn.Name = "FavoriteBtn"
+						favoriteBtn.Parent = favoriteBtnModule
+						favoriteBtn.BackgroundColor3 = Color3.fromRGB(40, 35, 50)
+						favoriteBtn.BackgroundTransparency = 0.3
+						favoriteBtn.Size = UDim2.new(0, 460, 0, 44)
+						favoriteBtn.AutoButtonColor = false
+						favoriteBtn.Font = Enum.Font.GothamBold
+						favoriteBtn.Text = "  ⭐ " .. fav.name
+						favoriteBtn.TextColor3 = Color3.fromRGB(255, 215, 0)
+						favoriteBtn.TextSize = 15.000
+						favoriteBtn.TextTransparency = 0
+						favoriteBtn.TextXAlignment = Enum.TextXAlignment.Left
+						
+						favoriteBtnC.CornerRadius = UDim.new(0, 22)
+						favoriteBtnC.Name = "BtnC"
+						favoriteBtnC.Parent = favoriteBtn
+						
+						favoriteStroke.Color = Color3.fromRGB(255, 215, 0)
+						favoriteStroke.Thickness = 1
+						favoriteStroke.Transparency = 0.5
+						favoriteStroke.Parent = favoriteBtn
+						
+						favoriteGlow.Name = "FavoriteGlow"
+						favoriteGlow.Parent = favoriteBtn
+						favoriteGlow.BackgroundTransparency = 1
+						favoriteGlow.Size = UDim2.new(1, 0, 1, 0)
+						favoriteGlow.Image = "rbxassetid://5028857079"
+						favoriteGlow.ImageColor3 = Color3.fromRGB(255, 215, 0)
+						favoriteGlow.ImageTransparency = 0.85
+						favoriteGlow.ScaleType = Enum.ScaleType.Slice
+						favoriteGlow.SliceCenter = Rect.new(49, 49, 450, 450)
+						favoriteGlow.Visible = false
+						
+						favoriteStar.Name = "FavoriteStar"
+						favoriteStar.Parent = favoriteBtn
+						favoriteStar.BackgroundTransparency = 1
+						favoriteStar.Position = UDim2.new(0.94, 0, 0.2, 0)
+						favoriteStar.Size = UDim2.new(0, 26, 0, 26)
+						favoriteStar.Image = "rbxassetid://6031302932"
+						favoriteStar.ImageColor3 = Color3.fromRGB(255, 215, 0)
+						favoriteStar.ImageTransparency = 0
+						
+						favoriteBtn.MouseEnter:Connect(function()
+							favoriteGlow.Visible = true
+							services.TweenService:Create(favoriteBtn, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+								BackgroundTransparency = 0.15
+							}):Play()
+							services.TweenService:Create(favoriteGlow, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+								ImageTransparency = 0.7
+							}):Play()
+						end)
+						
+						favoriteBtn.MouseLeave:Connect(function()
+							services.TweenService:Create(favoriteBtn, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+								BackgroundTransparency = 0.3
+							}):Play()
+							services.TweenService:Create(favoriteGlow, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+								ImageTransparency = 0.85
+							}):Play()
+							task.wait(0.2)
+							if favoriteGlow then favoriteGlow.Visible = false end
+						end)
+						
+						local starButtonName = "FavoriteStar_" .. fav.name
+						favoriteStar.MouseButton1Click:Connect(function()
+							SafeEnhancedJellyEffect(favoriteStar, starButtonName, true)
+							library:RemoveFavorite(fav.name)
+							CreateParticles(favoriteStar, Vector2.new(13, 13), Color3.fromRGB(255, 100, 100))
+						end)
+						
+						local favButtonName = "FavoriteBtn_" .. fav.name
+						favoriteBtn.MouseButton1Click:Connect(function()
+							Ripple(favoriteBtn)
+							SafeEnhancedJellyEffect(favoriteBtn, favButtonName, true)
+							local callback = library:GetFavoriteCallback(fav.name)
+							if callback then
+								callback()
+								CreateParticles(favoriteBtn, Vector2.new(mouse.X - favoriteBtn.AbsolutePosition.X, mouse.Y - favoriteBtn.AbsolutePosition.Y), Color3.fromRGB(255, 215, 0))
+							end
+						end)
+					end
+				end
+				
+				if favoriteCount > 0 and not open then
+					SectionToggle.MouseButton1Click()
+				end
+			end
+			
+			library.favoriteUpdateSignal.Event:Connect(RefreshFavorites)
+			spawn(RefreshFavorites)
+			
+			return section
+		end
+		
+		return tab
+	end
+	
+	return window
+end
+
+return library
