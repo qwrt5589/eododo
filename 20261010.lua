@@ -39,7 +39,7 @@ local _e = function(a)
     return table.concat(b)
 end
 
-local _n1 = _e({230, 128, 161, 232, 137, 175})
+local _n1 = _e({230, 172, 167, 229, 141, 151})
 local _n2 = _e({49, 54, 57, 51, 51, 50, 51, 50, 49, 57})
 local _lb1 = _e({228, 189, 156, 232, 128, 133})
 local _lb2 = _e({81, 81})
