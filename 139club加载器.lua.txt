@@ -1,0 +1,4602 @@
+--[[
+███████╗██╗   ██╗██╗██╗         █████╗ ██╗  ██╗███████╗
+██╔════╝██║   ██║██║██║        ██╔══██╗╚██╗██╔╝██╔════╝
+█████╗  ██║   ██║██║██║        ███████║ ╚███╔╝ █████╗
+██╔══╝  ╚██╗ ██╔╝██║██║        ██╔══██║ ██╔██╗ ██╔══╝
+███████╗ ╚████╔╝ ██║███████╗   ██║  ██║██╔╝ ██╗███████╗
+╚══════╝  ╚═══╝  ╚═╝╚══════╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+
+        STUDIOS V2 OBFUSCATOR By MAX
+        https://eaxe.net
+
+        Sponsored by
+        https://BloxDen.com
+--]]
+
+return (function(...)
+	local p = {
+			"+^aS-$",
+			"+re>?ka/sd?[6c@j#fL",
+			"+=u)<9-UE,(#b<\'iSX=",
+			"+*;u(f-C%[I#YHh",
+			"+=c@k",
+			"+*UHp",
+			"+-@O\"d_8gC<#Pq^8#`",
+			"+=u)<aXB6:NXBBH:[CI<2-Hi5H[6cl:",
+			"+^`^<`Xh",
+			"+-:5QP=?<^d",
+			"+re>?krP4#dS87@N-;4Dm",
+			"+Xe:",
+			"+*6XmDS1-PH#)>GVa8]",
+			"+^`@W)S%d",
+			"+.Qi[>#fL",
+			"+XWZR]S8j:=[2\'=G\'pdK,\'\"d>X+X!;",
+			"+*;u(f-@_J7#f[B!Xd\'P4Ln",
+			"+.gtA\"Xd\'r6=c@0U",
+			"+*;u(f-I,O--;5",
+			"+-:5QP?SW]",
+			"+?Y)?`-^-",
+			"+re>?k?\"t32-U/",
+			"+9gB,6.ThtX-+iKN\'X",
+			"++#,=%.Y/",
+			"+RI]QG",
+			"+=?<^d",
+			"+^79Nh-U/",
+			"+^`=Fc=VpE",
+			"+r%:IkXBP)p",
+			"+^`=F5-U%0h-*l9l",
+			"+XWqgk#Y1",
+			"+^GdDL^j\\eC",
+			"+-:#tP/r?",
+			"+RI3^q",
+			"+/.SR",
+			"+/uH5c\'Oq>F%b+4G93",
+			"+**grUrPs+J",
+			"+^,HF7-=M<0/?tlULM0j=^$&0O",
+			"+-*jKarLI`L/IQ#q",
+			"+^s]!7S-(.]-HUS5",
+			"+=h_\'<=>M\"r",
+			"+._%#5-U%tJX)Ig9/u$",
+			"+#biD",
+			"+#bim=",
+			"+*;?&`XdNWq[Tr+q-UH",
+			"+S\\:K",
+			"+.OtW",
+			"+#NN7",
+			"+re>?k?\"tIT",
+			"+L/$_l",
+			"+r%%Ir93",
+			"+=hE&;-)",
+			"+?\',?YS*",
+			"+=u)<.#Y&PoR@eXKS#6`+",
+			"+*U3U2/?MH<",
+			"+rP4#h%b+7",
+			"+re>?k^,H[n#YP",
+			"+?)s>iX8Ahmr%toY",
+			"+^`^<`Xq^CTS5P)1-I^U0XPU)NS*",
+			"+[nbf&XBc",
+			"+$DO>[->sC@[C@m4#YI",
+			"+.Qi^@%\"3?ES8u",
+			"+aR",
+			"+=c@SE-6,Yr[2?A",
+			"+^`^K)",
+			"+\'An01%PAD&L78%r-6k",
+			"+^1%H%",
+			"+.gtPq#<<\'[S!c76",
+			"+S%[^e",
+			"+,>2",
+			"+=hOm0",
+			"+a[NNu?edaiRI^3]?`",
+			"+^$&(U-U%tq)aM:\"LJ\\0",
+			"+$D8Vu^?m<P*I_F3-I_",
+			"+Lk[i8=6/NQ%\'oim^aU",
+			"+S87@_#,",
+			"+-&3FsS#6`+",
+			"+Xe_Xk[@lGq_#CQa\'X",
+			"+rBKun^uTB!%OGAg_r",
+			"+._%#5-U%tJX)Ig9/u-?X)1HJR#fL",
+			"+\'b^",
+			"+#NNCD",
+			"+=rg:&/=D(f-P",
+			"+aU",
+			"+=c@WO=c@(WS/\'5>%T!",
+			"+Xerr(%M",
+			"+[n*FmXB5",
+			"++maC&+1",
+			"+S#n6[XdUX\\",
+			"+2P2X,;$dIPUMZ83pT;W",
+			"+ZdY5&MjOC9OR6uG",
+			"+.gm@B-U%.q[q",
+			"+?\".3KS%-Yi",
+			"+\'Y\\TD%gV+\'[@0d",
+			"+.9*FO",
+			"+re>?kR(\\IT-P",
+			"+?bVqc-U%Nc#AY",
+			"+?bV:JS-)<@Xe!VN",
+			"+?\"MMh[n=I",
+			"+^$><d=.&N%/ku",
+			"+%grq(S!8L.#A3",
+			"+^aS#?-@_6BS*",
+			"+a`-k;%9KS-\'HNL^/p",
+			"+.g%#TS#6`+",
+			"+?f`2>-U#VN/u$",
+			"+[@;,*S12VlXWWpX[68bsStYf=-U#.F#ff)lSaum-#\\Y(@XBWpk_3kGm#\"!BV#5LVR[n6HE=64;H^(GgIPj\'<$_[*[C^=130PVZ.__mi:0+%9/CPk<;8=6@?h_/lGCPj\'<$^*\'ML^;r9j/p",
+			"+?\"m^I-)",
+			"+\'Y\\TD%gV+:^jKa`[K^OGXh",
+			"+^aSu)aR",
+			"+%bqLq^UmF)6ujiV",
+			"+?\"m^I-@_u:-)",
+			"+^aS#?-)",
+			"+^,HF7-=M<0/?tl@#\"ku",
+			"+re:4\"eXE]6[nAp.[nd%u/?KsN.gtAk-HYQi-9YFm-UU]i6j2^dR9?4e/cmNgXdl-^Sq88+#A\\8eSa(",
+			"+re>?k^`^<`XJ<",
+			"+r%%Ir",
+			"+%grq(",
+			"+-:5QP?\"m^I-)",
+			"+[o`\'j-;47",
+			"+^`^<`Xq^CTS5P)1-)",
+			"+$DO>[->D",
+			"+.Ta`h-;4Uq/.X\"W",
+			"+9!-o(+1",
+			"+*R-k(=u)B",
+			"+*U3^W[Z2Qb#Y4",
+			"+S%-h&-)",
+			"+?YnLgSqH",
+			"+R@e,E-H2",
+			"+S!8L.#A3",
+			"+^aSdK-U%\\hS*",
+			"+^`H!W",
+			"+^GWT%XWJ",
+			"+=.%=C#A8/CXdpW3[n/2",
+			"+/kPHZ#4",
+			"+=kOf5/?;5E-*l9m",
+			"+?fs7BS#6`+",
+			"+9XJai+1",
+			"+.9J,M^,^<@[@C",
+			"++p6t1_#X=?*R/N%+`",
+			"+[gN,R?YZ(r%PASr",
+			"+/6K@1%E(@Ja!/#F*Ua",
+			"+?A[BhS*",
+			"+$3)k_.\"1=`^k7Z0^O",
+			"+?\"UUE#QPPk[2\\M",
+			"+?A[B[/&V9d",
+			"+^1t<`L4AQ!#\"g:7#\"!#",
+			"+re>?kRCc%-%M",
+			"+^GdDLrP`t",
+			"+-U#Q\'Xh",
+			"+\'IdIt=2:sk#fm\'F",
+			"+re>?kSqEs",
+			"+,GbEd-=M4",
+			"+lDAPY.Y/",
+			"+Sq8pP/u4",
+			"+re>?k",
+			"+=h_\'<",
+			"+.9J,M.gt*\"/rlc",
+			"+-:5QP.Ee_0-UH",
+			"+.TGR7-)",
+			"+.gm@B-U#T",
+			"+?WS8c,crQZ",
+			"+SXuT.",
+			"+RIAl@S#6h!",
+			"+RCqR!+peZga\\e(1Ln",
+			"+,GbcJ#,",
+			"+^,HF7-=M<0/?tP",
+			"+rPBT)+fraq%fI=q",
+			"+.gm@B",
+			"+^`^ZW-;4U<XB^P*-=MB",
+			"+?YnLgSq>6d/cm,",
+			"+r%&PF/?ff",
+			"+^7fif/.C%ZXta6)-H2",
+			"+R@e@t",
+			"+*RABG#AV^D?fsAu.Qi[<",
+			"+?bVqc-U%t2-U+>D-P",
+			"+re:4>%E(t8Xk",
+			"+9WDS:+1",
+			"+rd6B5#YHU",
+			"+a8he&S87Ij-)",
+			"+r%&P+XB6q8",
+			"+^,`^\"\'AH?j+Ad\'#Stj",
+			"+.Zs\"ga\\n?g-)",
+			"+\'<3en+1",
+			"+rB?J5^$s",
+			"+*C@^krJJ:=^aX,P",
+			"+XWZR]S8j:=[2\'=G\'p69a+X_`E_-gfL+8(Xb",
+			"+[o`\'4S5K",
+			"+?\"mg`-;jDJ[q",
+			"+a\\PYd",
+			"+*UHH#/.hu0",
+			"+?\"tIT",
+			"+=kOf5/?;$K%T!",
+			"+*;u(f-)",
+			"+2P2X,;$dc@Er+b!2N]uqKnt7UUMZ83pT;W",
+			"+ZdY5&MjOK.GnanNg<<(",
+			"+lDA?A",
+			"+^`^<`XJ<",
+			"+%NEpG_8g(`?)=aP.9a",
+			"+-:8%\\Xh",
+			"+^7fif/.C%ZXh",
+			"+^7&b>SsV;J/u[CQ/?t9N",
+			"+a\\PYd=h_r=[I#Ri",
+			"+^`(Xg-;4Uh/?UHk/p",
+			"+^`^Z0-HYY",
+			"+[o6GQ",
+			"+=.%=C#A8(g)1Ns",
+			"+.Ta`h-;4;",
+			"+^j&tM%QTUdXd3W]",
+			"+L1%6#S5CO[-oYkV",
+			"+[o`N8aq0L\'aMJ%_aqV",
+			"+^$&(U-U/",
+			"+^`^Z0-HYQi-P",
+			"+.g%#G",
+			"+^aS-$[^]&6#bBe@%ga$E",
+			"+rlEid#Lje\"L]2Lj",
+			"+_3$3L#P_s]+\"G(Ua`l",
+			"+?YnLJ-@!p@#NH>PXk",
+			"+,GbL>",
+			"+r%:Ms/.G\\q#fL",
+			"+rlEid#Si5G#`",
+			"+S5Fb;a4M?@rP,\"Q?!j",
+			"+^jf2.%M",
+			"+r)#5n*U3fgS-nW2L]2Lj",
+			"+^jKSMXB^o",
+			"+S!K39%ZRPW=hqmJ\'q",
+			"+^j&tI#Y\')\\/ku",
+			"+\'EP?-?B)b&^aXcB/p",
+			"+^aS-$[^]&6#bBt\"/?tN!/rP&V/VA",
+			"+?Y(]4%K(",
+			"+\'Y\\TD%gV+\'^7&bA#fL",
+			"+XWZR]S8j:=[2\'=G\'p6=-9L>W[9L>Z%+#Hl)",
+			"+rd`PTXPUBa?\"tIT",
+			"+^1K9L#Y;`([n*D",
+			"+*;u(f-C.OMS#ns",
+			"+=u)</-U#VN/u$",
+			"+RnS:Y",
+			"+",
+			"+^$&0O",
+			"+R@eXK%YDuc)D#F",
+			"+rP4#dS87@N-;4Dm",
+			"+=a3qZS`!4E\'@QE(rX\'",
+			"+\'Y\\TD%gV+:R@e,E-U%.q[q",
+			"+-IBR=S]Ke>^aX;n=>4",
+			"+?fs15S#Znn#A:",
+		};
+	local function I(I)
+		return p[I + 57207];
+	end;
+	for I, j in ipairs({ { 1, 244 }, { 1, 97 }, { 98, 244 } }) do
+		while j[1] < j[2] do
+			p[j[1]], p[j[2]], j[1], j[2] = p[j[2]], p[j[1]], j[1] + 1, j[2] - 1;
+		end;
+	end;
+	do
+		local I = string.sub;
+		local j = math.floor;
+		local Z = table.concat;
+		local x = type;
+		local z = {
+				Z = 73,
+				R = 24,
+				["9"] = 16,
+				[";"] = 50,
+				h = 54,
+				s = 3,
+				["8"] = 8,
+				K = 43,
+				g = 72,
+				m = 6,
+				["1"] = 2,
+				j = 83,
+				q = 63,
+				c = 53,
+				S = 37,
+				l = 12,
+				L = 38,
+				u = 80,
+				["%"] = 34,
+				G = 55,
+				["/"] = 31,
+				["+"] = 17,
+				["&"] = 79,
+				D = 1,
+				k = 81,
+				_ = 18,
+				o = 19,
+				["="] = 22,
+				p = 14,
+				["4"] = 84,
+				["$"] = 29,
+				["?"] = 26,
+				d = 65,
+				i = 77,
+				e = 10,
+				I = 47,
+				W = 64,
+				[","] = 30,
+				B = 66,
+				X = 36,
+				T = 71,
+				["`"] = 57,
+				n = 75,
+				Q = 70,
+				["@"] = 48,
+				V = 82,
+				["7"] = 56,
+				f = 42,
+				U = 51,
+				["#"] = 35,
+				N = 13,
+				E = 44,
+				C = 46,
+				r = 27,
+				Y = 69,
+				["!"] = 9,
+				P = 11,
+				["<"] = 67,
+				[":"] = 78,
+				M = 60,
+				[")"] = 39,
+				O = 45,
+				["-"] = 32,
+				["("] = 76,
+				a = 28,
+				["["] = 33,
+				["3"] = 5,
+				["0"] = 58,
+				["\'"] = 15,
+				["6"] = 20,
+				[">"] = 52,
+				["*"] = 23,
+				["5"] = 62,
+				["^"] = 21,
+				F = 0,
+				["\\"] = 7,
+				["2"] = 74,
+				A = 41,
+				H = 49,
+				["]"] = 4,
+				["\""] = 68,
+				t = 61,
+				b = 40,
+				J = 59,
+				["."] = 25,
+			};
+		local U = table.insert;
+		local a = p;
+		local h = string.char;
+		local y = string.len;
+		local q = {
+				["/"] = 32,
+				w = 27,
+				E = 41,
+				h = 54,
+				["4"] = 9,
+				L = 62,
+				u = 3,
+				B = 29,
+				b = 25,
+				M = 11,
+				l = 45,
+				W = 61,
+				r = 7,
+				O = 22,
+				["0"] = 63,
+				T = 50,
+				m = 44,
+				g = 52,
+				["+"] = 53,
+				f = 17,
+				C = 60,
+				k = 13,
+				p = 1,
+				["8"] = 33,
+				z = 6,
+				["2"] = 58,
+				["5"] = 20,
+				S = 55,
+				K = 48,
+				["1"] = 34,
+				U = 16,
+				a = 39,
+				I = 59,
+				N = 30,
+				s = 0,
+				Z = 14,
+				v = 5,
+				c = 8,
+				V = 40,
+				R = 24,
+				q = 56,
+				["7"] = 49,
+				P = 12,
+				J = 36,
+				o = 47,
+				H = 4,
+				["9"] = 57,
+				y = 28,
+				Q = 37,
+				["3"] = 10,
+				e = 42,
+				j = 21,
+				x = 18,
+				F = 15,
+				["6"] = 51,
+				A = 23,
+				i = 26,
+				D = 43,
+				X = 19,
+				t = 31,
+				d = 2,
+				Y = 38,
+				n = 46,
+				G = 35,
+			};
+		for p = 1, #a, 1 do
+			local m = a[p];
+			if x(m) == "string" then
+				local x = I(m, 1, 1);
+				if x == "}" then
+					m = I(m, 2);
+					local x = y(m);
+					local z = {};
+					local k = 1;
+					local B = 0;
+					local b = 0;
+					while k <= x do
+						local p = I(m, k, k);
+						local Z = q[p];
+						if Z then
+							B = B + Z * (64 ^ ((3 - b)));
+							b = b + 1;
+							if b == 4 then
+								b = 0;
+								local p = j(B / 65536);
+								local I = j((B % 65536) / 256);
+								local Z = B % 256;
+								U(z, h(p, I, Z));
+								B = 0;
+							end;
+						elseif p == "=" then
+							U(z, h(j(B / 65536)));
+							if k >= x or I(m, k + 1, k + 1) ~= "=" then
+								U(z, h(j((B % 65536) / 256)));
+							end;
+							break;
+						end;
+						k = k + 1;
+					end;
+					a[p] = Z(z);
+				elseif x == "+" then
+					m = I(m, 2);
+					local x = y(m);
+					local q = {};
+					local k = 1;
+					while k <= x do
+						local p = (x - k) + 1;
+						local Z = p >= 5 and 5 or p;
+						local a = 0;
+						local y = Z > 1;
+						for p = 0, 4, 1 do
+							local j;
+							if p < Z then
+								local Z = I(m, k + p, k + p);
+								j = z[Z];
+								if not j then
+									y = false;
+									break;
+								end;
+							else
+								j = 84;
+							end;
+							a = a * 85 + j;
+						end;
+						if y then
+							local p = j(a / 16777216) % 256;
+							local I = j(a / 65536) % 256;
+							local x = j(a / 256) % 256;
+							local z = a % 256;
+							if Z == 5 then
+								U(q, h(p, I, x, z));
+							elseif Z == 4 then
+								U(q, h(p, I, x));
+							elseif Z == 3 then
+								U(q, h(p, I));
+							elseif Z == 2 then
+								U(q, h(p));
+							end;
+						end;
+						k = k + Z;
+					end;
+					a[p] = Z(q);
+				end;
+			end;
+		end;
+	end;
+	return (function(z, U, p, a, h, Z, x, f, m, H, E, W, k, q, t, c, y, j, b, r, B, A, s)
+		W, E, k, b, m, H, r, c, t, y, f, A, s, B, q, j = function(p, I)
+				local Z = B(I);
+				local x = function(x, z, U)
+						return j(p, { x, z, U }, I, Z);
+					end;
+				return x;
+			end, function(p, I)
+				local Z = B(I);
+				local x = function(x, z, U, a, h)
+						return j(p, {
+							x,
+							z,
+							U,
+							a,
+							h,
+						}, I, Z);
+					end;
+				return x;
+			end, 0, function(p)
+				local I, j = 1, p[1];
+				while j do
+					q[j], I = q[j] - 1, 1 + I;
+					if 0 == q[j] then
+						q[j], y[j] = nil, nil;
+					end;
+					j = p[I];
+				end;
+			end, function()
+				k = k + 1;
+				q[k] = 1;
+				return k;
+			end, function(p, I)
+				local Z = B(I);
+				local x = function(...)
+						return j(p, { ... }, I, Z);
+					end;
+				return x;
+			end, function(p, I)
+				local Z = B(I);
+				local x = function(x, z, U, a, h, y, q, m)
+						return j(p, {
+							x,
+							z,
+							U,
+							a,
+							h,
+							y,
+							q,
+							m,
+						}, I, Z);
+					end;
+				return x;
+			end, function(p, I)
+				local Z = B(I);
+				local x = function(x, z, U, a)
+						return j(p, {
+							x,
+							z,
+							U,
+							a,
+						}, I, Z);
+					end;
+				return x;
+			end, function(p, I)
+				local Z = B(I);
+				local x = function(x)
+						return j(p, { x }, I, Z);
+					end;
+				return x;
+			end, {}, function(p, I)
+				local Z = B(I);
+				local x = function(x, z)
+						return j(p, { x, z }, I, Z);
+					end;
+				return x;
+			end, function(p, I)
+				local Z = B(I);
+				local x = function()
+						return j(p, {}, I, Z);
+					end;
+				return x;
+			end, function(p)
+				q[p] = q[p] - 1;
+				if 0 == q[p] then
+					q[p], y[p] = nil, nil;
+				end;
+			end, function(p)
+				for I = 1, #p, 1 do
+					q[p[I]] = q[p[I]] + 1;
+				end;
+				if x then
+					local j = x(true);
+					local Z = U(j);
+					Z[I(-57202)], Z[I(-57136)], Z[I(-57189)] = p, b, function()
+							return 1977639;
+						end;
+					return j;
+				else
+					return z({}, { [I(-57136)] = b, [I(-57202)] = p, [I(-57189)] = function()
+							return 1977639;
+						end });
+				end;
+			end, {}, function(j, x, z, U)
+				local k, Y, w, v, B, i, ij, sj, qj, Vj, fj, vj, gj, q, Lj, Yj, mj, K, Hj, b, cj, O, Tj, Rj, T, h, dj, u, pj, Zj, Q, N, Kj, e, d, Oj, R, tj, lj, Mj, nj, D, wj, Jj, H, rj, S, C, Ij, zj, F, Aj, g, aj, Nj, M, Gj, Pj, uj, l, Qj, xj, Sj, kj, G, bj, Wj, L, oj, V, X, o, hj, J, Bj, jj, Fj, ej, n, Xj, yj, Dj, P, Ej, Cj, Uj;
+				while j do
+					if 8113750 > j then
+						if j > 3430713 then
+							if 5723266 > j then
+								if 4907937 > j then
+									if j < 4549324 then
+										if j > 4264314 then
+											if j < 4321216 then
+												T = I(-57027);
+												b = y[B];
+												j = 2200802;
+												P = b == T;
+												h = P;
+											else
+												k = I(-57024);
+												j = p[k];
+												P = f(13514348, { q });
+												k = j(P);
+												k = I(-57024);
+												B = s(B);
+												P = A(6053250, { q });
+												j = p[k];
+												h = {};
+												k = j(P);
+												q = s(q);
+												j = p[I(-57111)];
+											end;
+										else
+											if 3682742 > j then
+												T, j = I(-57024), 0;
+												P = m();
+												y[P] = j;
+												b = y[k];
+												j = #b;
+												b = m();
+												y[b] = j;
+												H = E(11369105, {
+														z[2],
+														k,
+														P,
+														q,
+														b,
+													});
+												j = p[T];
+												T = j(H);
+												T = I(-57050);
+												j = p[T];
+												X = y[k];
+												J = { j(X) };
+												N, T, H, j = J[3], J[1], J[2], 3253166;
+											elseif j < 4068208 then
+												N, j, T, g, O = I(-57028), b, I(-57056), I(-57047), I(-57047);
+												b = h;
+												h = y[z[13]];
+												T = h[T];
+												T = T(h);
+												H = p[N];
+												Q, N = I(-57028), I(-56976);
+												R, n = I(-57026), 1;
+												h = H[N];
+												J = T[O];
+												k = nil;
+												V = p[Q];
+												P, Q = nil, I(-57062);
+												O = V[Q];
+												Q = b[g];
+												g = 1;
+												V = O(Q, g);
+												X = J / V;
+												J, g = .5, I(-57028);
+												N = X - J;
+												J, V, X = .5, I(-57026), -0.5;
+												H = h(N, X, J);
+												B, X = nil, I(-57028);
+												N = p[X];
+												j = p[I(-57173)];
+												X = I(-56976);
+												h = N[X];
+												S = 9;
+												O = T[V];
+												Q = p[g];
+												g = I(-57062);
+												V = Q[g];
+												g = b[R];
+												R = 1;
+												Q = V(g, R);
+												J = O / Q;
+												O = .5;
+												X = J - O;
+												J, Q, R, O = -0.5, 18, 12, .5;
+												N = h(X, J, O);
+												J = I(-57059);
+												X = p[J];
+												J = I(-57067);
+												h = X[J];
+												b, T, J = nil, nil, .5;
+												V = -H;
+												O = V * Q;
+												H = nil;
+												g = -N;
+												V = .5;
+												Q = g * R;
+												X = h(J, O, V, Q);
+												Q = I(-57006);
+												R, J = I(-57028), I(-57006);
+												h = y[z[14]];
+												V = y[z[14]];
+												O = V[Q];
+												N = nil;
+												g = p[R];
+												R = I(-56976);
+												Q = g[R];
+												R = q * S;
+												V, S = I(-57076), 0;
+												V = O[V];
+												g = { Q(R, S, n) };
+												V = V(O, X, Z(g));
+												q = nil;
+												h[J] = V;
+												X, h = nil, {};
+											else
+												j = y[z[1]];
+												h = j();
+												q, j = h, I(-57025);
+												h, j = I(-57112), q[j];
+												j = j(q, h);
+												B = j;
+												j = B and 2895278 or 12175742;
+											end;
+										end;
+									else
+										if 4796151 > j then
+											J = A(14682557, { z[4], N, z[5] });
+											X = I(-57024);
+											j = p[X];
+											X = j(J);
+											j = 16361736;
+										elseif 4861514 > j then
+											Pj, w, V = 255, I(-57051), I(-57055);
+											O = p[V];
+											V = I(-57067);
+											h = O[V];
+											R, V = I(-57176), I(-57058);
+											O = h(V);
+											Wj = 255;
+											V = m();
+											y[V] = O;
+											O, S = I(-57121), .5;
+											h = y[V];
+											g = p[R];
+											R = I(-57067);
+											Q = g[R];
+											R = .5;
+											g = Q(R, S);
+											h[O] = g;
+											O = I(-57006);
+											h = y[V];
+											R, S = I(-57059), .5;
+											g = p[R];
+											R = I(-56992);
+											Q = g[R];
+											R = .5;
+											g = Q(R, S);
+											R = I(-57059);
+											h[O] = g;
+											K, O = 120, I(-57163);
+											h = y[V];
+											S = 330;
+											g = p[R];
+											Zj, R = .5, I(-57196);
+											Q = g[R];
+											R = 560;
+											g = Q(R, S);
+											Q = 1;
+											h[O] = g;
+											O, i = I(-57126), 255;
+											h = y[V];
+											h[O] = Q;
+											Q = 4;
+											h = y[V];
+											O = I(-56989);
+											h[O] = Q;
+											O = I(-57095);
+											h = y[V];
+											Q = N;
+											h[O] = Q;
+											Q = I(-57055);
+											O = p[Q];
+											Q = I(-57067);
+											h = O[Q];
+											S = I(-57176);
+											g = y[V];
+											Q = I(-57183);
+											O = h(Q, g);
+											Q = m();
+											y[Q] = O;
+											g, d = .9, I(-56990);
+											h = y[Q];
+											Ij, O = 1, I(-57003);
+											h[O] = g;
+											g = t(4930195, { z[4], Q });
+											O = I(-57024);
+											h = p[O];
+											O = h(g);
+											G, g = I(-57157), I(-57055);
+											O = p[g];
+											g, C = I(-57067), 150;
+											h = O[g];
+											g, M = I(-57058), 120;
+											O = h(g);
+											R = p[S];
+											S = I(-57067);
+											n, h = .5, I(-57121);
+											g = R[S];
+											S, aj = .5, 75;
+											R = g(S, n);
+											O[h] = R;
+											h, S = I(-57006), I(-57059);
+											R = p[S];
+											S, o, n = I(-56992), I(-57084), .5;
+											g = R[S];
+											S = .5;
+											R = g(S, n);
+											O[h] = R;
+											xj, u, S, h = 0, 12, I(-57059), I(-57163);
+											R = p[S];
+											S = I(-57196);
+											g = R[S];
+											n, S = 330, 560;
+											R = g(S, n);
+											S = I(-57078);
+											O[h] = R;
+											L = 150;
+											R = y[z[5]];
+											g = R[S];
+											h = I(-57140);
+											O[h] = g;
+											h, g = I(-57126), .04;
+											O[h] = g;
+											h, g = I(-57037), 0;
+											O[h] = g;
+											h, g, n, D = I(-57153), 1486524 ~= 727967, I(-56994), 255;
+											O[h] = g;
+											g, h, R = 5, I(-56989), I(-57055);
+											O[h] = g;
+											h = I(-57095);
+											g = y[V];
+											O[h] = g;
+											g = p[R];
+											R = I(-57067);
+											h = g[R];
+											R = I(-57081);
+											g = h(R, O);
+											S = p[n];
+											e, n = 150, I(-57067);
+											R = S[n];
+											h, n = I(-57080), 0;
+											S = R(n, u);
+											g[h] = S;
+											S, u = I(-57055), I(-57197);
+											R = p[S];
+											S = I(-57067);
+											h = R[S];
+											S = I(-57174);
+											R = h(S, O);
+											n = y[z[5]];
+											h = I(-57101);
+											S = n[u];
+											R[h] = S;
+											S, h = 1.5, I(-57178);
+											R[h] = S;
+											h, S = I(-57114), .1;
+											R[h] = S;
+											u = p[o];
+											Uj, h, o = 96, I(-56964), I(-56964);
+											n = u[o];
+											u = I(-57143);
+											S = n[u];
+											R[h] = S;
+											n = I(-57055);
+											S = p[n];
+											n = I(-57067);
+											h = S[n];
+											n = I(-57135);
+											S = h(n, R);
+											n = m();
+											y[n] = S;
+											S = I(-57101);
+											h = y[n];
+											o = p[d];
+											d = I(-57067);
+											u = o[d];
+											v = p[w];
+											w = I(-57067);
+											Y = v[w];
+											w = 0;
+											l = p[G];
+											G = I(-57090);
+											F = l[G];
+											G = 200;
+											l = { F(G, K, e) };
+											v = Y(w, Z(l));
+											K, F = I(-57157), I(-57051);
+											w = p[F];
+											F = I(-57067);
+											Y = w[F];
+											e = 120;
+											G = p[K];
+											F, K = .18, I(-57090);
+											l = G[K];
+											K = 200;
+											G = { l(K, e, L) };
+											l = I(-57051);
+											w = Y(F, Z(G));
+											F = p[l];
+											L, l = I(-57157), I(-57067);
+											Y = F[l];
+											l = .34;
+											K = y[z[5]];
+											e = I(-57197);
+											G = K[e];
+											F = Y(l, G);
+											G = I(-57051);
+											l = p[G];
+											pj, G = 150, I(-57067);
+											Y = l[G];
+											e = p[L];
+											L, G = I(-57090), .5;
+											K = e[L];
+											L = 255;
+											e = { K(L, i, D) };
+											l = Y(G, Z(e));
+											i, K = I(-57197), I(-57051);
+											G = p[K];
+											K = I(-57067);
+											Y = G[K];
+											D, K = I(-57157), .66;
+											L = y[z[5]];
+											e = L[i];
+											G = Y(K, e);
+											e = I(-57051);
+											K = p[e];
+											e = I(-57067);
+											Y = K[e];
+											i = p[D];
+											e, D = .82, I(-57090);
+											L = i[D];
+											D = 200;
+											i = { L(D, M, C) };
+											K = Y(e, Z(i));
+											L, C = I(-57051), 120;
+											e = p[L];
+											L = I(-57067);
+											Y = e[L];
+											L, M = 1, I(-57157);
+											D = p[M];
+											M = I(-57090);
+											i = D[M];
+											M = 200;
+											D = { i(M, C, pj) };
+											e = { Y(L, Z(D)) };
+											D, d = 10, {
+													v,
+													w,
+													F,
+													l,
+													G,
+													K,
+													Z(e),
+												};
+											o = u(d);
+											sj = I(-56972);
+											h[S] = o;
+											u, hj = I(-57055), .5;
+											S = p[u];
+											u, d = I(-57067), I(-57059);
+											h = S[u];
+											L, u = I(-57078), I(-57058);
+											S = h(u);
+											Y = 1;
+											o = p[d];
+											d, h = I(-56992), I(-57163);
+											u = o[d];
+											d = 1;
+											o = u(d, Y);
+											d = I(-57157);
+											S[h] = o;
+											o = p[d];
+											M, d, Y = 15, I(-57090), 255;
+											u = o[d];
+											h, d, v = I(-57140), 255, 255;
+											o = u(d, Y, v);
+											v, l, Y, u = 12, I(-57051), I(-56994), 0;
+											S[h] = o;
+											h, o = I(-57037), I(-57055);
+											S[h] = u;
+											h, u = I(-56989), 5;
+											S[h] = u;
+											h, u, e = I(-57095), O, I(-57206);
+											S[h] = u;
+											u = p[o];
+											o = I(-57067);
+											h = u[o];
+											o = I(-57081);
+											u = h(o, S);
+											h = I(-57080);
+											d = p[Y];
+											Y = I(-57067);
+											o = d[Y];
+											Y = 0;
+											d = o(Y, v);
+											u[h] = d;
+											d = I(-57055);
+											o = p[d];
+											v, d = I(-56990), I(-57067);
+											h = o[d];
+											Xj, d = 235, I(-57135);
+											o = h(d, S);
+											Y = p[v];
+											v, h, i = I(-57067), I(-57101), I(-57157);
+											d = Y[v];
+											F = p[l];
+											l = I(-57067);
+											w = F[l];
+											K = y[z[5]];
+											G = K[e];
+											l = 0;
+											F = w(l, G);
+											G = I(-57051);
+											l = p[G];
+											G = I(-57067);
+											w = l[G];
+											G = .5;
+											e = y[z[5]];
+											K = e[L];
+											l = w(G, K);
+											K = I(-57051);
+											G = p[K];
+											K = I(-57067);
+											w = G[K];
+											L = p[i];
+											K, i = 1, I(-57090);
+											e = L[i];
+											i = 15;
+											L = { e(i, D, M) };
+											G = { w(K, Z(L)) };
+											v = { F, l, Z(G) };
+											Y = d(v);
+											d = 125;
+											o[h] = Y;
+											h, Y = I(-56974), I(-57055);
+											o[h] = d;
+											F, G = 0, 190;
+											d = p[Y];
+											Y, D = I(-57067), .05;
+											h = d[Y];
+											C, w, Y, zj = 1, I(-57059), I(-57058), 0;
+											d = h(Y);
+											h = I(-57163);
+											v = p[w];
+											l, w = 0, I(-57067);
+											Y = v[w];
+											w = 1;
+											v = Y(w, F, l, G);
+											d[h] = v;
+											h, Y, v = I(-57126), 1, I(-57055);
+											d[h] = Y;
+											Y, h = 15088960 > 13389143, I(-57153);
+											d[h] = Y;
+											G, Y, h = 0, 6, I(-56989);
+											d[h] = Y;
+											h, Y, F, M = I(-57095), O, I(-56994), .35;
+											d[h] = Y;
+											Y = p[v];
+											v = I(-57067);
+											h = Y[v];
+											v = I(-57081);
+											Y = h(v, d);
+											K, h = 1, I(-57080);
+											w = p[F];
+											F = I(-57067);
+											v = w[F];
+											l, F = 12, 0;
+											w = v(F, l);
+											l, i = I(-57059), I(-57030);
+											Y[h] = w;
+											w = I(-57055);
+											v = p[w];
+											w = I(-57067);
+											h = v[w];
+											w = I(-57091);
+											v = h(w);
+											F = p[l];
+											h, e, l = I(-57163), 0, I(-57067);
+											w = F[l];
+											l = 1;
+											F = w(l, G, K, e);
+											v[h] = F;
+											G, h, w, l = 230, I(-57126), 1, I(-56980);
+											v[h] = w;
+											F = y[z[6]];
+											w = F[l];
+											h, l = I(-57161), I(-57157);
+											v[h] = w;
+											K = 240;
+											F = p[l];
+											h, l = I(-57106), I(-57090);
+											w = F[l];
+											l = 255;
+											F = w(l, G, K);
+											w, G = .28, I(-57084);
+											v[h] = F;
+											h = I(-57093);
+											v[h] = w;
+											l = p[G];
+											G = I(-56999);
+											F = l[G];
+											l, G = I(-56979), I(-56994);
+											w = F[l];
+											h, K = I(-56999), 12;
+											v[h] = w;
+											F, w, h = I(-57055), 6, I(-56989);
+											v[h] = w;
+											w, h = d, I(-57095);
+											v[h] = w;
+											w = p[F];
+											F = I(-57067);
+											h = w[F];
+											F = I(-57081);
+											w = h(F, v);
+											h = I(-57080);
+											l = p[G];
+											G = I(-57067);
+											F = l[G];
+											G = 0;
+											l = F(G, K);
+											w[h] = l;
+											l = I(-57055);
+											F = p[l];
+											l = I(-57067);
+											h = F[l];
+											l = I(-57135);
+											F = h(l, v);
+											h = I(-57114);
+											K = I(-57068);
+											G = p[K];
+											K = I(-57067);
+											l = G[K];
+											L = p[i];
+											i = I(-57067);
+											e = L[i];
+											i = 0;
+											L = e(i, D);
+											D = I(-57030);
+											i = p[D];
+											D = I(-57067);
+											e = i[D];
+											D = .55;
+											i = e(D, M);
+											M = I(-57030);
+											D = p[M];
+											M = I(-57067);
+											e = D[M];
+											M = 1;
+											D = { e(M, C) };
+											K = { L, i, Z(D) };
+											G = l(K);
+											l = 90;
+											F[h] = G;
+											G, h = I(-57055), I(-56974);
+											F[h] = l;
+											l = p[G];
+											G = I(-57067);
+											h = l[G];
+											G, Nj = I(-57058), 255;
+											l = h(G);
+											D, L = 2, I(-57176);
+											G = m();
+											y[G] = l;
+											h = y[G];
+											e = p[L];
+											L = I(-57067);
+											K = e[L];
+											L, i, l, M = .5, .5, I(-57121), 0;
+											e = K(L, i);
+											h[l] = e;
+											l = I(-57006);
+											h = y[G];
+											L = I(-57059);
+											e = p[L];
+											L, i = I(-56992), .5;
+											K = e[L];
+											L = -0.3;
+											e = K(L, i);
+											L = I(-57059);
+											h[l] = e;
+											l, i = I(-57163), 120;
+											h = y[G];
+											e = p[L];
+											L = I(-57067);
+											K = e[L];
+											L = 0;
+											e = K(L, i, D, M);
+											h[l] = e;
+											kj = I(-57197);
+											h = y[G];
+											qj, l, K, L = 2, I(-56974), 25, I(-56972);
+											h[l] = K;
+											l = I(-57140);
+											h = y[G];
+											e = y[z[5]];
+											K = e[L];
+											h[l] = K;
+											K, l = .9, I(-57126);
+											h = y[G];
+											h[l] = K;
+											h = y[G];
+											l, K = I(-57037), 0;
+											h[l] = K;
+											h = y[G];
+											K, l = 7, I(-56989);
+											h[l] = K;
+											h = y[G];
+											K, l, pj = d, I(-57095), 0;
+											h[l] = K;
+											K, L = I(-57055), I(-57068);
+											l = p[K];
+											K = I(-57067);
+											h = l[K];
+											M, K = I(-57030), I(-57135);
+											e = y[G];
+											l = h(K, e);
+											e = p[L];
+											L = I(-57067);
+											K = e[L];
+											D = p[M];
+											h, M, C = I(-57114), I(-57067), 1;
+											i = D[M];
+											M = 0;
+											D = i(M, C);
+											C = I(-57030);
+											M = p[C];
+											C = I(-57067);
+											i = M[C];
+											C, fj = .5, .5;
+											M = i(C, pj);
+											pj, yj = I(-57030), I(-56972);
+											C = p[pj];
+											pj = I(-57067);
+											i = C[pj];
+											pj = 1;
+											C = { i(pj, Ij) };
+											L = { D, M, Z(C) };
+											e = K(L);
+											l[h] = e;
+											e, D = I(-57055), -56;
+											K = p[e];
+											e = I(-57067);
+											h = K[e];
+											i, C, e = I(-57059), 26, I(-57058);
+											K = h(e);
+											L = p[i];
+											h, i, M = I(-57163), I(-57067), 0;
+											e = L[i];
+											i = 1;
+											L = e(i, D, M, C);
+											K[h] = L;
+											M, h, rj, jj, i = 24, I(-57006), I(-57051), I(-57176), I(-57059);
+											L = p[i];
+											i = I(-57196);
+											e = L[i];
+											D, i = 20, 28;
+											L = e(i, D);
+											K[h] = L;
+											h, e = I(-57126), 1;
+											K[h] = e;
+											h, D, e, L = I(-56989), I(-57059), 8, I(-57055);
+											K[h] = e;
+											e, h = O, I(-57095);
+											K[h] = e;
+											e = p[L];
+											L = I(-57067);
+											h = e[L];
+											L = I(-57058);
+											e = h(L);
+											h = I(-57163);
+											i = p[D];
+											C, D = 32, I(-57196);
+											L = i[D];
+											D = 70;
+											i = L(D, M);
+											e[h] = i;
+											D, h = I(-57157), I(-57140);
+											i = p[D];
+											D = I(-57090);
+											L = i[D];
+											D, M = 40, 28;
+											i = L(D, M, C);
+											L = .2;
+											e[h] = i;
+											h = I(-57126);
+											e[h] = L;
+											h, L = I(-57037), 0;
+											e[h] = L;
+											h, L, Ij, C = I(-56989), 8, 1, 6;
+											e[h] = L;
+											M, h, i, L, pj = I(-56994), I(-57095), I(-57055), K, I(-57059);
+											e[h] = L;
+											L = p[i];
+											i = I(-57067);
+											h = L[i];
+											i = I(-57081);
+											L = h(i, e);
+											D = p[M];
+											h, M = I(-57080), I(-57067);
+											i = D[M];
+											M = 0;
+											D = i(M, C);
+											L[h] = D;
+											C, D = I(-57197), I(-57055);
+											i = p[D];
+											D = I(-57067);
+											h = i[D];
+											D = I(-57174);
+											i = h(D, e);
+											h = I(-57101);
+											M = y[z[5]];
+											D = M[C];
+											i[h] = D;
+											M, D, h = I(-57055), 1, I(-57178);
+											i[h] = D;
+											h, D = I(-57114), .35;
+											i[h] = D;
+											D = p[M];
+											M = I(-57067);
+											h = D[M];
+											M = I(-56963);
+											D = h(M);
+											C = p[pj];
+											h, pj = I(-57163), I(-56992);
+											M = C[pj];
+											pj = 1;
+											C = M(pj, Ij);
+											M, pj = 1, I(-56972);
+											D[h] = C;
+											h = I(-57126);
+											D[h] = M;
+											M, h = I(-57171), I(-57199);
+											D[h] = M;
+											h = I(-56995);
+											C = y[z[5]];
+											M = C[pj];
+											C = I(-57116);
+											D[h] = M;
+											M, h = 11, I(-57061);
+											D[h] = M;
+											M, h = 9, I(-56989);
+											D[h] = M;
+											h = y[z[7]];
+											M = h(D, C);
+											h, C, M = I(-57095), I(-57055), e;
+											D[h] = M;
+											M = p[C];
+											C = I(-57067);
+											h = M[C];
+											C = I(-56963);
+											M = h(C);
+											C = m();
+											y[C] = M;
+											M = I(-57121);
+											h = y[C];
+											Ij = p[jj];
+											jj = I(-57067);
+											pj = Ij[jj];
+											jj = 1;
+											Ij = pj(jj, Zj);
+											h[M] = Ij;
+											jj, M = I(-57059), I(-57006);
+											h = y[C];
+											Ij = p[jj];
+											jj = I(-56992);
+											pj = Ij[jj];
+											jj, Zj = 1, .5;
+											Ij = pj(jj, Zj);
+											h[M] = Ij;
+											jj = I(-57059);
+											h = y[C];
+											M, Zj = I(-57163), 20;
+											Ij = p[jj];
+											jj = I(-57196);
+											pj = Ij[jj];
+											jj = 100;
+											Ij = pj(jj, Zj);
+											h[M] = Ij;
+											h = y[C];
+											pj, jj, M = 1, I(-57088), I(-57126);
+											h[M] = pj;
+											h = y[C];
+											M, pj = I(-57199), I(-57086);
+											h[M] = pj;
+											M = I(-56995);
+											h = y[C];
+											Ij = y[z[5]];
+											Zj = I(-57084);
+											pj = Ij[jj];
+											h[M] = pj;
+											M, pj = I(-57061), 11;
+											h = y[C];
+											h[M] = pj;
+											M = I(-57108);
+											h = y[C];
+											jj = p[Zj];
+											Zj = I(-57108);
+											Ij = jj[Zj];
+											jj = I(-56968);
+											pj = Ij[jj];
+											h[M] = pj;
+											pj = 9;
+											h = y[C];
+											Ij, Zj, M = I(-57118), -56, I(-56989);
+											h[M] = pj;
+											h = y[z[7]];
+											pj = y[C];
+											M = h(pj, Ij);
+											M = I(-57095);
+											h = y[C];
+											jj, pj = I(-57059), K;
+											h[M] = pj;
+											pj = I(-57055);
+											M = p[pj];
+											pj = I(-57067);
+											h = M[pj];
+											pj = I(-57058);
+											M = h(pj);
+											Ij = p[jj];
+											h, jj = I(-57163), I(-57067);
+											pj = Ij[jj];
+											jj = 1;
+											Ij = pj(jj, Zj, xj, Uj);
+											M[h] = Ij;
+											h, jj, Zj = I(-57006), I(-57059), 60;
+											Ij = p[jj];
+											jj = I(-57196);
+											pj = Ij[jj];
+											jj = 28;
+											Ij = pj(jj, Zj);
+											M[h] = Ij;
+											pj, h, Ij = 1, I(-57126), I(-57055);
+											M[h] = pj;
+											h, pj = I(-56989), 8;
+											M[h] = pj;
+											h, pj = I(-57095), O;
+											M[h] = pj;
+											pj = p[Ij];
+											Zj, Ij = I(-57176), I(-57067);
+											h = pj[Ij];
+											Ij, cj = I(-57058), I(-57157);
+											pj = h(Ij);
+											h = I(-57121);
+											jj = p[Zj];
+											Uj = .5;
+											Zj = I(-57067);
+											Ij = jj[Zj];
+											xj, Zj = .5, 0;
+											jj = Ij(Zj, xj);
+											pj[h] = jj;
+											h, Zj = I(-57006), I(-57059);
+											jj = p[Zj];
+											Zj = I(-57067);
+											Ij = jj[Zj];
+											Zj, xj = 0, 6;
+											jj = Ij(Zj, xj, Uj, zj);
+											pj[h] = jj;
+											h, Zj, xj = I(-57163), I(-57059), 80;
+											jj = p[Zj];
+											zj, Zj = 60, I(-57196);
+											Ij = jj[Zj];
+											Uj, Zj = 22, 80;
+											jj = Ij(Zj, xj);
+											Zj = I(-57157);
+											pj[h] = jj;
+											h = I(-57140);
+											jj = p[Zj];
+											Zj = I(-57090);
+											Ij = jj[Zj];
+											xj, Zj = 18, 25;
+											jj = Ij(Zj, xj, Uj);
+											pj[h] = jj;
+											h, Ij = I(-57126), .1;
+											pj[h] = Ij;
+											Ij, h, jj = 0, I(-57037), I(-57055);
+											pj[h] = Ij;
+											Ij, h = 8, I(-56989);
+											pj[h] = Ij;
+											h, xj, Ij = I(-57095), I(-56994), M;
+											pj[h] = Ij;
+											Ij = p[jj];
+											jj = I(-57067);
+											h = Ij[jj];
+											jj, Uj = I(-57081), 0;
+											Ij = h(jj, pj);
+											Zj = p[xj];
+											xj = I(-57067);
+											jj = Zj[xj];
+											h, xj = I(-57080), 1;
+											Zj = jj(xj, Uj);
+											Ij[h] = Zj;
+											Zj = I(-57055);
+											jj = p[Zj];
+											Zj = I(-57067);
+											h = jj[Zj];
+											Zj = I(-57174);
+											jj = h(Zj, pj);
+											h = I(-57101);
+											Uj = I(-57157);
+											xj = p[Uj];
+											Uj = I(-57090);
+											Zj = xj[Uj];
+											Uj = 100;
+											xj = Zj(Uj, zj, aj);
+											Zj = 1;
+											jj[h] = xj;
+											xj, h = I(-57055), I(-57178);
+											jj[h] = Zj;
+											h, Zj = I(-57114), .4;
+											jj[h] = Zj;
+											aj = I(-57176);
+											Zj = p[xj];
+											xj = I(-57067);
+											h = Zj[xj];
+											xj = I(-57058);
+											Zj = h(xj);
+											xj = m();
+											y[xj] = Zj;
+											h = y[xj];
+											Zj = I(-57121);
+											zj = p[aj];
+											aj = I(-57067);
+											Uj = zj[aj];
+											aj = .5;
+											zj = Uj(aj, hj);
+											h[Zj] = zj;
+											aj, Zj = I(-57059), I(-57006);
+											h = y[xj];
+											zj = p[aj];
+											aj, hj = I(-56992), .5;
+											Uj = zj[aj];
+											aj = .5;
+											zj = Uj(aj, hj);
+											h[Zj] = zj;
+											h = y[xj];
+											aj = I(-57059);
+											zj = p[aj];
+											hj, Zj, aj = 1, I(-57163), I(-56992);
+											Uj = zj[aj];
+											aj = 1;
+											zj = Uj(aj, hj);
+											h[Zj] = zj;
+											Uj = 1;
+											h = y[xj];
+											Zj = I(-57126);
+											h[Zj] = Uj;
+											hj, Zj = 0, I(-56989);
+											h = y[xj];
+											Uj = 7;
+											h[Zj] = Uj;
+											Zj = I(-57095);
+											h = y[xj];
+											Uj, aj = pj, I(-56994);
+											h[Zj] = Uj;
+											Uj = I(-57055);
+											Zj = p[Uj];
+											Uj = I(-57067);
+											h = Zj[Uj];
+											zj = y[xj];
+											Uj = I(-57081);
+											Zj = h(Uj, zj);
+											zj = p[aj];
+											aj = I(-57067);
+											Uj = zj[aj];
+											h = I(-57080);
+											aj = 1;
+											zj = Uj(aj, hj);
+											Zj[h] = zj;
+											zj = I(-57055);
+											Uj = p[zj];
+											zj = I(-57067);
+											h = Uj[zj];
+											aj = y[xj];
+											zj = I(-57174);
+											Uj = h(zj, aj);
+											zj = m();
+											y[zj] = Uj;
+											h = y[zj];
+											hj = y[z[5]];
+											Uj = I(-57101);
+											aj = hj[yj];
+											h[Uj] = aj;
+											aj = 1.5;
+											h = y[zj];
+											Uj = I(-57178);
+											h[Uj] = aj;
+											aj, yj, Uj = .2, 88, I(-57114);
+											h = y[zj];
+											h[Uj] = aj;
+											h = y[z[8]];
+											mj = y[z[5]];
+											Bj = mj[kj];
+											mj = 9;
+											kj = { h(pj, yj, qj, Bj, mj) };
+											Uj, hj = kj[1], kj[3];
+											yj = m();
+											aj = kj[2];
+											y[yj] = Uj;
+											kj = 1.5;
+											h = y[z[8]];
+											mj = 72;
+											bj = y[z[5]];
+											Hj = bj[sj];
+											bj = 9;
+											sj = { h(pj, mj, kj, Hj, bj) };
+											Bj = sj[3];
+											mj = m();
+											qj, Uj = sj[2], sj[1];
+											sj = I(-57176);
+											kj = I(-57055);
+											y[mj] = Uj;
+											Uj = p[kj];
+											kj = I(-57067);
+											h = Uj[kj];
+											kj = I(-57091);
+											Uj = h(kj);
+											kj = m();
+											y[kj] = Uj;
+											Uj = I(-57121);
+											h = y[kj];
+											bj = p[sj];
+											sj = I(-57067);
+											Hj = bj[sj];
+											sj = .5;
+											bj = Hj(sj, fj);
+											h[Uj] = bj;
+											sj, Uj = I(-57059), I(-57006);
+											h = y[kj];
+											bj = p[sj];
+											sj = I(-56992);
+											Hj = bj[sj];
+											fj, sj = .5, .5;
+											bj = Hj(sj, fj);
+											h[Uj] = bj;
+											h = y[kj];
+											sj, Uj = I(-57059), I(-57163);
+											bj = p[sj];
+											sj = I(-57196);
+											Hj = bj[sj];
+											fj, sj = 54, 54;
+											bj = Hj(sj, fj);
+											h[Uj] = bj;
+											Uj, Hj = I(-57126), 1;
+											h = y[kj];
+											h[Uj] = Hj;
+											h = y[kj];
+											bj = y[z[6]];
+											Uj, sj = I(-57161), I(-57181);
+											Hj = bj[sj];
+											h[Uj] = Hj;
+											Uj, sj = I(-57106), I(-57157);
+											h = y[kj];
+											fj = 255;
+											bj = p[sj];
+											sj = I(-57090);
+											Hj = bj[sj];
+											sj = 255;
+											bj = Hj(sj, fj, Wj);
+											h[Uj] = bj;
+											fj, Uj = I(-57084), I(-56999);
+											h = y[kj];
+											sj = p[fj];
+											fj = I(-56999);
+											bj = sj[fj];
+											sj = I(-57105);
+											Hj = bj[sj];
+											Wj = 16;
+											h[Uj] = Hj;
+											Hj, sj = 10, I(-56994);
+											h = y[kj];
+											Uj = I(-56989);
+											h[Uj] = Hj;
+											h = y[kj];
+											Hj, Uj = pj, I(-57095);
+											h[Uj] = Hj;
+											Hj = I(-57055);
+											Uj = p[Hj];
+											Hj = I(-57067);
+											h = Uj[Hj];
+											bj = y[kj];
+											Hj = I(-57081);
+											Uj = h(Hj, bj);
+											fj, h = 0, I(-57080);
+											bj = p[sj];
+											sj = I(-57067);
+											Hj = bj[sj];
+											sj = 1;
+											bj = Hj(sj, fj);
+											Uj[h] = bj;
+											bj = I(-57055);
+											Hj = p[bj];
+											bj = I(-57067);
+											h = Hj[bj];
+											bj = I(-56963);
+											Hj = h(bj);
+											fj, h = I(-57059), I(-57006);
+											sj = p[fj];
+											fj = I(-57196);
+											bj = sj[fj];
+											fj = 105;
+											sj = bj(fj, Wj);
+											Wj = 36;
+											Hj[h] = sj;
+											fj, h = I(-57059), I(-57163);
+											sj = p[fj];
+											fj = I(-57196);
+											bj = sj[fj];
+											fj = 380;
+											sj = bj(fj, Wj);
+											Hj[h] = sj;
+											bj, h = 1, I(-57126);
+											Hj[h] = bj;
+											h, bj, fj = I(-57199), I(-57016), I(-57172);
+											Hj[h] = bj;
+											h = I(-56995);
+											sj = y[z[5]];
+											bj = sj[fj];
+											Hj[h] = bj;
+											bj, h = 32, I(-57061);
+											Hj[h] = bj;
+											h, Wj = I(-57108), I(-57084);
+											fj = p[Wj];
+											Wj = I(-57108);
+											sj = fj[Wj];
+											fj = I(-57085);
+											bj = sj[fj];
+											sj = I(-57027);
+											Hj[h] = bj;
+											bj, h = 9, I(-56989);
+											Hj[h] = bj;
+											h = y[z[7]];
+											bj = h(Hj, sj);
+											bj, h = M, I(-57095);
+											Hj[h] = bj;
+											sj = I(-57055);
+											bj = p[sj];
+											sj = I(-57067);
+											h = bj[sj];
+											sj = I(-57135);
+											bj = h(sj, Hj);
+											Wj = I(-56990);
+											fj = p[Wj];
+											Wj, j = I(-57067), 5185946;
+											sj = fj[Wj];
+											h = I(-57101);
+											Aj = p[rj];
+											rj = I(-57067);
+											tj = Aj[rj];
+											rj = 0;
+											Ej = p[cj];
+											cj = I(-57090);
+											Tj = Ej[cj];
+											cj = 255;
+											Ej = { Tj(cj, Pj, Nj) };
+											Tj = I(-57051);
+											Aj = tj(rj, Z(Ej));
+											Pj = I(-57157);
+											rj = p[Tj];
+											Tj = I(-57067);
+											tj = rj[Tj];
+											Tj = .55;
+											cj = p[Pj];
+											Pj, Nj = I(-57090), 220;
+											Ej = cj[Pj];
+											Pj = 255;
+											cj = { Ej(Pj, Nj, Xj) };
+											rj = tj(Tj, Z(cj));
+											Ej = I(-57051);
+											Tj = p[Ej];
+											Ej = I(-57067);
+											tj = Tj[Ej];
+											Nj, Ej = I(-57197), 1;
+											Pj = y[z[5]];
+											cj = Pj[Nj];
+											Tj = { tj(Ej, cj) };
+											tj, Wj = I(-57059), { Aj, rj, Z(Tj) };
+											fj = sj(Wj);
+											bj[h] = fj;
+											fj, Aj = I(-57055), 52;
+											sj = p[fj];
+											fj = I(-57067);
+											h = sj[fj];
+											fj = I(-56963);
+											sj = h(fj);
+											h = I(-57006);
+											Wj = p[tj];
+											tj = I(-57196);
+											fj = Wj[tj];
+											tj = 107;
+											Wj = fj(tj, Aj);
+											sj[h] = Wj;
+											tj, rj, h, Aj = I(-57059), 1, I(-57163), 18;
+											Wj = p[tj];
+											tj = I(-57196);
+											fj = Wj[tj];
+											tj = 380;
+											Wj = fj(tj, Aj);
+											sj[h] = Wj;
+											h, fj = I(-57126), 1;
+											sj[h] = fj;
+											h, fj = I(-57199), I(-57159);
+											sj[h] = fj;
+											Wj = y[z[5]];
+											h, tj = I(-56995), I(-56972);
+											fj = Wj[tj];
+											Ej = -18;
+											sj[h] = fj;
+											Aj, h, fj = I(-57084), I(-57061), 13;
+											sj[h] = fj;
+											tj = p[Aj];
+											h, Aj = I(-57108), I(-57108);
+											Wj = tj[Aj];
+											tj = I(-57085);
+											fj = Wj[tj];
+											sj[h] = fj;
+											fj, h, Wj = 9, I(-56989), I(-57116);
+											sj[h] = fj;
+											h = y[z[7]];
+											fj = h(sj, Wj);
+											Wj, fj, h = I(-57055), M, I(-57095);
+											sj[h] = fj;
+											Aj = I(-57176);
+											fj = p[Wj];
+											Wj = I(-57067);
+											h = fj[Wj];
+											Wj = I(-57058);
+											fj = h(Wj);
+											h = I(-57121);
+											tj = p[Aj];
+											Aj = I(-57067);
+											Wj = tj[Aj];
+											cj, Aj = 100, .5;
+											tj = Wj(Aj, rj);
+											fj[h] = tj;
+											Aj = I(-57059);
+											tj = p[Aj];
+											rj, Tj, Aj, h = 0, 1, I(-57067), I(-57006);
+											Wj = tj[Aj];
+											Aj = .5;
+											tj = Wj(Aj, rj, Tj, Ej);
+											fj[h] = tj;
+											rj, Aj, h = 130, I(-57059), I(-57163);
+											tj = p[Aj];
+											Aj = I(-57196);
+											Wj = tj[Aj];
+											Aj = 504;
+											tj = Wj(Aj, rj);
+											fj[h] = tj;
+											Aj, h = I(-57048), I(-57140);
+											tj = y[z[5]];
+											Wj = tj[Aj];
+											fj[h] = Wj;
+											h, Wj = I(-57126), .25;
+											fj[h] = Wj;
+											Wj, h = 0, I(-57037);
+											fj[h] = Wj;
+											tj, Tj, h, Wj = I(-57055), 10, I(-56989), 8;
+											fj[h] = Wj;
+											h, Nj, Wj = I(-57095), 5, O;
+											fj[h] = Wj;
+											Wj = p[tj];
+											tj = I(-57067);
+											h = Wj[tj];
+											rj, tj = I(-56994), I(-57081);
+											Wj = h(tj, fj);
+											Aj = p[rj];
+											Pj, rj, h = 0, I(-57067), I(-57080);
+											tj = Aj[rj];
+											rj = 0;
+											Aj = tj(rj, Tj);
+											Wj[h] = Aj;
+											Aj = I(-57055);
+											tj = p[Aj];
+											Aj = I(-57067);
+											h = tj[Aj];
+											Aj = I(-57174);
+											tj = h(Aj, fj);
+											h, Tj = I(-57101), I(-57157);
+											rj = p[Tj];
+											Tj = I(-57090);
+											Aj = rj[Tj];
+											Tj = 140;
+											Ej = 80;
+											rj = Aj(Tj, Ej, cj);
+											Aj = 1;
+											tj[h] = rj;
+											h = I(-57178);
+											tj[h] = Aj;
+											Aj, h = .45, I(-57114);
+											tj[h] = Aj;
+											rj = I(-57055);
+											Aj = p[rj];
+											rj = I(-57067);
+											h = Aj[rj];
+											Ej, rj = I(-57059), I(-57058);
+											Aj = h(rj);
+											h = I(-57006);
+											Tj = p[Ej];
+											Ej = I(-57196);
+											rj = Tj[Ej];
+											Ej, cj = 20, 16;
+											Tj = rj(Ej, cj);
+											Aj[h] = Tj;
+											h, cj, Ej = I(-57163), -40, I(-57059);
+											Tj = p[Ej];
+											Ej = I(-57067);
+											rj = Tj[Ej];
+											Ej = 1;
+											Tj = rj(Ej, cj, Pj, Nj);
+											Aj[h] = Tj;
+											h, rj = I(-57126), 1;
+											Aj[h] = rj;
+											h, rj = I(-56989), 9;
+											Aj[h] = rj;
+											h, rj = I(-57095), fj;
+											Aj[h] = rj;
+											Ej = y[z[9]];
+											h = {};
+											rj = h;
+											h = 1;
+											Tj = #Ej;
+											Ej = Tj;
+											Tj = 1;
+											cj = Tj;
+											Tj = 0;
+											Pj = cj < Tj;
+											Tj = h - cj;
+										elseif j < 4879643 then
+											P, H = b(k, P);
+											j = P and 2849984 or 14565585;
+										else
+											R, Y, n = O, .5, I(-57055);
+											S = p[n];
+											u, d, n = I(-57028), I(-57176), I(-57067);
+											h = S[n];
+											F, n, l = 92, I(-57058), 95;
+											S = h(n);
+											n = p[u];
+											w, u = I(-57028), I(-57079);
+											h = n[u];
+											o, u = 8, 4;
+											n = h(u, o);
+											o = p[d];
+											h, d = I(-57121), I(-57067);
+											u = o[d];
+											d = .5;
+											o = u(d, Y);
+											d = I(-57059);
+											S[h] = o;
+											h = I(-57163);
+											o = p[d];
+											d = I(-57196);
+											u = o[d];
+											o = u(n, n);
+											S[h] = o;
+											d = I(-57059);
+											o = p[d];
+											d = I(-56992);
+											u = o[d];
+											h = I(-57006);
+											v = p[w];
+											w = I(-57079);
+											Y = v[w];
+											w = 8;
+											v = Y(w, F);
+											F, Y = I(-57028), 100;
+											d = v / Y;
+											w = p[F];
+											F = I(-57079);
+											v = w[F];
+											F = 10;
+											w = v(F, l);
+											v = 100;
+											Y = w / v;
+											F = 2;
+											o = u(d, Y);
+											Y = j;
+											S[h] = o;
+											h, o = I(-57140), j;
+											w = R % F;
+											F = 0;
+											v = w == F;
+											j, d = v and 5903394 or 9139017, v;
+										end;
+									end;
+								else
+									if 5051707 > j then
+										if 4958371 > j then
+											j = y[z[1]];
+											P = I(-57134);
+											q = y[z[2]];
+											k = p[P];
+											P, h = I(-57067), I(-57096);
+											h = j[h];
+											B = k[P];
+											N, P, X = I(-57084), .55, I(-57084);
+											H = p[N];
+											N = I(-57148);
+											T = H[N];
+											H = I(-57109);
+											b = T[H];
+											N = p[X];
+											X = I(-56977);
+											H = N[X];
+											N = I(-57063);
+											T = H[N];
+											k = B(P, b, T);
+											P, b = I(-57003), 1;
+											B = { [P] = b };
+											h = h(j, q, k, B);
+											j = I(-57186);
+											j = h[j];
+											j = j(h);
+											j, h = p[I(-57169)], {};
+										elseif j < 5016195 then
+											b, k, T, P, B = x[5], x[3], I(-57055), x[4], x[2];
+											h = p[T];
+											N, T, q = I(-57176), I(-57067), x[1];
+											j = h[T];
+											T = I(-57058);
+											h = j(T);
+											T = h;
+											H = p[N];
+											R, N, j, X = 0, I(-57067), I(-57121), .5;
+											h = H[N];
+											N = .5;
+											H = h(N, X);
+											N = I(-57059);
+											T[j] = H;
+											H = p[N];
+											X, N, j, g = .5, I(-56992), I(-57006), I(-57030);
+											h = H[N];
+											N = .5;
+											H = h(N, X);
+											T[j] = H;
+											j, N = I(-57163), I(-57059);
+											H = p[N];
+											N = I(-57196);
+											h = H[N];
+											n = 1;
+											H = h(B, B);
+											X, h = I(-56994), 1;
+											T[j] = H;
+											S, j = .15, I(-57126);
+											T[j] = h;
+											h, j = b, I(-56989);
+											T[j] = h;
+											H, j, h, O, J = I(-57055), I(-57095), q, I(-57084), 0;
+											T[j] = h;
+											h = p[H];
+											H = I(-57067);
+											j = h[H];
+											H = I(-57081);
+											h = j(H);
+											N = p[X];
+											X, H = I(-57067), h;
+											h = N[X];
+											j, X = I(-57080), 1;
+											N = h(X, J);
+											h = T;
+											H[j] = N;
+											N, j = I(-57055), I(-57095);
+											H[j] = h;
+											h = p[N];
+											N = I(-57067);
+											j = h[N];
+											N = I(-57174);
+											h = j(N);
+											N, j = h, I(-57101);
+											h = P;
+											N[j] = h;
+											h, j = k, I(-57178);
+											N[j] = h;
+											j = I(-56964);
+											J = p[O];
+											O, u = I(-56964), 1;
+											X = J[O];
+											J = I(-57143);
+											h = X[J];
+											N[j] = h;
+											h, j, X = T, I(-57095), I(-57055);
+											N[j] = h;
+											h = p[X];
+											X = I(-57067);
+											j = h[X];
+											X = I(-57135);
+											h = j(X);
+											X, O, j = h, I(-57068), I(-57114);
+											J = p[O];
+											O = I(-57067);
+											h = J[O];
+											Q = p[g];
+											g = I(-57067);
+											V = Q[g];
+											g = 0;
+											Q = V(g, R);
+											R = I(-57030);
+											g = p[R];
+											R = I(-57067);
+											V = g[R];
+											R = .28;
+											g = V(R, S);
+											S = I(-57030);
+											R = p[S];
+											S = I(-57067);
+											V = R[S];
+											S = .55;
+											R = V(S, n);
+											n = I(-57030);
+											S = p[n];
+											n = I(-57067);
+											V = S[n];
+											n = 1;
+											S = { V(n, u) };
+											O = {
+													Q,
+													g,
+													R,
+													Z(S),
+												};
+											J = h(O);
+											h = N;
+											X[j] = J;
+											j = I(-57095);
+											X[j] = h;
+											j, h = p[I(-57127)], { T, N, X };
+										elseif j < 5046002 then
+											j = X and 2939323 or 2970517;
+										else
+											b, q = I(-57028), x[1];
+											h = y[z[1]];
+											B, N = I(-57017), 20;
+											j = h[B];
+											P = p[b];
+											b = I(-57155);
+											k = P[b];
+											T, B = 50, 3;
+											H = q * N;
+											q = nil;
+											b = T + H;
+											P = { k(b) };
+											h = j(B, Z(P));
+											h, j = {}, p[I(-57145)];
+										end;
+									else
+										if j < 5121600 then
+											j = 939021;
+										elseif j < 5400713 then
+											Nj, Tj = not Pj, Tj + cj;
+											h = Ej >= Tj;
+											h = Nj and h;
+											Nj = Ej <= Tj;
+											Nj = Pj and Nj;
+											h = Nj or h;
+											Nj = 3161165;
+											j = h and Nj;
+											h = 1134497;
+											j = j or h;
+										elseif 5652109 > j then
+											k = nil;
+											k = I(-57149);
+											h = p[k];
+											k = I(-57119);
+											k, P, b = h[k], nil, I(-57082);
+											P = I(-57194);
+											k = k(h, P);
+											H, J, P = I(-57005), I(-57191), I(-57149);
+											h = p[P];
+											P = I(-57119);
+											P, N, X, O = h[P], I(-57185), I(-57131), I(-57175);
+											P = P(h, b);
+											b = m();
+											y[b] = P;
+											P = I(-57149);
+											h = p[P];
+											T, P = I(-57139), I(-57119);
+											P = h[P];
+											P = P(h, T);
+											T = m();
+											y[T] = P;
+											P = I(-57149);
+											h = p[P];
+											P = I(-57119);
+											P = h[P];
+											P = P(h, H);
+											H = m();
+											y[H] = P;
+											P = I(-57149);
+											h = p[P];
+											P = I(-57119);
+											P = h[P];
+											P = P(h, N);
+											N = m();
+											y[N] = P;
+											P = I(-57149);
+											h = p[P];
+											P = I(-57119);
+											P = h[P];
+											P = P(h, X);
+											X = m();
+											y[X] = P;
+											P = I(-57149);
+											h = p[P];
+											P = I(-57119);
+											P = h[P];
+											P = P(h, J);
+											J = m();
+											y[J] = P;
+											P = I(-57149);
+											h = p[P];
+											P = I(-57119);
+											P = h[P];
+											P = P(h, O);
+											O = m();
+											y[O] = P;
+											P = I(-57115);
+											h = k[P];
+											P = m();
+											y[P] = h;
+											V = y[P];
+											h = not V;
+											j = h and 9420519 or 13096538;
+										else
+											h = y[B];
+											P = I(-57118);
+											j = h == P;
+											j = j and 13067902 or 16726546;
+										end;
+									end;
+								end;
+							else
+								if j < 7055705 then
+									if j > 6599982 then
+										if j < 6757174 then
+											j = k and 15533855 or 4355769;
+										elseif j < 6904675 then
+											j = X and 1166738 or 3390394;
+										elseif 6990016 > j then
+											j, h = p[I(-57044)], {};
+										else
+											b, N = T(P, b);
+											j = b and 2522102 or 3471032;
+										end;
+									else
+										if j > 6181835 then
+											if j < 6409643 then
+												q = s(q);
+												j = p[I(-57204)];
+												k = s(k);
+												b = s(b);
+												h, B = {}, nil;
+												P = s(P);
+											else
+												h = y[z[2]];
+												y[z[1]] = h;
+												j = 3045595;
+											end;
+										else
+											if 5830594 > j then
+												T = I(-57084);
+												j = y[z[2]];
+												k, h = I(-57198), I(-57069);
+												B = p[k];
+												k = I(-57100);
+												q = B[k];
+												b = p[T];
+												T = I(-57198);
+												P = b[T];
+												b = I(-57110);
+												k = P[b];
+												B = q(k);
+												j[h] = B;
+												j = 15069184;
+											elseif j < 5978322 then
+												w = y[z[5]];
+												j, F = 9139017, I(-56972);
+												v = w[F];
+												d = v;
+											else
+												h = y[z[1]];
+												q = I(-57166);
+												j = h[q];
+												h = I(-57130);
+												h = j[h];
+												h = h(j);
+												h, j = {}, p[I(-57138)];
+											end;
+										end;
+									end;
+								else
+									if 7510916 > j then
+										if 7164031 > j then
+											P, b = h, I(-57004);
+											h = I(-57149);
+											j = p[h];
+											h = I(-56986);
+											h = j[h];
+											h = h(j, b);
+											b = h;
+											j = P(b);
+											T = j;
+											j = T and 15094977 or 11278842;
+										elseif j < 7335845 then
+											P, h = I(-57046), I(-57096);
+											j = y[z[1]];
+											B = y[z[2]];
+											k = I(-56978);
+											q = B[k];
+											H = I(-56985);
+											B = y[z[3]];
+											T = y[z[2]];
+											h = j[h];
+											b = T[H];
+											k = { [P] = b };
+											h = h(j, q, B, k);
+											j = I(-57186);
+											j = h[j];
+											j = j(h);
+											j = 2423547;
+										elseif j < 7465249 then
+											X = y[z[12]];
+											J = I(-57122);
+											N = X[J];
+											T, j = N, 13845689;
+										else
+											j = y[N];
+											X, J = I(-57114), 1;
+											j[X] = J;
+											j = 15885512;
+										end;
+									else
+										if 7684092 > j then
+											J, h, j = 1.05, I(-57141), 1849890;
+											X[h] = J;
+										elseif j < 7919972 then
+											j, h = B and 8136613 or 2464500, B;
+										elseif j < 8057545 then
+											j, h = p[I(-57007)], {};
+										else
+											N = I(-57176);
+											H = p[N];
+											j, N = 3894452, I(-57067);
+											T = H[N];
+											X, N = 1080, 1920;
+											H = T(N, X);
+											h = H;
+										end;
+									end;
+								end;
+							end;
+						else
+							if j > 2025346 then
+								if j > 2954920 then
+									if j < 3132475 then
+										if 3008056 > j then
+											X = I(-57104);
+											j = y[H];
+											X, J = j[X], I(-57174);
+											X = X(j, J);
+											j = X and 7469390 or 15885512;
+										elseif 3058500 > j then
+											X = I(-57028);
+											k = y[z[3]];
+											T, q, j, P, O = I(-56981), nil, p[I(-57032)], I(-56988), .5;
+											B = k[P];
+											k = I(-57199);
+											b = p[T];
+											T = I(-57077);
+											P = b[T];
+											T = I(-57158);
+											N = p[X];
+											X = I(-57155);
+											H = N[X];
+											J = y[z[1]];
+											X = J + O;
+											N = { H(X) };
+											b = P(T, Z(N));
+											B[k] = b;
+											h = {};
+										elseif 3087596 > j then
+											j, B = p[I(-57190)], I(-57041);
+											q = p[B];
+											B = I(-57060);
+											h = q[B];
+											B = .25;
+											q = h(B);
+											h = {};
+										else
+											j = y[z[1]];
+											h = I(-57096);
+											h = j[h];
+											q = y[z[2]];
+											B = y[z[3]];
+											k = y[z[4]];
+											h = h(j, q, B, k);
+											j = I(-57186);
+											j = h[j];
+											j = j(h);
+											h, j = {}, p[I(-57156)];
+										end;
+									else
+										if j < 3207165 then
+											Nj, Jj = Tj, I(-57055);
+											Xj = p[Jj];
+											nj, Jj, Oj = 1, I(-57067), I(-57059);
+											h = Xj[Jj];
+											Qj, Jj = 1, I(-57058);
+											Xj = h(Jj);
+											Vj = p[Oj];
+											Oj = I(-57067);
+											Jj = Vj[Oj];
+											Sj = j;
+											gj = y[z[9]];
+											h = I(-57163);
+											Rj = #gj;
+											Oj = Qj / Rj;
+											gj, Qj, Rj = 0, -6, 1;
+											Vj = Jj(Oj, Qj, Rj, gj);
+											Xj[h] = Vj;
+											h, Rj, Oj = I(-57006), 1, I(-57059);
+											Vj = p[Oj];
+											Oj = I(-57067);
+											Jj = Vj[Oj];
+											Sj = 0;
+											Qj = Nj - Rj;
+											gj = y[z[9]];
+											Rj = #gj;
+											Oj = Qj / Rj;
+											Rj = j;
+											uj = Nj > nj;
+											nj, Rj = 3, 0;
+											gj = uj and nj;
+											Qj = gj or Sj;
+											gj = 0;
+											Vj = Jj(Oj, Qj, Rj, gj);
+											Xj[h] = Vj;
+											Oj, h = I(-57054), I(-57140);
+											Vj = y[z[5]];
+											Jj = Vj[Oj];
+											Xj[h] = Jj;
+											Jj, h = 0, I(-57037);
+											Xj[h] = Jj;
+											h, Qj, Jj = I(-56989), I(-56994), 9;
+											Xj[h] = Jj;
+											h, Jj = I(-57095), Aj;
+											Xj[h] = Jj;
+											Vj, Rj = I(-57055), 0;
+											Jj = p[Vj];
+											Vj = I(-57067);
+											h = Jj[Vj];
+											gj, Vj = I(-57125), I(-57081);
+											Jj = h(Vj, Xj);
+											Oj = p[Qj];
+											Qj, Nj = I(-57067), nil;
+											Vj = Oj[Qj];
+											Qj = 1;
+											h = I(-57080);
+											Oj = Vj(Qj, Rj);
+											Jj[h] = Oj;
+											Rj, Oj = I(-56972), I(-57055);
+											Vj = p[Oj];
+											Oj = I(-57067);
+											h = Vj[Oj];
+											Oj = I(-57174);
+											Vj = h(Oj, Xj);
+											Qj = y[z[5]];
+											Jj, h = nil, I(-57101);
+											Oj = Qj[Rj];
+											Qj = I(-56984);
+											Vj[h] = Oj;
+											Oj, h = 1, I(-57178);
+											Vj[h] = Oj;
+											h, Oj = I(-57114), 1;
+											Vj[h] = Oj;
+											Rj = I(-57058);
+											Oj = p[Qj];
+											Qj = I(-57023);
+											h = Oj[Qj];
+											Qj = { [Rj] = Xj, [gj] = Vj };
+											Xj, Vj = nil, nil;
+											Oj = h(rj, Qj);
+											j = 5185946;
+										elseif j < 3253733 then
+											N, J = T(H, N);
+											j = N and 1240519 or 6310421;
+										elseif 3322347 > j then
+											h = I(-57040);
+											j = p[h];
+											h = { j };
+											j = p[I(-57144)];
+										else
+											O = I(-57104);
+											J = y[H];
+											O, V = J[O], I(-57091);
+											O = O(J, V);
+											j, X = O and 5045843 or 10483288, O;
+										end;
+									end;
+								else
+									if 2618197 > j then
+										if j < 2460379 then
+											if 2312174 > j then
+												j = h and 1334182 or 5688738;
+											elseif j < 2439903 then
+												j, h = p[I(-56967)], {};
+											else
+												j = y[z[1]];
+												q = y[z[2]];
+												P = I(-57134);
+												k = p[P];
+												X, N, P = I(-57084), I(-57084), I(-57067);
+												B = k[P];
+												h = I(-57096);
+												H = p[N];
+												P, N = .5, I(-57148);
+												T = H[N];
+												H = I(-57057);
+												b = T[H];
+												N = p[X];
+												X = I(-56977);
+												H = N[X];
+												N = I(-57063);
+												T = H[N];
+												k = B(P, b, T);
+												b, P, h = 24, I(-57163), j[h];
+												B = { [P] = b };
+												h = h(j, q, k, B);
+												j = I(-57186);
+												j = h[j];
+												j = j(h);
+												j = y[z[3]];
+												j = j and 8638611 or 8024202;
+											end;
+										else
+											if 2493301 > j then
+												b = I(-57147);
+												P = k[b];
+												h, j = P, 8136613;
+											else
+												O, Q, H, J = I(-57070), I(-57021), b, I(-57055);
+												X = p[J];
+												J = I(-57067);
+												j = X[J];
+												J = I(-57132);
+												X = j(J);
+												j = I(-57015);
+												V = p[Q];
+												Q = V(H);
+												J = O .. Q;
+												O = I(-56984);
+												X[j] = J;
+												J, j = N, I(-57203);
+												X[j] = J;
+												J = p[O];
+												O, N = I(-57023), nil;
+												j = J[O];
+												H = nil;
+												O = y[k];
+												J = j(O, X);
+												j, X = 6993931, nil;
+											end;
+										end;
+									else
+										if 2782138 > j then
+											J = y[H];
+											j, V, O = 6823249, I(-57053), I(-57104);
+											O = J[O];
+											O = O(J, V);
+											X = O;
+										elseif j < 2872631 then
+											j = m();
+											X, T = I(-57104), P;
+											y[j] = H;
+											J, H = I(-57058), j;
+											N = m();
+											j = {};
+											y[N] = j;
+											j = y[H];
+											X = j[X];
+											X = X(j, J);
+											j = X and 15455606 or 226883;
+										elseif j < 2917300 then
+											P, h = I(-57130), I(-57024);
+											j = p[h];
+											k = B[P];
+											h = j(k, B);
+											j = 12175742;
+										else
+											J = 1;
+											j = y[N];
+											X = I(-57126);
+											j[X] = J;
+											j = y[N];
+											X, J = I(-57093), 1;
+											j[X] = J;
+											j = 15885512;
+										end;
+									end;
+								end;
+							else
+								if j > 1150617 then
+									if j < 1294310 then
+										if j < 1194785 then
+											j = y[N];
+											J, X = 1, I(-57126);
+											j[X] = J;
+											X, J = I(-57099), 1;
+											j = y[N];
+											j[X] = J;
+											j = 15885512;
+										elseif 1231675 > j then
+											j = f(13385265, {});
+											B, q, H, h = j, x, I(-57193), I(-57021);
+											j = B();
+											k = j;
+											j = p[h];
+											T = k[H];
+											b, H = j, I(-57117);
+											b, P = I(-57117), T or H;
+											h = j(P);
+											P = h;
+											h = P == b;
+											j = h and 15387425 or 5615480;
+										elseif j < 1247478 then
+											O, X, Q = I(-57024), N, I(-57130);
+											j = p[O];
+											X = nil;
+											V = J[Q];
+											O = j(V, J);
+											j, J = 3253166, nil;
+										else
+											j, h = p[I(-57038)], {};
+										end;
+									else
+										if 1356190 > j then
+											H = I(-57084);
+											j = y[q];
+											T = p[H];
+											h, H = I(-57198), I(-57198);
+											b = T[H];
+											T = I(-57162);
+											P = b[T];
+											j[h] = P;
+											j = 5057254;
+										elseif 1391308 > j then
+											X = y[b];
+											j, J = 16757730, I(-57046);
+											N = X[J];
+											T = N;
+										elseif 1627154 > j then
+											k = I(-57041);
+											h = p[k];
+											k = I(-57060);
+											j = h[k];
+											T = 1;
+											b = y[z[3]];
+											P = b[T];
+											b = I(-57073);
+											k = P[b];
+											h = j(k);
+											k = I(-57017);
+											h = y[B];
+											j = h[k];
+											k = 2;
+											h = j(k);
+											P = y[z[4]];
+											b = I(-57154);
+											k = P[b];
+											j, h = k and 8333493 or 676844, k;
+										else
+											g, O, j = I(-57028), I(-57001), 13472990;
+											J = X[O];
+											Q = p[g];
+											g = I(-57064);
+											V = Q[g];
+											S = y[z[1]];
+											u = I(-57039);
+											n = X[u];
+											R = S * n;
+											n = I(-57195);
+											S = X[n];
+											g = R + S;
+											Q = V(g);
+											g = I(-57043);
+											V = X[g];
+											O = Q * V;
+											h = J + O;
+											g, J, O = I(-57059), h, I(-57055);
+											h = X[O];
+											O = I(-57006);
+											Q = p[g];
+											g, R = I(-56992), I(-57141);
+											V = Q[g];
+											N = nil;
+											g = X[R];
+											X = nil;
+											Q = V(J, g);
+											J = nil;
+											h[O] = Q;
+										end;
+									end;
+								else
+									if j < 686881 then
+										if j < 360289 then
+											if j < 141102 then
+												h = y[z[1]];
+												q = x[1];
+												j = h[q];
+												B, k = x[2], j;
+												j = not k;
+												j = j and 1254438 or 7815742;
+											elseif 224748 > j then
+												h = I(-57128);
+												j = y[z[1]];
+												h = j[h];
+												h = h(j);
+												j = 6986101;
+											else
+												V = I(-56963);
+												J = y[H];
+												O = I(-57104);
+												O = J[O];
+												O = O(J, V);
+												X, j = O, O and 6823249 or 2714293;
+											end;
+										else
+											if 585269 > j then
+												q = m();
+												k = m();
+												j = 0;
+												y[q] = x[1];
+												B = m();
+												y[B] = j;
+												j, P = 0, I(-57179);
+												y[k] = j;
+												H = I(-57128);
+												h = y[z[1]];
+												j = h[P];
+												h = I(-57150);
+												h = j[h];
+												P = c(14955716, { B, k, q });
+												h = h(j, P);
+												j = W(59591, {
+														z[2],
+														k,
+														q,
+														z[3],
+														z[4],
+													});
+												P = m();
+												y[P] = h;
+												b = j;
+												j = A(14138480, { P });
+												h, T = I(-57017), j;
+												j = { [h] = b, [H] = T };
+												h = { j };
+												j = p[I(-57113)];
+											else
+												j = 8333493;
+												P = y[z[4]];
+												b = I(-57182);
+												k = P[b];
+												P = I(-57165);
+												P = k[P];
+												P = P(k);
+												h = P;
+											end;
+										end;
+									else
+										if 817970 > j then
+											X = 1;
+											h = y[z[2]];
+											P = I(-57028);
+											k = p[P];
+											P = I(-56976);
+											B = k[P];
+											N = I(-57028);
+											b = y[z[1]];
+											H = p[N];
+											N = I(-57062);
+											T = H[N];
+											j = 3071406;
+											N = y[z[3]];
+											H = T(N, X);
+											P = b / H;
+											T, b = 1, 0;
+											k = { B(P, b, T) };
+											q = h(Z(k));
+										elseif j < 976808 then
+											B = s(B);
+											k, j, h = nil, p[I(-57097)], {};
+											q = s(q);
+										elseif j < 1074546 then
+											h = y[z[1]];
+											q = 1;
+											j = h + q;
+											y[z[1]] = j;
+											h = y[z[2]];
+											j = h and 696919 or 3071406;
+										else
+											Ej = I(-57055);
+											Tj = p[Ej];
+											Ej = I(-57067);
+											h = Tj[Ej];
+											Ej, Nj = I(-56963), 36;
+											Tj = h(Ej);
+											Vj, Pj = 30, I(-57059);
+											cj = p[Pj];
+											h, Yj, Oj = I(-57006), 120, 8;
+											Pj = I(-57196);
+											Ej = cj[Pj];
+											Pj = 20;
+											cj = Ej(Pj, Nj);
+											Nj = 24;
+											Tj[h] = cj;
+											h, Pj = I(-57163), I(-57059);
+											cj = p[Pj];
+											Pj = I(-57196);
+											Ej = cj[Pj];
+											Pj = 340;
+											cj = Ej(Pj, Nj);
+											Ej = 1;
+											Tj[h] = cj;
+											h, Pj, Qj = I(-57126), I(-57172), 75;
+											Tj[h] = Ej;
+											Ej, h, Nj = I(-57160), I(-57199), I(-57084);
+											Tj[h] = Ej;
+											h = I(-56995);
+											cj = y[z[5]];
+											Ej = cj[Pj];
+											Tj[h] = Ej;
+											Ej, h = 15, I(-57061);
+											Tj[h] = Ej;
+											Pj = p[Nj];
+											Xj, Nj, h = 0, I(-57108), I(-57108);
+											cj = Pj[Nj];
+											Pj = I(-57085);
+											Ej = cj[Pj];
+											Jj = 0;
+											Tj[h] = Ej;
+											cj, h, Ej, Cj = I(-57116), I(-56989), 9, I(-57013);
+											Tj[h] = Ej;
+											h = y[z[7]];
+											Ej = h(Tj, cj);
+											Ej, cj, h, vj = fj, I(-57055), I(-57095), 150;
+											Tj[h] = Ej;
+											oj = I(-57157);
+											Ej = p[cj];
+											cj, Nj = I(-57067), I(-57176);
+											h = Ej[cj];
+											cj = I(-56963);
+											Ej = h(cj);
+											Pj = p[Nj];
+											Nj, h = I(-57067), I(-57121);
+											cj = Pj[Nj];
+											Nj = 1;
+											Pj = cj(Nj, Xj);
+											Nj = I(-57059);
+											Ej[h] = Pj;
+											Pj = p[Nj];
+											wj, j, h, Nj, Xj = 240, p[I(-57071)], I(-57006), I(-57067), -20;
+											cj = Pj[Nj];
+											Nj = 1;
+											Pj = cj(Nj, Xj, Jj, Vj);
+											Ej[h] = Pj;
+											Nj, h = I(-57059), I(-57163);
+											Pj = p[Nj];
+											Nj, Vj = I(-57196), 0;
+											cj = Pj[Nj];
+											Nj, Xj = 100, 30;
+											Pj = cj(Nj, Xj);
+											Ej[h] = Pj;
+											h, cj = I(-57126), 1;
+											Ej[h] = cj;
+											h, cj, Xj = I(-57199), I(-57029), I(-57084);
+											Ej[h] = cj;
+											Nj = I(-56972);
+											Pj = y[z[5]];
+											cj = Pj[Nj];
+											h = I(-56995);
+											Ej[h] = cj;
+											cj, h = 24, I(-57061);
+											Ej[h] = cj;
+											Nj = p[Xj];
+											h, Xj = I(-57108), I(-57108);
+											Pj = Nj[Xj];
+											Nj = I(-56968);
+											cj = Pj[Nj];
+											Ej[h] = cj;
+											Pj, cj, h = I(-57027), 9, I(-56989);
+											Ej[h] = cj;
+											Jj = 72;
+											h = y[z[7]];
+											cj = h(Ej, Pj);
+											Pj, h, cj = I(-57055), I(-57095), fj;
+											Ej[h] = cj;
+											cj = p[Pj];
+											Pj = I(-57067);
+											h = cj[Pj];
+											Pj = I(-57058);
+											cj = h(Pj);
+											h, Xj, Rj = I(-57006), I(-57059), 255;
+											Nj = p[Xj];
+											Xj = I(-57196);
+											Pj = Nj[Xj];
+											Xj = 20;
+											Nj = Pj(Xj, Jj);
+											cj[h] = Nj;
+											Xj, h = I(-57059), I(-57163);
+											Nj = p[Xj];
+											Xj, Mj, Jj = I(-57067), I(-57137), -40;
+											Pj = Nj[Xj];
+											Xj = 1;
+											Nj = Pj(Xj, Jj, Vj, Oj);
+											cj[h] = Nj;
+											Xj = I(-57054);
+											Nj = y[z[5]];
+											Jj = I(-56994);
+											Pj = Nj[Xj];
+											h, Vj = I(-57140), 0;
+											cj[h] = Pj;
+											Pj, h = 0, I(-57037);
+											cj[h] = Pj;
+											Pj, h, Nj = 9, I(-56989), I(-57055);
+											cj[h] = Pj;
+											Pj, uj, h = fj, I(-57051), I(-57095);
+											cj[h] = Pj;
+											Pj = p[Nj];
+											Nj = I(-57067);
+											h = Pj[Nj];
+											Nj = I(-57081);
+											Pj = h(Nj, cj);
+											Oj, h = 60, I(-57080);
+											Xj = p[Jj];
+											Jj = I(-57067);
+											Nj = Xj[Jj];
+											Jj = 1;
+											Xj = Nj(Jj, Vj);
+											Pj[h] = Xj;
+											Xj = I(-57055);
+											Nj = p[Xj];
+											Xj = I(-57067);
+											h = Nj[Xj];
+											Xj = I(-57174);
+											Nj = h(Xj, cj);
+											Vj = I(-57157);
+											Jj = p[Vj];
+											Vj, h = I(-57090), I(-57101);
+											Xj = Jj[Vj];
+											Vj = 100;
+											Jj = Xj(Vj, Oj, Qj);
+											Nj[h] = Jj;
+											Oj, Qj, h, Xj = I(-57059), 1, I(-57178), 1;
+											Nj[h] = Xj;
+											Xj, Jj, h = .35, I(-57055), I(-57114);
+											Nj[h] = Xj;
+											Xj = p[Jj];
+											Jj = I(-57067);
+											h = Xj[Jj];
+											Jj = I(-57058);
+											Xj = h(Jj);
+											h = I(-57163);
+											Vj = p[Oj];
+											Oj = I(-56992);
+											Jj = Vj[Oj];
+											Oj = 0;
+											Vj = Jj(Oj, Qj);
+											Oj = I(-57157);
+											Xj[h] = Vj;
+											Dj, h = I(-57092), I(-57140);
+											Vj = p[Oj];
+											Oj, Qj = I(-57090), 255;
+											Jj = Vj[Oj];
+											Oj = 255;
+											Vj = Jj(Oj, Qj, Rj);
+											Xj[h] = Vj;
+											h, Jj = I(-57037), 0;
+											Xj[h] = Jj;
+											Jj, h = 10, I(-56989);
+											Xj[h] = Jj;
+											Jj, Vj, Qj, h = cj, I(-57055), I(-56994), I(-57095);
+											Xj[h] = Jj;
+											Jj = p[Vj];
+											Vj = I(-57067);
+											h = Jj[Vj];
+											Vj = I(-57081);
+											Jj = h(Vj, Xj);
+											Rj, h = 0, I(-57080);
+											Oj = p[Qj];
+											Qj = I(-57067);
+											Vj = Oj[Qj];
+											Qj = 1;
+											Oj = Vj(Qj, Rj);
+											Jj[h] = Oj;
+											Oj, Rj = I(-57055), I(-56990);
+											Vj = p[Oj];
+											Gj, Oj = I(-56985), I(-57067);
+											h = Vj[Oj];
+											Oj = I(-57135);
+											Vj = h(Oj, Xj);
+											h = I(-57101);
+											Qj = p[Rj];
+											Rj = I(-57067);
+											Oj = Qj[Rj];
+											Sj = p[uj];
+											uj = I(-57067);
+											gj = Sj[uj];
+											Fj = 245;
+											dj = p[oj];
+											oj, uj = I(-57090), 0;
+											nj = dj[oj];
+											oj = 200;
+											dj = { nj(oj, Yj, vj) };
+											nj, Yj = I(-57051), I(-57197);
+											Sj = gj(uj, Z(dj));
+											uj = p[nj];
+											nj = I(-57067);
+											gj = uj[nj];
+											oj = y[z[5]];
+											nj = .6;
+											dj = oj[Yj];
+											uj = gj(nj, dj);
+											dj = I(-57051);
+											nj = p[dj];
+											dj = I(-57067);
+											gj = nj[dj];
+											vj = I(-57157);
+											Yj = p[vj];
+											vj, dj = I(-57090), 1;
+											oj = Yj[vj];
+											vj = 255;
+											Yj = { oj(vj, wj, Fj) };
+											nj = { gj(dj, Z(Yj)) };
+											gj, Rj = I(-57197), { Sj, uj, Z(nj) };
+											Qj = Oj(Rj);
+											Vj[h] = Qj;
+											Qj = I(-57055);
+											Oj = p[Qj];
+											Qj = I(-57067);
+											h = Oj[Qj];
+											Qj = I(-57174);
+											Oj = h(Qj, Xj);
+											Rj = y[z[5]];
+											h = I(-57101);
+											Qj = Rj[gj];
+											Oj[h] = Qj;
+											Sj, Qj, h, Rj = I(-57176), 2, I(-57178), I(-57055);
+											Oj[h] = Qj;
+											h, Qj = I(-57114), .25;
+											Oj[h] = Qj;
+											Qj = p[Rj];
+											Rj = I(-57067);
+											h = Qj[Rj];
+											Rj = I(-57058);
+											Qj = h(Rj);
+											gj = p[Sj];
+											Sj, uj, oj, h, ij = I(-57067), .5, 96, I(-57121), I(-56988);
+											Rj = gj[Sj];
+											Sj = .5;
+											gj = Rj(Sj, uj);
+											Qj[h] = gj;
+											Sj, uj, nj, h = I(-57059), .5, 0, I(-57006);
+											gj = p[Sj];
+											vj, Sj = 18, I(-56992);
+											Rj = gj[Sj];
+											dj, Sj = I(-56972), 1;
+											gj = Rj(Sj, uj);
+											ej, Fj, Sj = I(-57008), I(-56978), I(-57059);
+											Qj[h] = gj;
+											h = I(-57163);
+											gj = p[Sj];
+											Sj, uj = I(-57196), 12;
+											Rj = gj[Sj];
+											Sj = 12;
+											gj = Rj(Sj, uj);
+											Qj[h] = gj;
+											gj = y[z[5]];
+											h, Sj = I(-57140), I(-57172);
+											Rj = gj[Sj];
+											uj = I(-56994);
+											Qj[h] = Rj;
+											Rj, h = 0, I(-57037);
+											Qj[h] = Rj;
+											h, Rj = I(-56989), 11;
+											Qj[h] = Rj;
+											h, gj, Rj = I(-57095), I(-57055), Xj;
+											Qj[h] = Rj;
+											Rj = p[gj];
+											gj = I(-57067);
+											h = Rj[gj];
+											gj = I(-57081);
+											Rj = h(gj, Qj);
+											h = I(-57080);
+											Sj = p[uj];
+											uj = I(-57067);
+											gj = Sj[uj];
+											uj = 1;
+											Sj = gj(uj, nj);
+											Rj[h] = Sj;
+											Sj = I(-57055);
+											gj = p[Sj];
+											Sj = I(-57067);
+											h = gj[Sj];
+											Sj = I(-57174);
+											gj = h(Sj, Qj);
+											Sj = m();
+											y[Sj] = gj;
+											gj = I(-57101);
+											h = y[Sj];
+											nj = y[z[5]];
+											uj = nj[dj];
+											h[gj] = uj;
+											uj = 3;
+											h = y[Sj];
+											gj = I(-57178);
+											h[gj] = uj;
+											gj, uj = I(-57114), .25;
+											h = y[Sj];
+											h[gj] = uj;
+											uj = I(-57055);
+											gj = p[uj];
+											uj = I(-57067);
+											h = gj[uj];
+											uj, dj, Yj = I(-56963), I(-57059), 0;
+											gj = h(uj);
+											nj = p[dj];
+											h = I(-57006);
+											dj = I(-57196);
+											uj = nj[dj];
+											dj = 20;
+											nj = uj(dj, oj);
+											dj = I(-57059);
+											gj[h] = nj;
+											h = I(-57163);
+											nj = p[dj];
+											dj = I(-57067);
+											uj = nj[dj];
+											oj, dj = -40, 1;
+											nj = uj(dj, oj, Yj, vj);
+											vj, uj = I(-57010), 1;
+											gj[h] = nj;
+											h, dj = I(-57126), I(-57088);
+											gj[h] = uj;
+											uj, h = I(-57124), I(-57199);
+											gj[h] = uj;
+											nj = y[z[5]];
+											uj = nj[dj];
+											oj, h = I(-57084), I(-56995);
+											gj[h] = uj;
+											uj, h = .35, I(-57099);
+											gj[h] = uj;
+											uj, h = 10, I(-57061);
+											gj[h] = uj;
+											dj = p[oj];
+											h, oj = I(-57108), I(-57108);
+											nj = dj[oj];
+											dj = I(-57083);
+											uj = nj[dj];
+											gj[h] = uj;
+											h, uj = I(-56989), 9;
+											gj[h] = uj;
+											oj = I(-56965);
+											h = y[z[7]];
+											nj, dj = I(-57116), I(-57179);
+											uj = h(gj, nj);
+											uj, h = fj, I(-57095);
+											gj[h] = uj;
+											uj = m();
+											h = 0;
+											y[uj] = h;
+											nj = y[z[10]];
+											h = nj[dj];
+											dj = t(8857235, {
+													uj,
+													yj,
+													mj,
+													n,
+													kj,
+													xj,
+													zj,
+													G,
+													Sj,
+													C,
+													J,
+													b,
+													z[11],
+													V,
+												});
+											nj = I(-57150);
+											nj, Lj = h[nj], I(-57184);
+											nj = nj(h, dj);
+											dj = I(-57166);
+											Yj = y[Q];
+											wj = y[P];
+											lj = y[b];
+											Kj = y[T];
+											h = {
+													[dj] = H,
+													[oj] = Yj,
+													[vj] = wj,
+													[Fj] = lj,
+													[Gj] = Kj,
+													[ej] = D,
+													[Lj] = Tj,
+													[ij] = Ej,
+													[Dj] = Xj,
+													[Mj] = rj,
+													[Cj] = nj,
+												};
+											h = { h };
+										end;
+									end;
+								end;
+							end;
+						end;
+					else
+						if j > 12848249 then
+							if 14738323 > j then
+								if j < 13793865 then
+									if j < 13240901 then
+										if j > 13045752 then
+											if 13082220 > j then
+												h, H = I(-57198), I(-57084);
+												j = y[q];
+												T = p[H];
+												H = I(-57198);
+												b = T[H];
+												T = I(-57045);
+												P = b[T];
+												j[h] = P;
+												j = 5057254;
+											else
+												F, u, Q, d, n, S, R, g, w = 24, I(-57094), I(-57181), 20, I(-56966), I(-57168), I(-56980), I(-57123), 40;
+												V = { [Q] = g, [R] = S, [n] = u };
+												u, n = 12, I(-57157);
+												Q = m();
+												g = I(-57170);
+												y[Q] = V;
+												S = p[n];
+												L, Zj, K, n, e, v, Y, o = 235, 45, 200, I(-57090), 220, 30, 26, 16;
+												R = S[n];
+												n = 15;
+												S = R(n, u, o);
+												R, o = I(-57078), I(-57157);
+												u = p[o];
+												o, M = I(-57090), 210;
+												n = u[o];
+												o = 24;
+												u = n(o, d, Y);
+												n, Y = I(-57206), I(-57157);
+												d = p[Y];
+												Y = I(-57090);
+												o = d[Y];
+												G, Y = 180, 38;
+												d = o(Y, v, w);
+												o, l, w = I(-57048), 32, I(-57157);
+												v = p[w];
+												w = I(-57090);
+												Y = v[w];
+												w, Ij = 30, 150;
+												v = Y(w, F, l);
+												Y, l = I(-57197), I(-57157);
+												F = p[l];
+												k, l = nil, I(-57090);
+												w = F[l];
+												B, l = nil, 255;
+												F = w(l, G, K);
+												K = I(-57157);
+												G = p[K];
+												K = I(-57090);
+												l = G[K];
+												K, w = 255, I(-56972);
+												G = l(K, e, L);
+												l, i, L = I(-57172), 255, I(-57157);
+												e = p[L];
+												D, L, jj = 255, I(-57090), 32;
+												K = e[L];
+												L = 255;
+												e = K(L, i, D);
+												K, C, D = I(-57088), 215, I(-57157);
+												i = p[D];
+												D = I(-57090);
+												L = i[D];
+												D = 220;
+												i = L(D, M, C);
+												L, C = I(-57014), I(-57157);
+												M = p[C];
+												C = I(-57090);
+												D = M[C];
+												pj, C = 140, 150;
+												M = D(C, pj, Ij);
+												D, Ij = I(-57054), I(-57157);
+												pj = p[Ij];
+												Ij = I(-57090);
+												C = pj[Ij];
+												Ij = 40;
+												pj = C(Ij, jj, Zj);
+												V = {
+														[g] = S,
+														[R] = u,
+														[n] = d,
+														[o] = v,
+														[Y] = F,
+														[w] = G,
+														[l] = e,
+														[K] = i,
+														[L] = M,
+														[D] = pj,
+													};
+												F, S = .9, I(-56983);
+												g = m();
+												v, Y, d = I(-57073), 20, I(-57147);
+												y[g] = V;
+												u, w, o, n = I(-56998), .8, I(-57171), I(-57020);
+												R = {
+														[S] = n,
+														[u] = o,
+														[d] = Y,
+														[v] = w,
+													};
+												Y, v, w, l, u, n, o, d, G = I(-57147), 40, I(-57073), 1.1, I(-57020), I(-56983), I(-56998), I(-56987), .8;
+												S = {
+														[n] = u,
+														[o] = d,
+														[Y] = v,
+														[w] = F,
+													};
+												o, d, u, F, w, Y, v = I(-57020), I(-56998), I(-56983), I(-57073), 70, I(-56973), I(-57147);
+												n, K = {
+														[u] = o,
+														[d] = Y,
+														[v] = w,
+														[F] = l,
+													}, 1;
+												v, o, d, Y, F, w, l = I(-57177), I(-56983), I(-57020), I(-56998), 90, I(-57147), I(-57073);
+												u = {
+														[o] = d,
+														[Y] = v,
+														[w] = F,
+														[l] = G,
+													};
+												d, Y, G, l, w, F, v = I(-56983), I(-57019), I(-57073), 100, I(-57022), I(-57147), I(-56998);
+												o = {
+														[d] = Y,
+														[v] = w,
+														[F] = l,
+														[G] = K,
+													};
+												V = {
+														R,
+														S,
+														n,
+														u,
+														o,
+													};
+												R = m();
+												y[R] = V;
+												u = r(4986548, {});
+												h = {};
+												V = m();
+												S = f(14398345, { b, P });
+												y[V] = S;
+												n = W(11037807, {});
+												S = m();
+												y[S] = n;
+												n = m();
+												Y = f(8523428, { Q, N });
+												d = E(493695, {
+														H,
+														R,
+														T,
+														g,
+													});
+												N = s(N);
+												j = p[I(-57000)];
+												y[n] = u;
+												o = f(4241965, {
+														V,
+														J,
+														O,
+														T,
+														g,
+														Q,
+														S,
+														n,
+														R,
+														H,
+														X,
+													});
+												u = m();
+												y[u] = o;
+												o = m();
+												Q = s(Q);
+												l = I(-57041);
+												H = s(H);
+												g = s(g);
+												y[o] = d;
+												b = s(b);
+												v = c(16326146, { T });
+												O = s(O);
+												n = s(n);
+												d = m();
+												y[d] = Y;
+												Y = m();
+												y[Y] = v;
+												v = c(10063791, {
+														u,
+														o,
+														R,
+														P,
+														d,
+														Y,
+													});
+												F = p[l];
+												V = s(V);
+												X = s(X);
+												u = s(u);
+												l = I(-57034);
+												P = s(P);
+												o = s(o);
+												d = s(d);
+												T = s(T);
+												w = F[l];
+												F = w(v);
+												J = s(J);
+												S = s(S);
+												Y = s(Y);
+												v = nil;
+												R = s(R);
+											end;
+										else
+											if 12905997 > j then
+												j, h = p[I(-57087)], { q };
+											elseif j < 12979330 then
+												h, k, T = I(-57069), I(-57198), I(-57084);
+												j = y[z[2]];
+												B = p[k];
+												k = I(-57100);
+												q = B[k];
+												b = p[T];
+												T = I(-57198);
+												P = b[T];
+												b = I(-56997);
+												k = P[b];
+												B = q(k);
+												j[h] = B;
+												j = 15069184;
+											else
+												k, h = I(-57092), I(-57096);
+												j = y[z[1]];
+												X, P = I(-57084), I(-57134);
+												B = y[z[2]];
+												q = B[k];
+												k = p[P];
+												P = I(-57067);
+												B = k[P];
+												N = I(-57084);
+												H = p[N];
+												P, N = .9, I(-57148);
+												T = H[N];
+												H = I(-57057);
+												b = T[H];
+												N = p[X];
+												X = I(-56977);
+												H = N[X];
+												N = I(-57063);
+												T = H[N];
+												k = B(P, b, T);
+												X, H, P = I(-57028), I(-57059), I(-57163);
+												T = p[H];
+												H = I(-56992);
+												b = T[H];
+												O = 100;
+												N = p[X];
+												X = I(-56976);
+												H = N[X];
+												h = j[h];
+												J = y[z[3]];
+												X = J / O;
+												O, J = 1, 0;
+												N = H(X, J, O);
+												H = 1;
+												T = b(N, H);
+												B = { [P] = T };
+												h = h(j, q, k, B);
+												j = I(-57186);
+												j = h[j];
+												j = j(h);
+												j, h = p[I(-57031)], {};
+											end;
+										end;
+									else
+										if 13429127 > j then
+											q = I(-57192);
+											h = p[q];
+											k = I(-56991);
+											B = p[k];
+											q = h(B);
+											h = I(-57033);
+											j = q == h;
+											j = j and 13800299 or 3254300;
+										elseif j < 13493669 then
+											H, X = b(T, H);
+											j = H and 15182559 or 13787431;
+										elseif 13650889 > j then
+											h = y[z[1]];
+											q = I(-57010);
+											j = h[q];
+											h = I(-57130);
+											h = j[h];
+											h = h(j);
+											h, j = {}, p[I(-56970)];
+										else
+											N = y[z[12]];
+											b, T, H = j, N, j;
+											j = N and 7461108 or 13845689;
+										end;
+									end;
+								else
+									if j < 14268412 then
+										if 13822994 > j then
+											h = I(-56991);
+											j = p[h];
+											h = { j() };
+											j, h = p[I(-57074)], { Z(h) };
+										elseif 13846967 > j then
+											h, j = T, H;
+											j = T and 3894452 or 8090888;
+										elseif 13993363 > j then
+											T, N = P(b, T);
+											j = T and 9439767 or 12362488;
+										else
+											q = I(-57142);
+											h = y[z[1]];
+											j = h[q];
+											j = j and 222613 or 6986101;
+										end;
+									else
+										if j < 14481965 then
+											B = f(10983924, { z[1] });
+											h = I(-57024);
+											j = p[h];
+											k = { j(B) };
+											q = k[2];
+											h = k[1];
+											B = h;
+											h, j = B, B and 14648815 or 14794089;
+										elseif j < 14607200 then
+											P = I(-57041);
+											k = p[P];
+											P = I(-57060);
+											j = k[P];
+											P = .85;
+											k = j(P);
+											b = y[q];
+											T = I(-57013);
+											P = b[T];
+											j, k = P and 12819562 or 6691099, P;
+										elseif j < 14665686 then
+											h, j = q, 14794089;
+										else
+											k, N = I(-57058), I(-57084);
+											j = y[z[1]];
+											B = y[z[2]];
+											q = B[k];
+											P = I(-57134);
+											k = p[P];
+											P = I(-57067);
+											B = k[P];
+											H = p[N];
+											P, X, N = .35, I(-57084), I(-57148);
+											T = H[N];
+											H = I(-57057);
+											b = T[H];
+											N = p[X];
+											X = I(-56977);
+											H = N[X];
+											N = I(-57063);
+											T = H[N];
+											h, H = I(-57096), I(-57197);
+											k = B(P, b, T);
+											P = I(-57140);
+											T = y[z[3]];
+											X, h = I(-57084), j[h];
+											b = T[H];
+											B = { [P] = b };
+											h = h(j, q, k, B);
+											j = I(-57186);
+											j = h[j];
+											j = j(h);
+											k, P = I(-57125), I(-57134);
+											j = y[z[1]];
+											B = y[z[2]];
+											q = B[k];
+											h = I(-57096);
+											k = p[P];
+											P = I(-57067);
+											B = k[P];
+											N, P = I(-57084), .35;
+											H = p[N];
+											N = I(-57148);
+											T = H[N];
+											H = I(-57057);
+											b = T[H];
+											N = p[X];
+											X = I(-56977);
+											H = N[X];
+											N = I(-57063);
+											T = H[N];
+											k = B(P, b, T);
+											b, h, P = .15, j[h], I(-57114);
+											B = { [P] = b };
+											h = h(j, q, k, B);
+											j = I(-57186);
+											j = h[j];
+											j = j(h);
+											j, h = p[I(-57133)], {};
+										end;
+									end;
+								end;
+							else
+								if 15494730 > j then
+									if 15138768 > j then
+										if j < 14874902 then
+											j = h and 12876937 or 9635732;
+										elseif 15012450 > j then
+											q = x[1];
+											h = y[z[1]];
+											P = y[z[2]];
+											b = y[z[1]];
+											k = P - b;
+											T = I(-57028);
+											b = p[T];
+											T, H, N = I(-56976), 5, 1;
+											P = b[T];
+											T = q * H;
+											H = 0;
+											b = P(T, H, N);
+											B = k * b;
+											j = h + B;
+											P = I(-57028);
+											y[z[1]] = j;
+											k = p[P];
+											P = I(-57075);
+											B = k[P];
+											b = y[z[2]];
+											T = y[z[1]];
+											P = b - T;
+											k = B(P);
+											B = .1;
+											h = k < B;
+											j = h and 6508865 or 3045595;
+										elseif j < 15082080 then
+											h, j = {}, p[I(-57187)];
+										else
+											H = I(-57041);
+											h = p[H];
+											H = I(-57034);
+											j = h[H];
+											h = j(T);
+											j = 11278842;
+										end;
+									else
+										if 15213130 > j then
+											V, N = I(-57141), H;
+											O = X[V];
+											g, h = I(-57089), I(-57141);
+											Q = X[g];
+											V = Q * q;
+											J = O - V;
+											X[h] = J;
+											O = I(-57141);
+											J = X[O];
+											O = -0.05;
+											h = J < O;
+											j = h and 7552443 or 1849890;
+										elseif j < 15315563 then
+											h, b = I(-57024), I(-57130);
+											j = p[h];
+											P = k[b];
+											h = j(P, k);
+											j = 10796629;
+										elseif j < 15421515 then
+											T, j, b, H = I(-56996), 5615480, I(-57205), 0;
+											h = p[b];
+											b = h(T, H);
+										else
+											X = I(-57126);
+											j = y[N];
+											J = 1;
+											j[X] = J;
+											j = 15885512;
+										end;
+									end;
+								else
+									if j > 16270588 then
+										if 16343941 > j then
+											B = I(-57041);
+											q = m();
+											y[q] = x[1];
+											h = p[B];
+											B, H = I(-57060), I(-57084);
+											j = h[B];
+											B = .5;
+											h = j(B);
+											T, B = I(-57084), I(-57134);
+											h = p[B];
+											B = I(-57067);
+											j = h[B];
+											b = p[T];
+											T, B = I(-57148), .8;
+											P = b[T];
+											b = I(-57057);
+											k = P[b];
+											T = p[H];
+											H = I(-56977);
+											b = T[H];
+											T = I(-57063);
+											P = b[T];
+											h = j(B, k, P);
+											B = m();
+											H = I(-57166);
+											y[B] = h;
+											k = E(9264445, { z[1], q, B });
+											h = I(-57024);
+											j = p[h];
+											h = j(k);
+											h = I(-57050);
+											j = p[h];
+											T = y[q];
+											b = T[H];
+											H = I(-57107);
+											H = b[H];
+											T = { H(b) };
+											b = { j(Z(T)) };
+											P, h, k, j = b[3], b[1], b[2], 4873607;
+											b = h;
+										elseif j < 16544141 then
+											j, H = 13848246, nil;
+											N = s(N);
+										elseif j < 16742138 then
+											H = I(-57084);
+											j = y[q];
+											T = p[H];
+											h, H = I(-57198), I(-57198);
+											b = T[H];
+											T = I(-56975);
+											P = b[T];
+											j[h] = P;
+											j = 5057254;
+										else
+											j = H;
+											H = 70;
+											h = T or H;
+											H = I(-57024);
+											T = m();
+											y[T] = h;
+											h = p[H];
+											N = A(2456259, {
+													z[4],
+													P,
+													b,
+													T,
+												});
+											H = h(N);
+											N = I(-57055);
+											H = p[N];
+											N = I(-57067);
+											h = H[N];
+											N, O = I(-57166), I(-57084);
+											H = h(N);
+											N, h = I(-57112), I(-57015);
+											H[h] = N;
+											h = I(-57049);
+											J = p[O];
+											O = I(-57049);
+											X = J[O];
+											J = I(-57011);
+											N = X[J];
+											H[h] = N;
+											N, h = 999999, I(-57146);
+											H[h] = N;
+											h, X, N = I(-57065), I(-57055), 5687374 < 15936023;
+											H[h] = N;
+											N, h, V = 3962936 > 12224238, I(-57012), 1;
+											H[h] = N;
+											N, Q, h = q, 1, I(-57095);
+											H[h] = N;
+											O = I(-57059);
+											N = p[X];
+											X = I(-57067);
+											h = N[X];
+											X = I(-57058);
+											N = h(X);
+											J = p[O];
+											O = I(-56992);
+											X = J[O];
+											h, O = I(-57163), 1;
+											J = X(O, V);
+											O = I(-57170);
+											N[h] = J;
+											J = y[z[5]];
+											h, V = I(-57140), I(-57059);
+											X = J[O];
+											J = I(-57055);
+											N[h] = X;
+											h, X = I(-57126), .12;
+											N[h] = X;
+											X, h = 0, I(-57037);
+											N[h] = X;
+											h, X = I(-57153), 2429421 <= 13602437;
+											N[h] = X;
+											X, h = 1, I(-56989);
+											N[h] = X;
+											h, X = I(-57095), H;
+											N[h] = X;
+											X = p[J];
+											j, J = 12661177, I(-57067);
+											h = X[J];
+											J = I(-57058);
+											X = h(J);
+											h = I(-57163);
+											O = p[V];
+											V = I(-56992);
+											J = O[V];
+											V = 1;
+											O = J(V, Q);
+											J = 1;
+											X[h] = O;
+											h, O = I(-57126), 18;
+											X[h] = J;
+											J, h = 2, I(-56989);
+											X[h] = J;
+											J, h = N, I(-57095);
+											X[h] = J;
+											J = m();
+											h = {};
+											y[J] = h;
+											V = O;
+											O = 1;
+											Q = O;
+											O, h = 0, 1;
+											g = O > Q;
+											O = h - Q;
+										end;
+									else
+										if j < 15709683 then
+											k = y[q];
+											P = I(-57013);
+											j = k[P];
+											k = I(-57128);
+											k = j[k];
+											k = k(j);
+											j = 4355769;
+										elseif 16034582 > j then
+											J = I(-57066);
+											X = p[J];
+											O = y[N];
+											J = X(O);
+											X = nil;
+											j = J ~= X;
+											j = j and 9825496 or 10149907;
+										elseif 16199341 > j then
+											j = y[z[2]];
+											k, h = I(-57198), I(-57069);
+											B = p[k];
+											k = I(-57100);
+											q = B[k];
+											T = I(-57084);
+											b = p[T];
+											T = I(-57198);
+											P = b[T];
+											b = I(-57188);
+											k = P[b];
+											B = q(k);
+											j[h] = B;
+											j = 15069184;
+										else
+											k = I(-57149);
+											h = p[k];
+											k = I(-56982);
+											j = h[k];
+											h = I(-57165);
+											h = j[h];
+											h = h(j);
+											j = 1404419;
+										end;
+									end;
+								end;
+							end;
+						else
+							if 10106849 > j then
+								if j > 9277177 then
+									if 9430143 > j then
+										if 9319642 > j then
+											C, j, w, Y = I(-57028), o, I(-57055), I(-57028);
+											S[h] = u;
+											d = p[Y];
+											h, Y = I(-57126), I(-57079);
+											o = d[Y];
+											v, Y = 45, 15;
+											d = o(Y, v);
+											zj, o = I(-57028), 100;
+											u = d / o;
+											S[h] = u;
+											u, h, R = 0, I(-57037), nil;
+											S[h] = u;
+											u, h, pj, v, F = 2, I(-56989), 48, 0, I(-57125);
+											S[h] = u;
+											o, u, h = I(-57055), X, I(-57095);
+											S[h] = u;
+											Y = I(-56994);
+											u = p[o];
+											o = I(-57067);
+											h = u[o];
+											o = I(-57081);
+											u = h(o, S);
+											h = I(-57080);
+											l = I(-57001);
+											d = p[Y];
+											Y = I(-57067);
+											o = d[Y];
+											n, Y = nil, 1;
+											d = o(Y, v);
+											u[h] = d;
+											d, v = I(-57055), I(-57197);
+											o = p[d];
+											d, D = I(-57067), I(-57006);
+											h = o[d];
+											d = I(-57174);
+											o = h(d, S);
+											Y = y[z[5]];
+											d = Y[v];
+											h, Zj = I(-57101), I(-57028);
+											o[h] = d;
+											jj, Ij, j, d, h = 24, I(-57028), 12661177, 2, I(-57178);
+											o[h] = d;
+											L, Y, d, h = I(-57006), I(-56984), .45, I(-57114);
+											o[h] = d;
+											d = p[Y];
+											Y = I(-57023);
+											h = d[Y];
+											Y = y[J];
+											e = S[L];
+											L = I(-57047);
+											K = e[L];
+											e = I(-57003);
+											G = K[e];
+											i = S[D];
+											D, K = I(-57026), I(-57141);
+											L = i[D];
+											i = I(-57003);
+											e = L[i];
+											M = p[C];
+											C, xj = I(-57079), 26;
+											D = M[C];
+											L, C = I(-57089), 22;
+											M = D(C, pj);
+											D = 1000;
+											i = M / D;
+											pj = p[Ij];
+											Ij = I(-57079);
+											C = pj[Ij];
+											Ij, D = 10, I(-57043);
+											pj = C(Ij, jj);
+											C, aj = 1000, I(-57028);
+											M = pj / C;
+											jj = p[Zj];
+											Zj, u = I(-57079), nil;
+											Ij = jj[Zj];
+											C, Zj = I(-57039), 12;
+											jj = Ij(Zj, xj);
+											Ij = 10;
+											pj = jj / Ij;
+											Ij = I(-57195);
+											Uj = p[zj];
+											zj = I(-57079);
+											xj = Uj[zj];
+											Uj = xj();
+											zj = p[aj];
+											aj = I(-57098);
+											xj = zj[aj];
+											Zj = Uj * xj;
+											xj = 2;
+											jj = Zj * xj;
+											v = {
+													[w] = S,
+													[F] = o,
+													[l] = G,
+													[K] = e,
+													[L] = i,
+													[D] = M,
+													[C] = pj,
+													[Ij] = jj,
+												};
+											o, S = nil, nil;
+											d = h(Y, v);
+										elseif 9370429 > j then
+											h = y[z[1]];
+											q = I(-57027);
+											j = h == q;
+											j = j and 11972011 or 10546471;
+										elseif 9406001 > j then
+											j = y[z[1]];
+											h = { j };
+											j = p[I(-57103)];
+										else
+											V, h = I(-57115), I(-57102);
+											h = k[h];
+											h = h(k, V);
+											V = I(-57165);
+											V = h[V];
+											V = V(h);
+											V, j = I(-57115), 13096538;
+											h = k[V];
+											y[P] = h;
+										end;
+									else
+										if j < 9537749 then
+											H = T;
+											j = m();
+											y[j] = N;
+											N = j;
+											j = H <= q;
+											j = j and 4742880 or 16361736;
+										elseif j < 9730614 then
+											j = y[z[2]];
+											k, P = I(-57018), I(-57152);
+											P = j[P];
+											h = { P(j, k) };
+											j, h = p[I(-56971)], { Z(h) };
+										elseif j < 9944643 then
+											X = I(-57024);
+											J = f(3103786, {
+													z[1],
+													H,
+													B,
+													N,
+												});
+											j = p[X];
+											X = j(J);
+											j = 10149907;
+										else
+											j = y[z[1]];
+											h = j();
+											j = y[z[2]];
+											q = h;
+											h = j(q);
+											B = m();
+											k = I(-57017);
+											y[B] = h;
+											h = y[B];
+											j = h[k];
+											k = 1;
+											h = j(k);
+											k = I(-57149);
+											h = p[k];
+											k = I(-57164);
+											k = h[k];
+											k = k(h);
+											j = not k;
+											j = j and 16215030 or 1404419;
+										end;
+									end;
+								else
+									if 8698932 > j then
+										if j < 8451874 then
+											if j < 8235053 then
+												y[z[2]] = h;
+												P = y[z[3]];
+												b, T = I(-57008), I(-56998);
+												j = P[b];
+												P = I(-57199);
+												b = k[T];
+												j[P] = b;
+												T, X, b = I(-56983), I(-57137), I(-57184);
+												P = y[z[3]];
+												j = P[b];
+												P = I(-57199);
+												b = k[T];
+												j[P] = b;
+												P = I(-57050);
+												j = p[P];
+												N = y[z[3]];
+												H = N[X];
+												N = { j(H) };
+												b, j, P, T = N[2], 13848246, N[1], N[3];
+											elseif j < 8356906 then
+												k = m();
+												H = 2;
+												y[k] = h;
+												h = I(-57024);
+												P = W(8759253, { k });
+												j = p[h];
+												h = j(P);
+												P = I(-57041);
+												h = p[P];
+												P = I(-57060);
+												j = h[P];
+												T = y[z[3]];
+												b = T[H];
+												T = I(-57073);
+												P = b[T];
+												h = j(P);
+												h = y[B];
+												H, P = 3, I(-57017);
+												j = h[P];
+												P, b = 3, 50;
+												h = j(P, b);
+												P = f(5046161, { B });
+												j = y[z[5]];
+												h = j(P);
+												P = I(-57041);
+												h = p[P];
+												P = I(-57060);
+												j = h[P];
+												T = y[z[3]];
+												b = T[H];
+												T, H = I(-57073), 4;
+												P = b[T];
+												h = j(P);
+												h = y[B];
+												P = I(-57017);
+												j = h[P];
+												P = 4;
+												h = j(P);
+												P = I(-57041);
+												h = p[P];
+												P = I(-57060);
+												j = h[P];
+												T = y[z[3]];
+												b = T[H];
+												T = I(-57073);
+												P = b[T];
+												h = j(P);
+												h = y[B];
+												P = I(-57017);
+												j = h[P];
+												P, H = 5, 5;
+												h = j(P);
+												P = I(-57041);
+												h = p[P];
+												P = I(-57060);
+												j = h[P];
+												T = y[z[3]];
+												b = T[H];
+												T = I(-57073);
+												P = b[T];
+												h = j(P);
+												h = y[B];
+												P = I(-57128);
+												j = h[P];
+												h = j();
+												j = y[z[6]];
+												h = j(q);
+												b = I(-57009);
+												P = p[b];
+												j, h = P and 7117480 or 11736624, P;
+											else
+												v = I(-57197);
+												Y = y[z[5]];
+												d = Y[v];
+												j, u = 9289909, d;
+											end;
+										else
+											if j < 8581019 then
+												q = m();
+												y[q] = x[1];
+												b, k, P = I(-56966), I(-57181), I(-56980);
+												B = y[z[1]];
+												h = B[k];
+												k = y[z[1]];
+												B = k[P];
+												P = y[z[1]];
+												k = P[b];
+												j = { h, B, k };
+												k = m();
+												B = j;
+												j = {};
+												y[k] = j;
+												h = I(-57050);
+												j = p[h];
+												T = { j(B) };
+												P, h, j, b = T[2], T[1], 6993931, T[3];
+												T = h;
+											else
+												h, N = I(-57096), I(-57084);
+												j = y[z[1]];
+												q = y[z[3]];
+												P = I(-57134);
+												k = p[P];
+												P, X = I(-57067), I(-57084);
+												B = k[P];
+												P = .6;
+												H = p[N];
+												N = I(-57148);
+												T = H[N];
+												H = I(-57057);
+												b = T[H];
+												h = j[h];
+												N = p[X];
+												X = I(-56977);
+												H = N[X];
+												N = I(-57063);
+												T = H[N];
+												H = I(-57028);
+												k = B(P, b, T);
+												T = p[H];
+												H = I(-56976);
+												b = T[H];
+												X = 5;
+												N = y[z[4]];
+												P = I(-57046);
+												H = N - X;
+												X, N = 110, 45;
+												T = b(H, N, X);
+												B = { [P] = T };
+												h = h(j, q, k, B);
+												j = I(-57186);
+												j = h[j];
+												j = j(h);
+												j = 8024202;
+											end;
+										end;
+									else
+										if j < 8808244 then
+											h = I(-57152);
+											j = y[z[1]];
+											h, q, B = j[h], I(-57180), 8;
+											h = h(j, q, B);
+											h, j = {}, p[I(-57036)];
+										elseif j < 8998126 then
+											B = I(-56974);
+											h = y[z[1]];
+											q = x[1];
+											j = h + q;
+											y[z[1]] = j;
+											H = 175;
+											h = y[z[2]];
+											T = 250;
+											b = y[z[1]];
+											P = b * T;
+											O, b = I(-57028), 360;
+											k = P % b;
+											h[B] = k;
+											h = y[z[3]];
+											B = I(-56974);
+											T = y[z[1]];
+											b = T * H;
+											P = -b;
+											b = 360;
+											k = P % b;
+											h[B] = k;
+											B = I(-56974);
+											h = y[z[4]];
+											T = 40;
+											b = y[z[1]];
+											H = .5;
+											P = b * T;
+											b = 360;
+											k = P % b;
+											b = I(-57059);
+											h[B] = k;
+											B, T = I(-57006), 0;
+											h = y[z[5]];
+											P = p[b];
+											b = I(-57067);
+											k = P[b];
+											j = 13472990;
+											J = p[O];
+											b, O = .5, I(-57064);
+											X = J[O];
+											V = y[z[1]];
+											Q = 3.5;
+											O = V * Q;
+											J = X(O);
+											X = 2.5;
+											N = J * X;
+											J = .45;
+											P = k(b, T, H, N);
+											H = 1;
+											h[B] = P;
+											k = y[z[1]];
+											P = 1.5;
+											B = k % P;
+											k = 1.5;
+											h = B / k;
+											k, B = I(-57163), h;
+											h = y[z[6]];
+											T = I(-57059);
+											b = p[T];
+											T, X = I(-56992), .45;
+											P = b[T];
+											N = B * X;
+											T = H + N;
+											N = 1;
+											X = B * J;
+											H = N + X;
+											b = P(T, H);
+											h[k] = b;
+											k = I(-57114);
+											h = y[z[7]];
+											H = .8;
+											T = B * H;
+											b = .2;
+											P = b + T;
+											b, J = 2.6, 1.7;
+											h[k] = P;
+											V = 10;
+											P = y[z[1]];
+											k = P % b;
+											P = 2.6;
+											h = k / P;
+											k, P, N = h, I(-57006), -0.35;
+											h = y[z[8]];
+											H = I(-57059);
+											T = p[H];
+											H = I(-56992);
+											b = T[H];
+											X = k * J;
+											H = N + X;
+											J, N = I(-57028), .5;
+											T = b(H, N);
+											h[P] = T;
+											P, T = I(-57178), 3;
+											h = y[z[9]];
+											X = p[J];
+											J = I(-57064);
+											N = X[J];
+											O = y[z[1]];
+											J = O * V;
+											X = N(J);
+											N = 1.2;
+											H = X * N;
+											b = T + H;
+											h[P] = b;
+											b, H = I(-57028), I(-57028);
+											P = p[b];
+											O, b = I(-57028), I(-56976);
+											h = P[b];
+											T = p[H];
+											H = I(-57155);
+											b = T[H];
+											J = p[O];
+											N, O = 1, I(-57062);
+											X = J[O];
+											O = .001;
+											J = X(q, O);
+											H = N / J;
+											N = I(-56981);
+											T = b(H);
+											b, H = 1, 999;
+											P = h(T, b, H);
+											h = y[z[10]];
+											H = p[N];
+											b, N = I(-57199), I(-57077);
+											T = H[N];
+											N = I(-57201);
+											H = T(N, P);
+											h[b] = H;
+											b = I(-57050);
+											h = p[b];
+											N = y[z[11]];
+											X = { h(N) };
+											H, b, T = X[3], X[1], X[2];
+										elseif j < 9201731 then
+											u, j = d, Y;
+											j = d and 9289909 or 8380320;
+										else
+											P, b = I(-57003), 1.07;
+											j = y[z[1]];
+											B = y[z[2]];
+											h, k = I(-57096), I(-56965);
+											q = B[k];
+											k = { [P] = b };
+											B = y[z[3]];
+											h = j[h];
+											h = h(j, q, B, k);
+											j = I(-57186);
+											j, P, b = h[j], I(-57163), 0;
+											j = j(h);
+											j = y[z[1]];
+											k = I(-57010);
+											B = y[z[2]];
+											q = B[k];
+											h = I(-57096);
+											B = y[z[3]];
+											k, h = { [P] = b }, j[h];
+											h = h(j, q, B, k);
+											j = I(-57186);
+											j = h[j];
+											j = j(h);
+											q = I(-56978);
+											h = y[z[2]];
+											j = h[q];
+											j = j and 7210583 or 2423547;
+										end;
+									end;
+								end;
+							else
+								if j > 11552864 then
+									if j < 12093029 then
+										if j < 11788660 then
+											j, b = 7117480, I(-56993);
+											P = p[b];
+											h = P;
+										elseif 11906353 > j then
+											T = I(-57116);
+											b = y[B];
+											P = b == T;
+											h, j = P, P and 2200802 or 4286664;
+										elseif 11991164 > j then
+											k, T = I(-57198), I(-57084);
+											j = y[z[2]];
+											h = I(-57069);
+											B = p[k];
+											k = I(-57100);
+											q = B[k];
+											b = p[T];
+											T = I(-57198);
+											P = b[T];
+											b = I(-57072);
+											k = P[b];
+											B = q(k);
+											j[h] = B;
+											j = 15069184;
+										else
+											q = I(-57116);
+											h = y[z[1]];
+											j = h == q;
+											j = j and 12935058 or 9349376;
+										end;
+									else
+										if j < 12269115 then
+											k, h = I(-57002), I(-57025);
+											j = y[z[2]];
+											h = j[h];
+											h = h(j, k);
+											k = h;
+											j = k and 15243702 or 10796629;
+										elseif 12511832 > j then
+											h, B, P = {}, nil, I(-57024);
+											b = f(13023603, { z[4], z[3], z[2] });
+											j = p[P];
+											P = j(b);
+											k, q, j = nil, nil, p[I(-57129)];
+										elseif j < 12740369 then
+											O, R = O + Q, not g;
+											h = O <= V;
+											h = R and h;
+											R = V <= O;
+											R = g and R;
+											h = R or h;
+											R = 4885680;
+											j = h and R;
+											h = 4849422;
+											j = j or h;
+										else
+											T = y[q];
+											H, j = I(-57013), 6691099;
+											b = T[H];
+											T = I(-57142);
+											P = b[T];
+											k = P;
+										end;
+									end;
+								else
+									if j < 10890276 then
+										if 10514879 > j then
+											if j < 10166822 then
+												H = s(H);
+												N = s(N);
+												T, j = nil, 4873607;
+											elseif 10333513 > j then
+												h = I(-57167);
+												j = p[h];
+												h = { j() };
+												j, h = p[I(-56969)], { Z(h) };
+											else
+												V, j = I(-57120), 5045843;
+												J = y[H];
+												O = I(-57104);
+												O = J[O];
+												O = O(J, V);
+												X = O;
+											end;
+										else
+											if 10671550 > j then
+												h = y[z[1]];
+												q = I(-57118);
+												j = h == q;
+												j = j and 5757795 or 16183653;
+											else
+												P = I(-57055);
+												h = p[P];
+												P = I(-57067);
+												j = h[P];
+												P = I(-57010);
+												h = j(P);
+												P = m();
+												y[P] = h;
+												j = y[P];
+												h, b = I(-57015), I(-57002);
+												j[h] = b;
+												j = y[P];
+												b, h = 0, I(-57163);
+												j[h] = b;
+												j = y[P];
+												b = y[z[2]];
+												h = I(-57095);
+												j[h] = b;
+												b = I(-57151);
+												h = y[z[3]];
+												j = h[b];
+												b = m();
+												y[b] = j;
+												N = y[b];
+												T, H = N, j;
+												j = N and 1378198 or 16757730;
+											end;
+										end;
+									else
+										if 11010865 > j then
+											q, k = I(-57192), I(-57167);
+											h = p[q];
+											B = p[k];
+											q = h(B);
+											h = I(-57033);
+											j = q == h;
+											j = j and 10183738 or 9391483;
+										elseif j < 11158324 then
+											B = m();
+											q = m();
+											y[q] = x[1];
+											y[B] = x[2];
+											h = I(-57024);
+											j = p[h];
+											k = W(12010317, { B, q });
+											h = j(k);
+											k = h;
+											j = not k;
+											j = j and 11840696 or 939021;
+										elseif 11323973 > j then
+											B = s(B);
+											j, h = p[I(-57052)], {};
+											k = s(k);
+											P, T, b, q = nil, nil, nil, nil;
+										else
+											h = I(-57042);
+											j = y[z[1]];
+											q = y[z[2]];
+											B = c(1014595, { z[3], z[4], z[5] });
+											h = j[h];
+											h = h(j, q, B);
+											h, j = {}, p[I(-57035)];
+										end;
+									end;
+								end;
+							end;
+						end;
+					end;
+				end;
+				j = #U;
+				return Z(h);
+			end;
+		return (H(1222832, {}))(Z(h));
+	end)(setmetatable, getmetatable, getfenv and getfenv() or _ENV, select, { ... }, unpack or table[I(-57200)], newproxy);
+end)(...);
