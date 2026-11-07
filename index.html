@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Chat · Pro</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #f4f5f7;
+    --surface: rgba(255,255,255,0.62);
+    --surface-solid: #ffffff;
+    --line: rgba(0,0,0,0.08);
+    --line-strong: rgba(0,0,0,0.14);
+    --text: #14151a;
+    --text-sub: #5d5f6b;
+    --text-mute: #9a9ca6;
+    --accent: #1a1a1f;
+    --accent-soft: rgba(0,0,0,0.045);
+    --radius: 18px;
+    --radius-sm: 12px;
+    --glass-blur: 24px;
+    --glass-bg: rgba(255,255,255,0.55);
+    --glass-bg-2: rgba(255,255,255,0.72);
+    --glass-border: rgba(255,255,255,0.6);
+    --shadow: 0 4px 24px rgba(20,20,30,0.06);
+    --shadow-lg: 0 12px 40px rgba(20,20,30,0.10);
+    --shadow-xl: 0 20px 60px rgba(20,20,30,0.14);
+  }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+  }
+  #bgWallpaper {
+    position: fixed;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(2px) brightness(0.92);
+    transform: scale(1.03);
+    z-index: 0;
+    transition: opacity 0.6s ease;
+    opacity: 0;
+  }
+  #bgWallpaper.loaded { opacity: 1; }
+  #bgOverlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.58) 50%, rgba(255,255,255,0.70) 100%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .liquid-glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      0 8px 32px rgba(20,20,30,0.10),
+      inset 0 1px 0 rgba(255,255,255,0.9),
+      inset 0 -1px 0 rgba(0,0,0,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+  .liquid-glass::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0.8;
+  }
+  .liquid-btn {
+    background: var(--glass-bg-2);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      0 4px 16px rgba(20,20,30,0.08),
+      inset 0 1px 0 rgba(255,255,255,0.9),
+      inset 0 -1px 0 rgba(0,0,0,0.06);
+    transition: all 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+  }
+  .liquid-btn:hover {
+    background: rgba(255,255,255,0.85);
+    transform: translateY(-1px);
+    box-shadow:
+      0 6px 20px rgba(20,20,30,0.12),
+      inset 0 1px 0 rgba(255,255,255,1),
+      inset 0 -1px 0 rgba(0,0,0,0.08);
+  }
+  .liquid-btn:active {
+    transform: translateY(0) scale(0.98);
+    background: rgba(255,255,255,0.7);
+  }
+  .app {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    height: 100vh;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 20px;
+    gap: 16px;
+  }
+  .sidebar {
+    width: 288px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .user-card {
+    padding: 16px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .user-avatar {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    flex-shrink: 0;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.6);
+    border: 1.5px solid rgba(255,255,255,0.85);
+    overflow: hidden;
+    background: linear-gradient(145deg, #e8e8ec, #d0d0d6);
+  }
+  .user-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .user-info { flex: 1; min-width: 0; }
+  .user-name {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .user-status {
+    font-size: 11px;
+    color: var(--text-mute);
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 6px #34d399;
+    flex-shrink: 0;
+  }
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-radius: var(--radius);
+  }
+  .sidebar-title { font-size: 13px; font-weight: 700; }
+  .new-chat-btn {
+    width: 32px; height: 32px;
+    border-radius: 10px;
+    color: var(--text);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: inherit;
+  }
+  .conv-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-right: 4px;
+  }
+  .conv-list::-webkit-scrollbar { width: 4px; }
+  .conv-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 2px; }
+  .conv-item {
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.18s;
+    position: relative;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 2px 8px rgba(20,20,30,0.04), inset 0 1px 0 rgba(255,255,255,0.7);
+  }
+  .conv-item:hover {
+    background: rgba(255,255,255,0.78);
+    border-color: rgba(255,255,255,0.9);
+  }
+  .conv-item.active {
+    background: rgba(255,255,255,0.9);
+    border-color: rgba(0,0,0,0.14);
+    box-shadow: 0 4px 16px rgba(20,20,30,0.10), inset 0 1px 0 rgba(255,255,255,1);
+  }
+  .conv-item-title {
+    font-size: 12.5px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 20px;
+  }
+  .conv-item-meta { font-size: 10.5px; color: var(--text-mute); margin-top: 3px; }
+  .conv-item-del {
+    position: absolute;
+    top: 10px; right: 10px;
+    width: 18px; height: 18px;
+    border: none;
+    background: transparent;
+    color: var(--text-mute);
+    cursor: pointer;
+    display: none;
+    font-size: 14px;
+    border-radius: 4px;
+  }
+  .conv-item:hover .conv-item-del { display: block; }
+  .conv-item-del:hover { background: #ffe5e5; color: #e54848; }
+  .music-player {
+    padding: 14px 16px;
+    border-radius: var(--radius);
+    flex-shrink: 0;
+  }
+  .music-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .music-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-mute);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .music-search-box { display: flex; gap: 6px; margin-bottom: 10px; }
+  .music-search-input {
+    flex: 1;
+    padding: 9px 12px;
+    background: rgba(255,255,255,0.65);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.18s;
+    min-width: 0;
+    backdrop-filter: blur(10px);
+  }
+  .music-search-input::placeholder { color: var(--text-mute); }
+  .music-search-input:focus { border-color: rgba(0,0,0,0.2); background: rgba(255,255,255,0.9); }
+  .music-search-submit {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    color: var(--text);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .music-results {
+    max-height: 0;
+    overflow-y: auto;
+    transition: max-height 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .music-results.show {
+    max-height: 200px;
+    padding-top: 6px;
+    border-top: 1px solid var(--line);
+    margin-top: 6px;
+    margin-bottom: 10px;
+  }
+  .music-results::-webkit-scrollbar { width: 4px; }
+  .music-results::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 2px; }
+  .music-result-item {
+    padding: 7px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 11.5px;
+    color: var(--text-sub);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .music-result-item:hover { background: rgba(255,255,255,0.7); color: var(--text); }
+  .music-result-item .name {
+    font-weight: 600;
+    color: var(--text);
+    display: block;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .music-result-item .artist { font-size: 10.5px; color: var(--text-mute); }
+  .music-info { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .music-cover {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #2a2a35, #1a1a1f);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+  .music-meta { flex: 1; min-width: 0; }
+  .music-song-name {
+    font-size: 12.5px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .music-artist {
+    font-size: 10.5px;
+    color: var(--text-mute);
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .music-controls { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+  .music-btn {
+    flex: 1;
+    height: 32px;
+    border-radius: 9px;
+    color: var(--text);
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .music-btn.play {
+    background: rgba(26,26,31,0.9);
+    color: #fff;
+    border-color: rgba(0,0,0,0.3);
+    flex: 1.5;
+  }
+  .music-btn.play:hover { background: rgba(26,26,31,1); }
+  .music-progress { height: 3px; background: rgba(0,0,0,0.08); border-radius: 2px; overflow: hidden; cursor: pointer; }
+  .music-progress-bar { height: 100%; background: linear-gradient(90deg, #1a1a1f, #3a3a44); width: 0%; transition: width 0.1s linear; border-radius: 2px; }
+  .main-chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 22px;
+    border-radius: var(--radius);
+    flex-shrink: 0;
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .mark {
+    width: 40px; height: 40px;
+    border-radius: 11px;
+    background: linear-gradient(145deg, #2a2a35, #0a0a0f);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    font-weight: 800;
+    box-shadow:
+      0 4px 16px rgba(0,0,0,0.25),
+      inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+  .brand-text h1 { font-size: 16px; font-weight: 800; letter-spacing: -0.2px; }
+  .brand-text p { font-size: 9.5px; color: var(--text-mute); letter-spacing: 2px; margin-top: 1px; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .model-select {
+    appearance: none;
+    padding: 8px 34px 8px 14px;
+    background: rgba(255,255,255,0.7) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%235d5f6b' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>") no-repeat right 12px center;
+    border: 1px solid var(--glass-border);
+    border-radius: 11px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    outline: none;
+    min-width: 190px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 2px 8px rgba(20,20,30,0.06), inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+  .model-select:hover { border-color: rgba(0,0,0,0.2); }
+  .chat-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    scroll-behavior: smooth;
+    min-height: 0;
+    background: transparent;
+  }
+  .chat-area::-webkit-scrollbar { width: 6px; }
+  .chat-area::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 3px; }
+  .welcome {
+    text-align: center;
+    padding: 50px 20px;
+    animation: fadeUp 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+  }
+  .welcome-icon {
+    width: 72px; height: 72px;
+    margin: 0 auto 18px;
+    border-radius: 20px;
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 12px 40px rgba(20,20,30,0.10), inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .welcome h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.3px; }
+  .welcome p { font-size: 12.5px; color: var(--text-mute); }
+  .suggestions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-width: 540px;
+    margin: 28px auto 0;
+  }
+  .sug {
+    padding: 14px 16px;
+    border-radius: 14px;
+    font-size: 12.5px;
+    color: var(--text-sub);
+    text-align: left;
+    font-family: inherit;
+  }
+  .sug:hover { color: var(--text); }
+  .msg {
+    display: flex;
+    gap: 12px;
+    animation: fadeUp 0.35s cubic-bezier(0.2, 0, 0.2, 1);
+    max-width: 100%;
+    position: relative;
+  }
+  .msg.user { flex-direction: row-reverse; }
+  .msg-avatar {
+    width: 36px; height: 36px;
+    border-radius: 11px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    font-weight: 700;
+    overflow: hidden;
+    background: linear-gradient(145deg, #2a2a35, #0a0a0f);
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .msg-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .msg-bubble {
+    max-width: 72%;
+    padding: 14px 18px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    word-break: break-word;
+    position: relative;
+  }
+  .msg.ai .msg-bubble {
+    background: rgba(255,255,255,0.85);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      0 8px 32px rgba(20,20,30,0.08),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+    border-top-left-radius: 5px;
+    backdrop-filter: blur(24px) saturate(160%);
+  }
+  .msg.user .msg-bubble {
+    background: linear-gradient(145deg, #1f1f26, #0f0f14);
+    color: #fff;
+    border-top-right-radius: 5px;
+    box-shadow:
+      0 6px 24px rgba(0,0,0,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.1);
+    cursor: pointer;
+    user-select: none;
+  }
+  .msg.user .msg-bubble:hover {
+    box-shadow: 0 8px 28px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.12);
+    transform: translateY(-1px);
+  }
+  .typing { display: flex; gap: 4px; padding: 4px 0; }
+  .typing span {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--text-mute);
+    animation: bounce 1.4s ease-in-out infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-8px); opacity: 1; }
+  }
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: var(--text);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink 0.9s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .input-wrapper {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .input-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 14px;
+  }
+  .tool-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border-radius: 11px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-sub);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+  .tool-toggle:hover { color: var(--text); background: rgba(255,255,255,0.7); }
+  .tool-toggle.active {
+    background: rgba(26,26,31,0.9);
+    color: #fff;
+    border-color: rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+  .tool-toggle .switch {
+    width: 28px; height: 16px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.15);
+    position: relative;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .tool-toggle .switch::after {
+    content: "";
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+  .tool-toggle.active .switch { background: rgba(255,255,255,0.3); }
+  .tool-toggle.active .switch::after { transform: translateX(12px); }
+  .upload-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 11px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-sub);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    font-family: inherit;
+  }
+  .upload-btn:hover { color: var(--text); background: rgba(255,255,255,0.7); }
+  .upload-btn input { display: none; }
+  .upload-preview {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    max-width: 200px;
+    position: relative;
+  }
+  .upload-preview.show { display: flex; }
+  .upload-preview img {
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .upload-preview-info {
+    flex: 1;
+    font-size: 11px;
+    color: var(--text-sub);
+    overflow: hidden;
+  }
+  .upload-preview-name {
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+  }
+  .upload-preview-close {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.1);
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    transition: background 0.15s;
+  }
+  .upload-preview-close:hover { background: rgba(229,72,72,0.2); color: #e54848; }
+  .input-area {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding: 10px;
+    border-radius: var(--radius);
+  }
+  .input-area:focus-within {
+    border-color: rgba(0,0,0,0.18);
+    box-shadow:
+      0 0 0 4px rgba(26,26,31,0.04),
+      0 12px 40px rgba(20,20,30,0.10),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  #input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    resize: none;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    max-height: 140px;
+    min-height: 24px;
+    padding: 8px 10px;
+  }
+  #input::placeholder { color: var(--text-mute); }
+  .send-btn {
+    width: 44px; height: 44px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #1f1f26, #0f0f14);
+    color: #fff;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0.2, 1);
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .send-btn:hover:not(:disabled) {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+  .send-btn:active:not(:disabled) { transform: translateY(0) scale(0.98); }
+  .send-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .send-btn svg { width: 18px; height: 18px; }
+  .footer-hint {
+    text-align: center;
+    font-size: 10.5px;
+    color: var(--text-mute);
+    padding: 4px;
+  }
+  .action-menu {
+    position: fixed;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    box-shadow: 0 20px 60px rgba(20,20,30,0.18), inset 0 1px 0 rgba(255,255,255,0.9);
+    padding: 6px;
+    min-width: 140px;
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    animation: menuPop 0.18s cubic-bezier(0.2, 0, 0.2, 1);
+  }
+  .action-menu.show { display: flex; }
+  @keyframes menuPop {
+    from { opacity: 0; transform: scale(0.95) translateY(-4px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .action-item {
+    padding: 9px 14px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.14s;
+    border: none;
+    background: transparent;
+    text-align: left;
+    width: 100%;
+    font-family: inherit;
+    font-weight: 500;
+  }
+  .action-item:hover { background: rgba(0,0,0,0.06); }
+  .action-item.danger { color: #e54848; }
+  .action-item.danger:hover { background: rgba(229,72,72,0.1); }
+  .edit-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 20, 30, 0.35);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .edit-overlay.show { display: flex; }
+  .edit-dialog {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(20,20,30,0.2), inset 0 1px 0 rgba(255,255,255,0.9);
+    width: 100%;
+    max-width: 500px;
+    padding: 24px;
+    animation: dialogPop 0.28s cubic-bezier(0.2, 0, 0.2, 1);
+  }
+  @keyframes dialogPop {
+    from { opacity: 0; transform: scale(0.94) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .edit-title { font-size: 16px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.2px; }
+  .edit-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    resize: vertical;
+    outline: none;
+  }
+  .edit-textarea:focus { border-color: rgba(0,0,0,0.25); background: rgba(255,255,255,0.95); }
+  .edit-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+  .dialog-btn {
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.7);
+    color: var(--text);
+    font-family: inherit;
+    transition: all 0.18s;
+    backdrop-filter: blur(10px);
+  }
+  .dialog-btn:hover { background: rgba(255,255,255,0.95); }
+  .dialog-btn.primary {
+    background: linear-gradient(145deg, #1f1f26, #0f0f14);
+    border-color: rgba(0,0,0,0.3);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .dialog-btn.primary:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    padding: 11px 22px;
+    background: rgba(26,26,31,0.92);
+    backdrop-filter: blur(20px);
+    color: #fff;
+    border-radius: 100px;
+    font-size: 12.5px;
+    font-weight: 600;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+    z-index: 3000;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .app { padding: 12px; }
+  }
+  @media (max-width: 640px) {
+    .suggestions { grid-template-columns: 1fr; }
+    .msg-bubble { max-width: 85%; }
+    header { padding: 12px 16px; }
+    .model-select { min-width: 130px; font-size: 11px; padding: 6px 24px 6px 10px; }
+    .input-toolbar { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div id="bgWallpaper"></div>
+<div id="bgOverlay"></div>
+<img id="bgPreloader" src="" style="display:none;" alt="" />
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="user-card liquid-glass">
+      <div class="user-avatar">
+        <img src="https://b0.bdstatic.com/ugc/personal_page_creator/FKB9K4NmIzv3RGt4tcS7oQ4f8a59a613517f8ed476a3999a3f4fd9.jpg"
+             alt="avatar"
+             onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(145deg,#2a2a35,#1a1a1f)';this.parentElement.innerHTML='<span style=\'color:#fff;font-size:20px;font-weight:800;display:grid;place-items:center;height:100%\'>U</span>'" />
+      </div>
+      <div class="user-info">
+        <div class="user-name">访客用户</div>
+        <div class="user-status"><span class="status-dot"></span>在线</div>
+      </div>
+    </div>
+
+    <div class="sidebar-header liquid-glass">
+      <div class="sidebar-title">历史对话</div>
+      <button class="new-chat-btn liquid-btn" id="newChatBtn" title="新建对话">+</button>
+    </div>
+    <div class="conv-list" id="convList"></div>
+
+    <div class="music-player liquid-glass">
+      <div class="music-header">
+        <div class="music-title">Music</div>
+      </div>
+      <div class="music-search-box">
+        <input type="text" id="musicSearchInput" class="music-search-input" placeholder="搜索歌曲或歌手..." />
+        <button class="music-search-submit liquid-btn" id="musicSearchSubmit">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="music-results" id="musicResults"></div>
+      <div class="music-info">
+        <div class="music-cover" id="musicCover">♪</div>
+        <div class="music-meta">
+          <div class="music-song-name" id="musicSongName">未在播放</div>
+          <div class="music-artist" id="musicArtist">搜索并点击播放</div>
+        </div>
+      </div>
+      <div class="music-controls">
+        <button class="music-btn liquid-btn" id="musicPrev">⏮</button>
+        <button class="music-btn play" id="musicPlay">▶</button>
+        <button class="music-btn liquid-btn" id="musicNext">⏭</button>
+      </div>
+      <div class="music-progress" id="musicProgress">
+        <div class="music-progress-bar" id="musicProgressBar"></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-chat">
+    <header class="liquid-glass">
+      <div class="brand">
+        <div class="mark">✦</div>
+        <div class="brand-text">
+          <h1>AI Assistant</h1>
+          <p>INTELLIGENT CHAT</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <select id="modelSelect" class="model-select"></select>
+      </div>
+    </header>
+
+    <div class="chat-area" id="chatArea">
+      <div class="welcome" id="welcome">
+        <div class="welcome-icon">✦</div>
+        <h2>你好，有什么我可以帮你？</h2>
+        <p>我可以回答各种问题、写代码、翻译、创作、分析图片...</p>
+        <div class="suggestions">
+          <button class="sug liquid-btn" data-prompt="用简单的话解释一下量子计算">用简单的话解释一下量子计算</button>
+          <button class="sug liquid-btn" data-prompt="帮我写一个 Python 爬虫脚本">帮我写一个 Python 爬虫脚本</button>
+          <button class="sug liquid-btn" data-prompt="推荐几本值得读的书">推荐几本值得读的书</button>
+          <button class="sug liquid-btn" data-prompt="给我讲一个有趣的故事">给我讲一个有趣的故事</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-wrapper">
+      <div class="input-toolbar liquid-glass">
+        <div class="tool-toggle" id="webSearchToggle">
+          <span>联网搜索</span>
+          <span class="switch"></span>
+        </div>
+        <label class="upload-btn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span>上传图片</span>
+          <input type="file" id="imageUpload" accept="image/*" />
+        </label>
+        <div class="upload-preview" id="uploadPreview">
+          <img id="uploadPreviewImg" src="" alt="" />
+          <div class="upload-preview-info">
+            <div class="upload-preview-name" id="uploadPreviewName">image.png</div>
+            <div>已选择</div>
+          </div>
+          <button class="upload-preview-close" id="uploadPreviewClose">×</button>
+        </div>
+      </div>
+
+      <div class="input-area liquid-glass">
+        <textarea id="input" placeholder="输入消息... (Enter 发送，Shift+Enter 换行)" rows="1"></textarea>
+        <button class="send-btn" id="sendBtn" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="footer-hint">AI 可能会出错，请自行核实重要信息</div>
+  </div>
+</div>
+
+<div class="action-menu" id="actionMenu">
+  <button class="action-item" data-action="copy">📋 复制</button>
+  <button class="action-item" data-action="edit">✏️ 修改</button>
+  <button class="action-item danger" data-action="delete">🗑️ 删除</button>
+</div>
+
+<div class="edit-overlay" id="editOverlay">
+  <div class="edit-dialog">
+    <div class="edit-title">修改消息</div>
+    <textarea class="edit-textarea" id="editTextarea"></textarea>
+    <div class="edit-actions">
+      <button class="dialog-btn" id="editCancel">取消</button>
+      <button class="dialog-btn primary" id="editConfirm">保存并重新发送</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// 配置
+// ============================================================
+const API_URL = "https://api.dshapi.icu/v1/chat/completions";
+const API_KEY = "sk-051eb082be7a83680911837800f3e4fb2920fb2d912f495a228bf703d90c4327";
+
+const MODELS = {
+  "glm-5.3":             "GLM 5.3（支持图片）",
+  "kimi-k3":             "Kimi K3（支持图片）",
+  "deepseek-v4.1-flash": "DeepSeek V4.1 Flash（快）",
+  "minimax-m3":          "MiniMax M3"
+};
+let currentModel = "glm-5.3";
+
+// ★ 用户头像 URL（聊天界面也使用）
+const USER_AVATAR_URL = "https://b0.bdstatic.com/ugc/personal_page_creator/FKB9K4NmIzv3RGt4tcS7oQ4f8a59a613517f8ed476a3999a3f4fd9.jpg";
+
+// ============================================================
+// 壁纸
+// ============================================================
+const bgPreloader = document.getElementById("bgPreloader");
+const bgWallpaper = document.getElementById("bgWallpaper");
+const WALLPAPER_APIS = [
+  "https://www.dmoe.cc/random.php",
+  "https://api.dujin.org/bing/1920.php",
+  "https://api.dujin.org/pic/",
+];
+let wallpaperIndex = 0;
+
+function loadRandomWallpaper() {
+  const base = WALLPAPER_APIS[wallpaperIndex % WALLPAPER_APIS.length];
+  const url = base + (base.includes("?") ? "&" : "?") + "t=" + Date.now() + "&r=" + Math.random();
+  bgPreloader.onload = () => {
+    bgWallpaper.style.backgroundImage = `url("${bgPreloader.src}")`;
+    bgWallpaper.classList.add("loaded");
+  };
+  bgPreloader.onerror = () => {
+    wallpaperIndex++;
+    if (wallpaperIndex < WALLPAPER_APIS.length * 3) setTimeout(loadRandomWallpaper, 500);
+    else {
+      bgWallpaper.style.background = "linear-gradient(135deg, #ffd6e0 0%, #d6e4ff 100%)";
+      bgWallpaper.classList.add("loaded");
+    }
+  };
+  bgPreloader.src = url;
+}
+loadRandomWallpaper();
+
+// ============================================================
+// 联网搜索开关
+// ============================================================
+let webSearchEnabled = false;
+const webSearchToggle = document.getElementById("webSearchToggle");
+webSearchToggle.onclick = () => {
+  webSearchEnabled = !webSearchEnabled;
+  webSearchToggle.classList.toggle("active", webSearchEnabled);
+  showToast(webSearchEnabled ? "已开启联网搜索" : "已关闭联网搜索");
+};
+
+// ============================================================
+// 图片上传
+// ============================================================
+let uploadedImage = null;
+const imageUploadInput = document.getElementById("imageUpload");
+const uploadPreview = document.getElementById("uploadPreview");
+const uploadPreviewImg = document.getElementById("uploadPreviewImg");
+const uploadPreviewName = document.getElementById("uploadPreviewName");
+const uploadPreviewClose = document.getElementById("uploadPreviewClose");
+
+imageUploadInput.onchange = (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  if (!file.type.startsWith("image/")) { showToast("请选择图片文件"); return; }
+  if (file.size > 5 * 1024 * 1024) { showToast("图片不能超过 5MB"); return; }
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    uploadedImage = { name: file.name, dataUrl: ev.target.result };
+    uploadPreviewImg.src = ev.target.result;
+    uploadPreviewName.textContent = file.name;
+    uploadPreview.classList.add("show");
+  };
+  reader.readAsDataURL(file);
+};
+
+uploadPreviewClose.onclick = () => {
+  uploadedImage = null;
+  uploadPreview.classList.remove("show");
+  imageUploadInput.value = "";
+};
+
+// ============================================================
+// 音乐播放器
+// ============================================================
+const music = {
+  audio: new Audio(),
+  queue: [],
+  currentIndex: -1,
+  playing: false,
+  apiBase: "https://music.163.com/song/media/outer/url?id=",
+};
+const musicPlayBtn = document.getElementById("musicPlay");
+const musicSongName = document.getElementById("musicSongName");
+const musicArtist = document.getElementById("musicArtist");
+const musicProgressBar = document.getElementById("musicProgressBar");
+const musicProgress = document.getElementById("musicProgress");
+const musicCover = document.getElementById("musicCover");
+
+music.audio.addEventListener("timeupdate", () => {
+  if (music.audio.duration) {
+    const pct = (music.audio.currentTime / music.audio.duration) * 100;
+    musicProgressBar.style.width = pct + "%";
+  }
+});
+music.audio.addEventListener("ended", () => playNextMusic());
+music.audio.addEventListener("error", () => {
+  musicSongName.textContent = "加载失败";
+  musicArtist.textContent = "换一首试试";
+  musicPlayBtn.textContent = "▶";
+  music.playing = false;
+});
+
+musicProgress.addEventListener("click", (e) => {
+  const rect = musicProgress.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  if (music.audio.duration) music.audio.currentTime = pct * music.audio.duration;
+});
+
+async function searchMusic(keyword) {
+  try {
+    const res = await fetch(`https://music.163.com/api/search/get/web?s=${encodeURIComponent(keyword)}&type=1&limit=10`);
+    const data = await res.json();
+    if (data?.result?.songs?.length) {
+      return data.result.songs.map(s => ({
+        id: s.id, name: s.name,
+        artist: (s.artists || []).map(a => a.name).join(" / ") || "未知",
+      }));
+    }
+  } catch (e) { console.warn("搜索失败", e); }
+  return [];
+}
+
+function playMusicIndex(index) {
+  if (index < 0 || index >= music.queue.length) return;
+  music.currentIndex = index;
+  const song = music.queue[index];
+  musicSongName.textContent = song.name;
+  musicArtist.textContent = song.artist;
+  musicCover.textContent = "♪";
+  music.audio.src = music.apiBase + song.id + ".mp3";
+  music.audio.play().then(() => {
+    music.playing = true;
+    musicPlayBtn.textContent = "⏸";
+  }).catch(() => {
+    musicSongName.textContent = "无法播放";
+    musicArtist.textContent = "可能受版权限制";
+    musicPlayBtn.textContent = "▶";
+    music.playing = false;
+  });
+}
+
+function playNextMusic() {
+  if (music.queue.length === 0) return;
+  playMusicIndex((music.currentIndex + 1) % music.queue.length);
+}
+function playPrevMusic() {
+  if (music.queue.length === 0) return;
+  playMusicIndex((music.currentIndex - 1 + music.queue.length) % music.queue.length);
+}
+
+musicPlayBtn.onclick = () => {
+  if (music.playing) {
+    music.audio.pause();
+    music.playing = false;
+    musicPlayBtn.textContent = "▶";
+  } else {
+    if (music.audio.src) {
+      music.audio.play().then(() => {
+        music.playing = true;
+        musicPlayBtn.textContent = "⏸";
+      }).catch(() => {});
+    } else {
+      document.getElementById("musicSearchInput").focus();
+    }
+  }
+};
+document.getElementById("musicNext").onclick = playNextMusic;
+document.getElementById("musicPrev").onclick = playPrevMusic;
+
+const musicSearchInput = document.getElementById("musicSearchInput");
+const musicSearchSubmit = document.getElementById("musicSearchSubmit");
+const musicResults = document.getElementById("musicResults");
+
+async function performMusicSearch() {
+  const kw = musicSearchInput.value.trim();
+  if (!kw) return;
+  musicSearchInput.disabled = true;
+  musicResults.innerHTML = '<div style="padding:8px;font-size:11px;color:var(--text-mute);">搜索中...</div>';
+  musicResults.classList.add("show");
+  try {
+    const songs = await searchMusic(kw);
+    musicResults.innerHTML = "";
+    if (songs.length === 0) {
+      musicResults.innerHTML = '<div style="padding:8px;font-size:11px;color:var(--text-mute);">无结果</div>';
+      return;
+    }
+    songs.forEach((song, i) => {
+      const item = document.createElement("div");
+      item.className = "music-result-item";
+      item.innerHTML = `<span class="name">${song.name}</span><span class="artist">${song.artist}</span>`;
+      item.onclick = () => {
+        music.queue = songs;
+        playMusicIndex(i);
+        musicResults.classList.remove("show");
+        musicSearchInput.value = "";
+      };
+      musicResults.appendChild(item);
+    });
+  } catch (e) {
+    musicResults.innerHTML = '<div style="padding:8px;font-size:11px;color:#e54848;">搜索失败</div>';
+  } finally {
+    musicSearchInput.disabled = false;
+  }
+}
+
+musicSearchSubmit.onclick = performMusicSearch;
+musicSearchInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") performMusicSearch();
+});
+
+// ============================================================
+// 对话数据
+// ============================================================
+let conversations = loadConversations();
+let activeConvId = null;
+let isWaiting = false;
+let editingMsgIndex = -1;
+
+const chatArea = document.getElementById("chatArea");
+const welcome = document.getElementById("welcome");
+const input = document.getElementById("input");
+const sendBtn = document.getElementById("sendBtn");
+const modelSelect = document.getElementById("modelSelect");
+const convList = document.getElementById("convList");
+const newChatBtn = document.getElementById("newChatBtn");
+const actionMenu = document.getElementById("actionMenu");
+const editOverlay = document.getElementById("editOverlay");
+const editTextarea = document.getElementById("editTextarea");
+const editCancel = document.getElementById("editCancel");
+const editConfirm = document.getElementById("editConfirm");
+const toast = document.getElementById("toast");
+
+function loadConversations() {
+  try { return JSON.parse(localStorage.getItem("ai_chat_convs")) || []; } catch (e) { return []; }
+}
+function saveConversations() {
+  try { localStorage.setItem("ai_chat_convs", JSON.stringify(conversations)); } catch (e) {}
+}
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
+function getActiveConv() { return conversations.find(c => c.id === activeConvId); }
+function showToast(text) {
+  toast.textContent = text;
+  toast.classList.add("show");
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => toast.classList.remove("show"), 1800);
+}
+
+function renderConvList() {
+  convList.innerHTML = "";
+  if (conversations.length === 0) {
+    const empty = document.createElement("div");
+    empty.style.cssText = "padding:20px 14px;text-align:center;color:var(--text-mute);font-size:12px;";
+    empty.textContent = "暂无对话，点 + 新建";
+    convList.appendChild(empty);
+    return;
+  }
+  [...conversations].sort((a, b) => b.createdAt - a.createdAt).forEach(conv => {
+    const item = document.createElement("div");
+    item.className = "conv-item" + (conv.id === activeConvId ? " active" : "");
+    const title = document.createElement("div");
+    title.className = "conv-item-title";
+    title.textContent = conv.title || "新对话";
+    const meta = document.createElement("div");
+    meta.className = "conv-item-meta";
+    const d = new Date(conv.createdAt);
+    meta.textContent = `${d.getMonth()+1}月${d.getDate()}日 · ${conv.messages.length} 条`;
+    const del = document.createElement("button");
+    del.className = "conv-item-del";
+    del.textContent = "×";
+    del.onclick = (e) => {
+      e.stopPropagation();
+      if (!confirm("确定删除？")) return;
+      conversations = conversations.filter(c => c.id !== conv.id);
+      if (activeConvId === conv.id) activeConvId = null;
+      saveConversations(); renderConvList(); renderChat();
+    };
+    item.appendChild(title);
+    item.appendChild(meta);
+    item.appendChild(del);
+    item.onclick = () => {
+      if (isWaiting) { showToast("请等待回复完成"); return; }
+      activeConvId = conv.id;
+      const c = getActiveConv();
+      if (c?.model) { currentModel = c.model; modelSelect.value = currentModel; }
+      renderConvList(); renderChat();
+    };
+    convList.appendChild(item);
+  });
+}
+
+function newChat() {
+  if (isWaiting) { showToast("请等待回复完成"); return; }
+  const conv = { id: uid(), title: "新对话", messages: [], model: currentModel, createdAt: Date.now() };
+  conversations.unshift(conv);
+  activeConvId = conv.id;
+  saveConversations(); renderConvList(); renderChat();
+}
+
+function renderChat() {
+  chatArea.innerHTML = "";
+  const conv = getActiveConv();
+  if (!conv || conv.messages.length === 0) {
+    chatArea.appendChild(welcome);
+    welcome.style.display = "block";
+    return;
+  }
+  welcome.style.display = "none";
+  conv.messages.forEach((msg, idx) => {
+    if (msg.role === "user") {
+      const bubble = appendMsg("user", msg.content, idx, msg.image);
+      attachUserBubbleActions(bubble, idx);
+    } else {
+      appendMsg("ai", msg.content);
+    }
+  });
+  chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+// ★ 关键改动：用户头像用 <img> 引用 USER_AVATAR_URL
+function appendMsg(role, text, msgIndex, imageDataUrl) {
+  const div = document.createElement("div");
+  div.className = "msg " + role;
+  const avatar = document.createElement("div");
+  avatar.className = "msg-avatar";
+  if (role === "user") {
+    const av = document.createElement("img");
+    av.src = USER_AVATAR_URL;
+    av.alt = "user";
+    av.onerror = function() {
+      this.style.display = "none";
+      avatar.textContent = "你";
+    };
+    avatar.appendChild(av);
+  } else {
+    avatar.textContent = "✦";
+  }
+  const bubble = document.createElement("div");
+  bubble.className = "msg-bubble";
+  if (imageDataUrl) {
+    const img = document.createElement("img");
+    img.src = imageDataUrl;
+    img.style.cssText = "max-width:240px;border-radius:10px;display:block;margin-bottom:8px;box-shadow:0 4px 16px rgba(0,0,0,0.15);";
+    bubble.appendChild(img);
+  }
+  if (text) {
+    const t = document.createElement("div");
+    t.textContent = text;
+    bubble.appendChild(t);
+  }
+  bubble.dataset.msgIndex = msgIndex;
+  div.appendChild(avatar);
+  div.appendChild(bubble);
+  chatArea.appendChild(div);
+  chatArea.scrollTop = chatArea.scrollHeight;
+  return bubble;
+}
+
+function appendTyping() {
+  const div = document.createElement("div");
+  div.className = "msg ai";
+  const avatar = document.createElement("div");
+  avatar.className = "msg-avatar";
+  avatar.textContent = "✦";
+  const bubble = document.createElement("div");
+  bubble.className = "msg-bubble";
+  bubble.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  div.appendChild(avatar);
+  div.appendChild(bubble);
+  chatArea.appendChild(div);
+  chatArea.scrollTop = chatArea.scrollHeight;
+  return div;
+}
+
+function appendTypewriterMsg() {
+  const div = document.createElement("div");
+  div.className = "msg ai";
+  const avatar = document.createElement("div");
+  avatar.className = "msg-avatar";
+  avatar.textContent = "✦";
+  const bubble = document.createElement("div");
+  bubble.className = "msg-bubble";
+  const textSpan = document.createElement("span");
+  const cursor = document.createElement("span");
+  cursor.className = "cursor";
+  bubble.appendChild(textSpan);
+  bubble.appendChild(cursor);
+  div.appendChild(avatar);
+  div.appendChild(bubble);
+  chatArea.appendChild(div);
+  chatArea.scrollTop = chatArea.scrollHeight;
+  return { bubble, textSpan, cursor };
+}
+
+function typewriter(target, text) {
+  return new Promise((resolve) => {
+    const { textSpan, cursor } = target;
+    let i = 0;
+    const total = text.length;
+    const step = total < 200 ? 1 : Math.ceil(total / 200);
+    const timer = setInterval(() => {
+      i += step;
+      if (i >= total) {
+        textSpan.textContent = text;
+        cursor.remove();
+        chatArea.scrollTop = chatArea.scrollHeight;
+        clearInterval(timer);
+        resolve();
+      } else {
+        textSpan.textContent = text.slice(0, i);
+        chatArea.scrollTop = chatArea.scrollHeight;
+      }
+    }, 18);
+  });
+}
+
+function attachUserBubbleActions(bubble, msgIndex) {
+  let pressTimer = null;
+  bubble.addEventListener("mousedown", (e) => {
+    pressTimer = setTimeout(() => showActionMenu(e, msgIndex), 500);
+  });
+  bubble.addEventListener("mouseup", () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } });
+  bubble.addEventListener("mouseleave", () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } });
+  bubble.addEventListener("touchstart", (e) => {
+    pressTimer = setTimeout(() => showActionMenu(e, msgIndex), 500);
+  }, { passive: true });
+  bubble.addEventListener("touchend", () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } });
+  bubble.addEventListener("touchmove", () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } });
+  bubble.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    showActionMenu(e, msgIndex);
+  });
+}
+
+function showActionMenu(e, msgIndex) {
+  editingMsgIndex = msgIndex;
+  const menu = actionMenu;
+  menu.classList.add("show");
+  let x, y;
+  if (e.touches && e.touches[0]) { x = e.touches[0].clientX; y = e.touches[0].clientY; }
+  else { x = e.clientX; y = e.clientY; }
+  const mw = 160, mh = 140;
+  if (x + mw > window.innerWidth) x = window.innerWidth - mw - 10;
+  if (y + mh > window.innerHeight) y = window.innerHeight - mh - 10;
+  if (x < 10) x = 10;
+  if (y < 10) y = 10;
+  menu.style.left = x + "px";
+  menu.style.top = y + "px";
+}
+
+document.addEventListener("click", (e) => {
+  if (!actionMenu.contains(e.target)) actionMenu.classList.remove("show");
+});
+
+actionMenu.querySelectorAll(".action-item").forEach(btn => {
+  btn.onclick = (e) => {
+    e.stopPropagation();
+    const action = btn.dataset.action;
+    const conv = getActiveConv();
+    if (!conv) return;
+    const msg = conv.messages[editingMsgIndex];
+    if (!msg) return;
+    if (action === "copy") {
+      navigator.clipboard.writeText(msg.content).then(() => showToast("已复制")).catch(() => {
+        const ta = document.createElement("textarea");
+        ta.value = msg.content;
+        document.body.appendChild(ta); ta.select();
+        document.execCommand("copy"); document.body.removeChild(ta);
+        showToast("已复制");
+      });
+    } else if (action === "edit") {
+      editTextarea.value = msg.content;
+      editOverlay.classList.add("show");
+      editTextarea.focus();
+    } else if (action === "delete") {
+      conv.messages.splice(editingMsgIndex, 1);
+      if (conv.messages.length === 0) conv.title = "新对话";
+      saveConversations(); renderChat(); renderConvList();
+      showToast("已删除");
+    }
+    actionMenu.classList.remove("show");
+  };
+});
+
+editCancel.onclick = () => editOverlay.classList.remove("show");
+editOverlay.addEventListener("click", (e) => {
+  if (e.target === editOverlay) editOverlay.classList.remove("show");
+});
+editConfirm.onclick = async () => {
+  const newText = editTextarea.value.trim();
+  if (!newText) { showToast("内容不能为空"); return; }
+  editOverlay.classList.remove("show");
+  const conv = getActiveConv();
+  if (!conv) return;
+  const msg = conv.messages[editingMsgIndex];
+  if (!msg) return;
+  msg.content = newText;
+  conv.messages = conv.messages.slice(0, editingMsgIndex + 1);
+  saveConversations(); renderChat(); renderConvList();
+  await sendToAI(conv);
+};
+
+input.addEventListener("input", () => {
+  input.style.height = "auto";
+  input.style.height = Math.min(input.scrollHeight, 140) + "px";
+  sendBtn.disabled = (!input.value.trim() && !uploadedImage) || isWaiting;
+});
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
+});
+sendBtn.onclick = send;
+
+document.querySelectorAll(".sug").forEach(btn => {
+  btn.onclick = () => {
+    input.value = btn.dataset.prompt;
+    input.dispatchEvent(new Event("input"));
+    send();
+  };
+});
+
+Object.entries(MODELS).forEach(([id, name]) => {
+  const opt = document.createElement("option");
+  opt.value = id; opt.textContent = name;
+  modelSelect.appendChild(opt);
+});
+modelSelect.value = currentModel;
+modelSelect.addEventListener("change", () => {
+  currentModel = modelSelect.value;
+  const conv = getActiveConv();
+  if (conv) { conv.model = currentModel; saveConversations(); }
+});
+
+async function send() {
+  const text = input.value.trim();
+  const hasImage = !!uploadedImage;
+  if ((!text && !hasImage) || isWaiting) return;
+  let conv = getActiveConv();
+  if (!conv) { newChat(); conv = getActiveConv(); }
+  if (conv.messages.length === 0) conv.title = (text || "[图片]").slice(0, 30);
+  const msg = { role: "user", content: text };
+  if (hasImage) msg.image = uploadedImage.dataUrl;
+  conv.messages.push(msg);
+  conv.model = currentModel;
+  saveConversations();
+  renderChat(); renderConvList();
+  input.value = ""; input.style.height = "auto";
+  const imgData = uploadedImage ? uploadedImage.dataUrl : null;
+  uploadedImage = null;
+  uploadPreview.classList.remove("show");
+  imageUploadInput.value = "";
+  sendBtn.disabled = true;
+  isWaiting = true;
+  await sendToAI(conv, hasImage ? imgData : null);
+}
+
+async function sendToAI(conv, imageDataUrl) {
+  const typingEl = appendTyping();
+  try {
+    const messages = [
+      { role: "system", content: "你是一个乐于助人、聪明且友好的 AI 助手。用简洁清晰的中文回答。" },
+      ...conv.messages.slice(-20).map(m => {
+        if (m.image) {
+          return {
+            role: m.role,
+            content: [
+              { type: "text", text: m.content || "请分析这张图片" },
+              { type: "image_url", image_url: { url: m.image } }
+            ]
+          };
+        }
+        return { role: m.role, content: m.content };
+      }),
+    ];
+    const payload = {
+      model: conv.model || currentModel,
+      messages,
+      temperature: 0.7,
+      stream: false,
+    };
+    if (webSearchEnabled) payload.web_search = true;
+
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(`HTTP ${res.status}: ${err.slice(0, 200)}`);
+    }
+
+    const data = await res.json();
+    const content = data?.choices?.[0]?.message?.content;
+
+    if (!content) {
+      const errMsg = data?.error?.message || "API 返回为空（当前模型可能不支持该操作，试试换 GLM 5.3 或 Kimi K3）";
+      throw new Error(errMsg);
+    }
+
+    typingEl.remove();
+    const tw = appendTypewriterMsg();
+    await typewriter(tw, content);
+    conv.messages.push({ role: "assistant", content });
+    saveConversations(); renderConvList();
+  } catch (err) {
+    typingEl.remove();
+    appendMsg("ai", "⚠️ 请求失败: " + err.message);
+  } finally {
+    isWaiting = false;
+    sendBtn.disabled = (!input.value.trim() && !uploadedImage);
+    input.focus();
+  }
+}
+
+newChatBtn.onclick = newChat;
+
+if (conversations.length > 0) {
+  activeConvId = conversations[0].id;
+  currentModel = conversations[0].model || currentModel;
+  modelSelect.value = currentModel;
+} else {
+  newChat();
+}
+renderConvList();
+renderChat();
+input.focus();
+</script>
+
+</body>
+</html>
