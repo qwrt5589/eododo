@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>双图展示 · 截图与修图</title>
+  <style>
+    /* 全局重置与柔和背景 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0e0f14;  /* 深色背景，突出图片 */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      padding: 20px;
+    }
+
+    /* 主容器：卡片式双图布局 */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      max-width: 1200px;
+      width: 100%;
+      background: rgba(20, 22, 28, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 48px;
+      padding: 28px 24px;
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.8),
+                  0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    }
+
+    /* 每张图片的容器，保持比例并添加悬停微动 */
+    .image-card {
+      flex: 1 1 280px;
+      min-width: 240px;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.25s ease;
+    }
+
+    .image-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* 图片本身：圆角、阴影、自适应宽度 */
+    .image-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 28px;
+      box-shadow: 0 18px 30px -10px rgba(0, 0, 0, 0.7),
+                  0 0 0 1px rgba(255, 255, 255, 0.08);
+      transition: box-shadow 0.25s ease, filter 0.25s ease;
+      background-color: #1a1c22; /* 加载时的占位色 */
+      object-fit: cover;
+    }
+
+    .image-card img:hover {
+      box-shadow: 0 24px 40px -12px rgba(0, 0, 0, 0.9),
+                  0 0 0 1px rgba(255, 255, 255, 0.2);
+      filter: brightness(1.02);
+    }
+
+    /* 文件名标签，低调显示 */
+    .filename {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: #b0b8c5;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 6px 16px;
+      border-radius: 40px;
+      letter-spacing: 0.3px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-weight: 400;
+      text-align: center;
+      word-break: break-all;
+      max-width: 100%;
+    }
+
+    /* 页脚小提示 */
+    .footer-note {
+      margin-top: 24px;
+      font-size: 0.75rem;
+      color: #5e6673;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    /* 移动端优化 */
+    @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+
+      .gallery {
+        padding: 20px 14px;
+        gap: 20px;
+        border-radius: 36px;
+      }
+
+      .image-card {
+        flex: 1 1 100%;
+        min-width: 0;
+      }
+
+      .filename {
+        font-size: 0.75rem;
+        padding: 5px 12px;
+      }
+    }
+
+    /* 当图片加载失败时显示占位样式 */
+    img {
+      background: #1e2028;
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery">
+    <!-- 第一张图片：Screenshot_20261122_015223.jpg -->
+    <div class="image-card">
+      <img 
+        src="Screenshot_20261122_015223.jpg" 
+        alt="Screenshot 2026-11-22 01:52:23" 
+        loading="lazy"
+        onerror="this.style.opacity='0.6'; this.alt='图片加载失败，请检查文件是否存在';"
+      >
+      <span class="filename">Screenshot_20261122_015223.jpg</span>
+    </div>
+
+    <!-- 第二张图片：retouch_2026112201494153.png -->
+    <div class="image-card">
+      <img 
+        src="retouch_2026112201494153.png" 
+        alt="Retouch 2026-11-22 01:49:41.53" 
+        loading="lazy"
+        onerror="this.style.opacity='0.6'; this.alt='图片加载失败，请检查文件是否存在';"
+      >
+      <span class="filename">retouch_2026112201494153.png</span>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    ⚡ 图片来自同文件夹 · 点击图片可查看原图
+  </div>
+
+  <!-- 可选：点击图片在新标签页打开原图（简单增强体验） -->
+  <script>
+    (function() {
+      // 为所有图片添加点击打开原图功能（在新标签页显示原始尺寸）
+      const images = document.querySelectorAll('.image-card img');
+      images.forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function(e) {
+          // 阻止默认行为（避免与某些移动端手势冲突）
+          e.preventDefault();
+          const src = this.getAttribute('src');
+          if (src) {
+            window.open(src, '_blank');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
